@@ -1,0 +1,61 @@
+{
+  "name": "@formajs/formajs",
+  "version": "1.0.0",
+  "description": "A lightweight, modular JavaScript library for validating, parsing, and sanitizing form inputs",
+  "main": "dist/formajs.cjs.js",
+  "module": "dist/formajs.esm.js",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "npx vitest run",
+    "test:watch": "npx vitest --watch",
+    "test:coverage": "npx vitest run --coverage",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "check": "npm run format && npm run lint",
+    "docs": "node scripts/generateDocsMDTable.js",
+    "prepare": "npm run build"
+  },
+  "unpkg": "dist/formajs.umd.min.js",
+  "jsdelivr": "dist/formajs.umd.min.js",
+  "keywords": [
+    "validation",
+    "validate",
+    "form",
+    "internationalization",
+    "extensibility"
+  ],
+  "author": "FormaJS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FormaJS/forma"
+  },
+  "bugs": {
+    "url": "https://github.com/FormaJS/forma/issues"
+  },
+  "homepage": "https://github.com/FormaJS/forma#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitest/coverage-istanbul": "^4.0.5",
+    "@vitest/coverage-v8": "^4.0.3",
+    "eslint": "^9.38.0",
+    "prettier": "^3.6.2",
+    "rollup": "^4.52.5",
+    "vitest": "^4.0.3"
+  }
+}

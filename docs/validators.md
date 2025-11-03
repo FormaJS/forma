@@ -1,0 +1,63 @@
+| Validator | Description & Parameters |
+|----------|--------------------------|
+| `validateAlpha(str, options)` | Validates if the string contains only alphabetic characters (according to the locale). - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateAlphanumeric(str, options)` | Validates if the string contains only alphanumeric characters (according to the locale). - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateAscii(str)` | Validates if the string contains only ASCII characters. - `str`: `string` — String to validate |
+| `validateBase64(str, options)` | Validates if the string is a valid Base64 string. - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateBIC(str, options)` | Validates if the string is a valid BIC (SWIFT code). - `str`: `string` — String to be validated - `options`: `object` — Options (must contain 'locale' for getValidationRegex) |
+| `validateBoolean(str, options)` | Validates if the string represents a boolean value (locale-aware). - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateByteLength(str, options)` | Validates the byte length (assuming UTF-8) of a string. - `str`: `string` — The string to validate. - `options`: `object` — Options (e.g., { min: 10, max: 100 }) |
+| `validateContains(str, seed, options)` | Validates if the string contains a given substring (seed) and, optionally, how many times it appears. - `str`: `string` — String to validate - `seed`: `string` — The substring to search for (comes from '...finalArgs' in Forma.js) - `options`: `object` — Options |
+| `validateCreditCard(str, options)` | Checks if the string is a valid credit card number. Validates length (13-19), Luhn algorithm, and optionally the provider. - `str`: `string` — String to validate. - `options`: `object` — Options. |
+| `validateCurrency(str, options)` | Checks if the string represents a valid monetary value according to the locale. - `str`: `string` — String to be validated. - `options`: `object` — Validation options. |
+| `validateDataURI(str)` | Validates if the string has the format of a Data URI. - `str`: `string` — String to be validated |
+| `validateDate(str, options)` | Validates if the string is a valid date (ISO or locale format) and optionally within a range. - `str`: `string` — String to validate - `options`: `object` — Options (must contain 'locale') |
+| `validateDecimal(str, options)` | Validates if the string is a decimal number (REQUIRES a decimal part). Rejects "123" but allows "123.45". - `str`: `string` — String to validate - `options`: `object` — Options (minRange, maxRange, locale, etc.) |
+| `validateDivisibleBy(str, divisor, options)` | Validates if the number represented by the string is divisible by a divisor. - `str`: `string` — String to validate (e.g., "1.200,50") - `divisor`: `number` — The number to divide by (comes from '...finalArgs'). - `options`: `object` — Options (must contain 'locale') |
+| `validateEmail(str, options)` | Validates if the string is a valid email address. - `str`: `string` — String to validate. - `options`: `object` — Validation options. |
+| `validateEndsWith(str, seed, options)` | Validates if the string ends with a given substring (seed). - `str`: `string` — String to validate - `seed`: `string` — The substring to search for at the end. - `options`: `object` — Options |
+| `validateEqualsTo(str, comparison, options)` | Validates if the string is exactly equal to a comparison value. - `str`: `string` — String to validate - `comparison`: `string|number` — The value to compare against. - `options`: `object` — Options |
+| `validateFloat(str, options)` | Validates if the string is a valid floating-point number (integer OR decimal). Allows "123" and "123.45". - `str`: `string` — String to validate - `options`: `object` — Options (minRange, maxRange, locale, etc.) |
+| `validateFQDN(str, options)` | Verifica se uma string é um FQDN (Fully Qualified Domain Name) - `str`: `string` — * @param {object} [options] - `options` — *Documentation not found.* |
+| `validateHexadecimal(str)` | Validates if the string contains only hexadecimal characters (0-9, A-F). - `str`: `string` — String to validate |
+| `validateHexColor(str)` | Validates if the string is a valid hexadecimal color code (with #). - `str`: `string` — String to validate |
+| `validateHSL(str)` | Validates if the string has the format of an HSL or HSLA color. - `str`: `string` — String to be validated |
+| `validateIBAN(str, options)` | Validates if the string is a valid IBAN (International Bank Account Number). - `str`: `string` — String to be validated - `options`: `object` — Options |
+| `validateIMEI(str)` | Validates if the string is a valid IMEI number (15 digits and Luhn checksum). - `str`: `string` — String to be validated |
+| `validateInt(str, options)` | Validates if the string is a valid integer (does NOT allow decimals). Allows "123" but rejects "123.45". - `str`: `string` — String to validate - `options`: `object` — Options (minRange, maxRange, locale, etc.) |
+| `validateIP(str, options)` | Validates if the string is an IP address (IPv4 or IPv6). - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateIPRange(str, options)` | Validates if the string is a CIDR IP range (IPv4 or IPv6). - `str`: `string` — String to validate (e.g., "192.168.1.0/24") - `options`: `object` — Options |
+| `validateIsBlacklisted(str, options)` | Validates if the string does NOT contain characters or words from a blacklist. - `str`: `string` — The string to validate. - `options`: `object` — Validation options. |
+| `validateISBN(str, options)` | Validates if the string is a valid ISBN (ISBN-10 or ISBN-13). - `str`: `string` — String to be validated - `options`: `object` — Options |
+| `validateIsIn(str, comparisonArray, options)` | Validates if the string is present in an array of allowed values. - `str`: `string` — String to validate - `comparisonArray`: `Array<string|number>` — The array of allowed values. - `options`: `object` — Options |
+| `validateISINCode(str)` | Validates if the string is a valid ISIN (International Securities Identification Number). - `str`: `string` — String to be validated |
+| `validateISO(str, options)` | Validates if the string matches a specified ISO standard. - `str`: `string` — String to validate. - `options`: `object` — Validation options. |
+| `validateISRC(str)` | Validates if the string is a valid ISRC (International Standard Recording Code). - `str`: `string` — String to be validated |
+| `validateISSN(str)` | Validates if the string is a valid ISSN (International Standard Serial Number). - `str`: `string` — String to be validated |
+| `validateIsWhitelisted(str, options)` | Validates if the string contains ONLY characters from a whitelist. - `str`: `string` — The string to validate. - `options`: `object` — Validation options. |
+| `validateJSON(str, options)` | Validates if the string is a valid JSON string. - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateJWT(str)` | Validates if the string has the format of a JSON Web Token (JWT) (Header.Payload.Signature). (Does not validate the cryptographic signature). - `str`: `string` — String to validate |
+| `validateLength(str, options)` | Validates the number of characters in a string. - `str`: `string` — The string to validate. - `options`: `object` — Options (e.g., { min: 10, max: 100 }) |
+| `validateLicensePlate(plate, options)` | Validates a vehicle license plate according to locale and options (e.g., state) - `plate`: `string` — Plate to validate - `options`: `object` — Options (e.g., { locale: 'en-US', state: 'CA' }) |
+| `validateLowercase(str, options)` | Validates if the string contains only lowercase alphabetic characters (locale-aware). - `str`: `string` — String to validate - `options`: `object` — Options (e.g., { locale: 'pt-BR', ignoreSpace: true }) |
+| `validateMACAddress(str, options)` | Validates if the string is a valid MAC address, testing against allowed formats. - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateMatches(str, pattern, options)` | Validates if the string matches a custom RegEx pattern. - `str`: `string` — String to validate - `pattern`: `string|RegExp` — The RegEx pattern (as string or RegExp object). - `options`: `object` — Options |
+| `validateMimeType(str)` | Validates if the string has the format of a MIME Type (e.g., 'application/json'). - `str`: `string` — String to be validated |
+| `validateMobileNumber(mobile, options)` | Validates mobile number according to locale - `mobile`: `string` — Number to validate - `options`: `object` — Options (e.g., { locale: 'pt-BR' }) |
+| `validateMongoId(str)` | Validates if the string is a valid MongoId (24 hex characters). - `str`: `string` — String to validate |
+| `validateMultibyte(str)` | Validates if the string contains at least one multibyte (non-ASCII) character. - `str`: `string` — String to validate |
+| `validateNegative(str, options)` | Validates if the string is a negative number (< 0). - `str`: `string` — String to validate - `options`: `object` — Options (e.g., { locale: 'pt-BR' }) |
+| `validateNotEmpty(str)` | Validates if a string is empty (considering whitespace). - `str`: `string` — The string to validate. |
+| `validateNumeric(str, options)` | Validates if the string is a valid number (locale-aware). This is the "master" function used by validateInt, validateFloat, etc. - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validatePort(str)` | Validates if the string is a valid port number (0-65535). - `str`: `string` — String to validate |
+| `validatePositive(str, options)` | Validates if the string is a positive number (> 0). - `str`: `string` — String to validate - `options`: `object` — Options (e.g., { locale: 'pt-BR' }) |
+| `validatePostalCode(str, options)` | Validates if the string is a valid postal code (according to the locale). - `str`: `string` — String to be validated - `options`: `object` — Options (must contain 'locale') |
+| `validateSemVer(str)` | Validates if the string has the format of a Semantic Version (1.0.0 or v1.0.0). - `str`: `string` — String to be validated |
+| `validateSlug(str, options)` | Validates if the string is in a valid "slug" format. (alphanumeric, separated by hyphen/underscore, no accents). - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateStartsWith(str, seed, options)` | Validates if the string starts with a given substring (seed). - `str`: `string` — String to validate - `seed`: `string` — The substring to search for at the start. - `options`: `object` — Options |
+| `validateStrongPassword(str, options)` | Validates the strength of a password based on configurable rules. - `str`: `string` — String to validate - `options`: `object` — Options |
+| `validateSurrogatePair(str)` | Validates if the string contains at least one surrogate pair, such as emojis. - `str`: `string` — String to validate |
+| `validateTaxId(str, options)` | Validates a tax payment identifier according to locale - `str`: `string` — Document to validate - `options`: `object` — Options (must contain 'locale') |
+| `validateUppercase(str, options)` | Validates if the string contains only uppercase alphabetic characters (locale-aware). - `str`: `string` — String to validate - `options`: `object` — Options (e.g., { locale: 'pt-BR', ignoreSpace: true }) |
+| `validateURL(str, options)` | Validates if the string is a valid URL. - `str`: `string` — String to be validated - `options`: `object` — Validation options. |
+| `validateUUID(str, options)` | Validates if the string is a valid UUID (Universally Unique Identifier). - `str`: `string` — String to be validated - `options`: `object` — Options |

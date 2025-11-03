@@ -1,0 +1,391 @@
+{
+    "name": "English (USA)",
+    "separators": {
+        "decimal": ".",
+        "thousand": ",",
+        "thousandDigits": 3
+    },
+    "currency": {
+        "symbol": "$",
+        "symbol_before_digits": true,
+        "space_between_symbol_and_digits": false,
+        "decimal_digits": 2,
+        "negative_format": ["-{symbol}{amount}", "({symbol}{amount})", "{symbol}({amount})"]
+    },
+    "date": {
+        "format": "m/dd/yyyy",
+        "separator": "/"
+    },
+    "masks": {
+        "postalcode": "#####-####"
+    },
+    "validate": {
+        "alpha": {
+            "pattern": "^[A-Z]+$",
+            "flags": "i"
+        },
+        "alphanumeric": {
+            "pattern": "^[A-Z0-9]+$",
+            "flags": "i"
+        },
+        "mobilenumber": {
+            "pattern": "^(?:(?:\\+?1[\\s.-]?)?(?:\\(\\s*([2-9]\\d{2})\\s*\\)|([2-9]\\d{2}))[\\s.-]?)?([2-9]\\d{2})[\\s.-]?(\\d{4})$|^[2-9]\\d{9}$",
+            "flags": ""
+        },
+        "licenseplate": {
+            "AL": {
+                "pattern": "^[1-9][0-9A-Z]{1,6}$",
+                "flags": "i"
+            },
+            "AK": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "AZ": {
+                "pattern": "^[A-Z0-9]{3,7}$",
+                "flags": "i"
+            },
+            "AR": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "CA": {
+                "pattern": "^[1-9][A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "CO": {
+                "pattern": "^([0-9]{3}-?[A-Z]{3}|[A-Z]{3}-?[0-9]{3})$",
+                "flags": "i"
+            },
+            "CT": {
+                "pattern": "^[A-Z0-9]{2,7}$",
+                "flags": "i"
+            },
+            "DE": {
+                "pattern": "^[A-Z0-9]{1,7}$",
+                "flags": "i"
+            },
+            "DC": {
+                "pattern": "^[A-Z]{2}[0-9]{4}$",
+                "flags": "i"
+            },
+            "FL": {
+                "pattern": "^[A-Z0-9]{3} ?[A-Z0-9]{3}$",
+                "flags": "i"
+            },
+            "GA": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "HI": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "ID": {
+                "pattern": "^[0-9][A-Z][0-9A-Z]{1,5}$",
+                "flags": "i"
+            },
+            "IL": {
+                "pattern": "^[A-Z0-9]{1,7}$",
+                "flags": "i"
+            },
+            "IN": {
+                "pattern": "^[0-9]{1,3}[A-Z][0-9]{1,4}$",
+                "flags": "i"
+            },
+            "IA": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "KS": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "KY": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "LA": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "ME": {
+                "pattern": "^[0-9]{1,6}[A-Z]{1,2}$",
+                "flags": "i"
+            },
+            "MD": {
+                "pattern": "^[1-9][A-Z]{2}[0-9]{4}$",
+                "flags": "i"
+            },
+            "MA": {
+                "pattern": "^[0-9]{1,4}[A-Z]{1,2}$",
+                "flags": "i"
+            },
+            "MI": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "MN": {
+                "pattern": "^[A-Z0-9]{3,7}$",
+                "flags": "i"
+            },
+            "MS": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "MO": {
+                "pattern": "^[A-Z0-9]{2}[A-Z][0-9A-Z][0-9]$",
+                "flags": "i"
+            },
+            "MT": {
+                "pattern": "^[A-Z0-9]{1,7}$",
+                "flags": "i"
+            },
+            "NE": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "NV": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "NH": {
+                "pattern": "^[0-9]{3}[0-9]{3,4}$",
+                "flags": "i"
+            },
+            "NJ": {
+                "pattern": "^[A-Z][0-9]{2}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "NM": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "NY": {
+                "pattern": "^[A-Z]{3}-?[0-9]{4}$",
+                "flags": "i"
+            },
+            "NC": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "ND": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "OH": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "OK": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "OR": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "PA": {
+                "pattern": "^[A-Z]{3}-?[0-9]{4}$",
+                "flags": "i"
+            },
+            "RI": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "SC": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "SD": {
+                "pattern": "^[0-9][A-Z]{2}[0-9]{3}$",
+                "flags": "i"
+            },
+            "TN": {
+                "pattern": "^[0-9]{3}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "TX": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "UT": {
+                "pattern": "^[A-Z][0-9]{2}[A-Z]{3}$",
+                "flags": "i"
+            },
+            "VT": {
+                "pattern": "^[A-Z]{3}[0-9]{3}$",
+                "flags": "i"
+            },
+            "VA": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "WA": {
+                "pattern": "^[A-Z]{3}[0-9]{4}$",
+                "flags": "i"
+            },
+            "WV": {
+                "pattern": "^[0-9A-Z]{1,2} [0-9A-Z]{3,5}$",
+                "flags": "i"
+            },
+            "WI": {
+                "pattern": "^[A-Z]{3}-?[0-9]{4}$",
+                "flags": "i"
+            },
+            "WY": {
+                "pattern": "^[0-9]{1,2}-[A-Z0-9]{1,5}$",
+                "flags": "i"
+            }
+        },
+        "postalcode": {
+            "pattern": "^\\d{5}(-\\d{4})?$"
+        },
+        "taxid": "function:validateTaxId",
+        "boolean": {
+            "strictTrue": ["true"],
+            "strictFalse": ["false"],
+            "looseTrue": ["1", "yes", "y"],
+            "looseFalse": ["0", "no", "n"]
+        }
+    },
+    "messages": {
+        "genericError": "An unexpected error occurred during validation.",
+        "invalidRule": "The validation rule '{rule}' could not be found or is not valid.",
+        "invalidType": "The provided value is not a string.",
+        "isEmpty": "The field cannot be empty.",
+        "localeRequired": "A locale option is required for this validation.",
+        "validateAlpha": "The field must contain only alphabetic characters.",
+        "validateByteLengthMax": "The field must be at most {max} bytes.",
+        "validateByteLengthMin": "The field must be at least {min} bytes.",
+        "validateLengthExact": "The field must be exactly {min} characters.",
+        "validateLengthMax": "The field must be at most {max} characters.",
+        "validateLengthMin": "The field must be at least {min} characters.",
+        "validateAlphanumeric": "The field must contain only alphanumeric characters.",
+        "validateMatches": "The field does not match the required pattern.",
+        "validateMatchesInvalid": "The provided RegEx pattern is invalid.",
+        "validateAscii": "The field must contain only ASCII characters.",
+        "validateBase64": "The field must be a valid Base64 string.",
+        "validateNumericFormat": "The field must be a valid number.",
+        "validateNumericInvalid": "The field contains an invalid numeric value.",
+        "validateNumericRangeMin": "The value must be {minRange} or greater.",
+        "validateNumericRangeMax": "The value must be {maxRange} or less.",
+        "validateNumericRangeMinStrict": "The value must be greater than {minRange}.",
+        "validateNumericRangeMaxStrict": "The value must be less than {maxRange}.",
+        "validateNumericNotInt": "The field must be a whole number (no decimals).",
+        "validateNumericNotDecimal": "The field must include a decimal part.",
+        "validateHexadecimal": "The field must be a valid hexadecimal string.",
+        "validateHexColor": "The field must be a valid hex color (e.g., #F00, #FF0000, #FF0000FF).",
+        "validatePortRange": "The field must be a valid port number (0-65535).",
+        "validateNumericPositive": "The field must be a positive number (greater than 0).",
+        "validateNumericNegative": "The field must be a negative number (less than 0).",
+        "validateLowercase": "The field must contain only lowercase alphabetic characters.",
+        "validateUppercase": "The field must contain only uppercase alphabetic characters.",
+        "validateMongoId": "The field must be a valid 24-character MongoId.",
+        "validateMultibyte": "The field must contain one or more multibyte characters.",
+        "validateSurrogatePair": "The field must contain one or more surrogate pair characters (e.g., emojis).",
+        "validateBoolean": "The field must be a valid boolean value (e.g., true, false, 1, 0).",
+        "validateContains": "The field must contain the text: {seed}.",
+        "validateContainsMin": "The field must contain '{seed}' at least {minOccurrences} time(s).",
+        "validateContainsMax": "The field must contain '{seed}' at most {maxOccurrences} time(s).",
+        "validateIsIn": "The value must be one of the following: {allowed}.",
+        "validateIsBlacklistedChars": "The field contains forbidden characters.",
+        "validateIsBlacklistedWords": "The field contains a forbidden word: {word}.",
+        "validateIsWhitelisted": "The field contains characters that are not allowed: {char}.",
+        "validateEndsWith": "The field must end with the text: {seed}.",
+        "validateStartsWith": "The field must start with the text: {seed}.",
+        "validateEqualsTo": "The field must be equal to: {comparison}.",
+        "validateJSON": "The field must be a valid JSON string.",
+        "validateJSONNotObject": "The JSON string must represent an Object or Array (primitives are not allowed).",
+        "validateCurrencyInvalidType": "The value must be a string.",
+        "validateCurrencyIsEmpty": "The field cannot be empty.",
+        "validateCurrencyMissingLocaleData": "Currency validation rules for the locale are missing or invalid.",
+        "validateCurrencyNegativeNotAllowed": "Negative currency values are not allowed.",
+        "validateCurrencyInvalidFormat": "The field must be a valid currency format.",
+        "validateCurrencyInvalidAmount": "The numeric part of the currency value is invalid.",
+        "validateCurrencyDecimalDigits": "The field must have at most {expected} decimal places (found {actual}).",
+        "validateCurrencySymbolRequired": "The currency symbol is required but was not found.",
+        "validateCreditCardProvider": "The credit card provider is not supported or the format is incorrect.",
+        "validateCreditCardLength": "The credit card number must be between 13 and 19 digits.",
+        "validateCreditCardChecksum": "The credit card number is invalid (failed checksum).",
+        "validateCreditCardUnknownProvider": "The specified card provider '{provider}' is not supported.",
+        "validateCreditCardProvierMismatch": "The card number does not match the format for {provider}.",
+        "validateCreditCardGeneric": "The credit card number is not a valid or supported card.",
+        "validateSlug": "The field must be a valid slug (e.g., 'my-example-slug').",
+        "validateEmailFormat": "The email must be in a valid format (e.g., local-part@domain-part).",
+        "validateEmailMaxLength": "The email must not exceed 254 characters.",
+        "validateEmailDisplayNameRequired": "The email must include a display name (e.g., 'Name <email>').",
+        "validateEmailDisplayNameNotAllowed": "The email must not include a display name.",
+        "validateEmailLocalPart": "The local part of the email contains invalid characters.",
+        "validateEmailDomainPart": "The domain part of the email is invalid.",
+        "validateEmailDomainIPNotAllowed": "The email domain cannot be an IP address.",
+        "validateEmailTLDRequired": "The email domain must include a Top-Level Domain (e.g., .com).",
+        "validateEmailHostBlacklisted": "The email domain is blacklisted: {host}.",
+        "validateEmailHostWhitelist": "The email domain is not in the allowed whitelist.",
+        "validateIP": "The field must be a valid IP address (IPv4 or IPv6).",
+        "validateIPV4": "The field must be a valid IPv4 address.",
+        "validateIPV6": "The field must be a valid IPv6 address.",
+        "validateDate": "The field must be a valid date.",
+        "validateDateMin": "The date must be on or after {minDate}.",
+        "validateDateMax": "The date must be on or before {maxDate}.",
+        "validateIPRange": "The field must be a valid IP CIDR range (e.g., 192.168.1.0/24 or 2001:db8::/32).",
+        "validateIPRangeV4": "The field must be a valid IPv4 CIDR range (e.g., 192.168.1.0/24).",
+        "validateIPRangeV6": "The field must be a valid IPv6 CIDR range (e.g., 2001:db8::/32).",
+        "validateISOStandardRequired": "The 'standard' option is required for validateISO.",
+        "validateISOUnknownStandard": "The ISO standard '{standard}' is not supported.",
+        "validateISO_3166-1": "The value must be a valid ISO 3166-1 country code (alpha-2 or alpha-3).",
+        "validateISO_ISO3166-1-alpha-2": "The value must be a valid ISO 3166-1 alpha-2 country code (2 letters).",
+        "validateISO_ISO3166-1-alpha-3": "The value must be a valid ISO 3166-1 alpha-3 country code (3 letters).",
+        "validateISO_ISO639-1": "The value must be a valid ISO 639-1 language code (2 lowercase letters).",
+        "validateISO_ISO4217": "The value must be a valid ISO 4217 currency code (3 uppercase letters).",
+        "validateISO_8601_lenient": "The value must be a valid ISO 8601 date/time (e.g., YYYY-MM-DD or YYYY-MM-DDTHH:mm:ssZ).",
+        "validateISO_8601_strict": "The value must be a strict ISO 8601 datetime (YYYY-MM-DDTHH:mm:ssZ or with offset).",
+        "validateDivisibleBy": "The field value must be divisible by {divisor}.",
+        "validateDivisibleByDivisor": "The 'divisor' argument must be a valid number other than zero.",
+        "validateMACAddressFormat": "The field must be a valid MAC address (or is not in an allowed format).",
+        "validateJWT": "The field must be a valid JSON Web Token (JWT) format.",
+        "validateURL": "The field must be a valid URL (e.g., http://www.example.com).",
+        "validateURLProtocolRequired": "The URL must include a valid protocol (e.g., http://).",
+        "validateURLProtocolNotAllowed": "The URL protocol used is not in the allowed list: {protocol}.",
+        "validateURLTLDRequired": "The URL domain must include a Top-Level Domain (e.g., .com).",
+        "validateURLIPNotAllowed": "The URL domain cannot be an IP address.",
+        "validateURLAuthNotAllowed": "The URL cannot include user authentication (user:pass@...).",
+        "validateURLFragmentsNotAllowed": "The URL cannot include fragments (#).",
+        "validateURLQueryNotAllowed": "The URL cannot include query parameters (?).",
+        "validatePasswordMinLength": "Password must be at least {minLength} characters.",
+        "validatePasswordMaxLength": "Password must be no more than {maxLength} characters.",
+        "validatePasswordLowercase": "Password must contain at least {minLowercase} lowercase letter(s).",
+        "validatePasswordUppercase": "Password must contain at least {minUppercase} uppercase letter(s).",
+        "validatePasswordNumbers": "Password must contain at least {minNumbers} number(s).",
+        "validatePasswordSymbols": "Password must contain at least {minSymbols} special character(s).",
+        "validateDataURI": "The field must be a valid Data URI (e.g., data:text/plain;base64,SGVsbG8...).",
+        "validateIMEIFormat": "The field must be a valid 15-digit IMEI number.",
+        "validateIMEIChecksum": "The IMEI number is invalid (failed checksum).",
+        "validateMimeType": "The field must be a valid MIME type (e.g., application/json).",
+        "validateSemVer": "The field must be a valid Semantic Version (e.g., v1.2.3 or 1.0.0-alpha.1).",
+        "validateHSL": "The field must be a valid HSL or HSLA color (e.g., hsl(0, 100%, 50%) or hsla(0, 100%, 50%, 0.5)).",
+        "validateFQDN": "The field must be a valid Fully Qualified Domain Name.",
+        "validateFQDNUnderscores": "Underscores are not allowed in the FQDN.",
+        "validateFQDNTrailingDot": "Trailing dots are not allowed in the FQDN.",
+        "validateFQDNWildcard": "Wildcards are not allowed in the FQDN.",
+        "validateFQDNLocalhost": "The hostname 'localhost' is not allowed.",
+        "validateFQDNLength": "FQDN labels must be 63 characters or less and the total length 255 or less.",
+        "validateFQDNFormat": "The FQDN contains an invalid format or characters.",
+        "validatePostalCode": "The field must be a valid postal code.",
+        "validateBIC": "The field must be a valid BIC (SWIFT) code.",
+        "validateIBANFormat": "The field must be a valid IBAN format (e.g., correct country code or length).",
+        "validateIBANChecksum": "The IBAN is invalid (failed checksum validation).",
+        "validateIBANWhitelist": "The IBAN country code is not in the allowed whitelist.",
+        "validateIBANBlacklist": "The IBAN country code is blacklisted: {country}.",
+        "validateISBNFormat": "The field must be a valid ISBN-10 or ISBN-13 format.",
+        "validateISBN10Checksum": "The ISBN-10 checksum is invalid.",
+        "validateISBN13Checksum": "The ISBN-13 checksum is invalid.",
+        "validateISINCodeFormat": "The field must be a valid 12-character ISIN format.",
+        "validateISINCodeChecksum": "The ISIN checksum is invalid.",
+        "validateISRC": "The field must be a valid 12-character ISRC code.",
+        "validateISSNFormat": "The field must be a valid 8-digit ISSN.",
+        "validateISSNChecksum": "The ISSN checksum is invalid.",
+        "validateUUID": "The field must be a valid UUID.",
+        "validateUUIDVersion": "The field must be a valid UUID version {version}."
+    }
+}
