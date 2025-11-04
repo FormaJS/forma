@@ -12,18 +12,7 @@ module.exports = [
             { file: 'dist/index.esm.js', format: 'es', sourcemap: false, exports: 'named' },
             { file: 'dist/index.cjs', format: 'cjs', sourcemap: false, exports: 'named' },
         ],
-        plugins: [resolve(), commonjs(), json()],
-    },
-    // UMD build (non-minified)
-    {
-        input: 'src/umd-entry.js',
-        output: {
-            file: 'dist/formajs.umd.js',
-            format: 'umd',
-            name: 'forma',
-            exports: 'named',
-        },
-        plugins: [resolve(), commonjs(), json()],
+        plugins: [resolve(), commonjs(), json(), terser()],
     },
     // UMD minified
     {
@@ -47,7 +36,7 @@ module.exports = [
             entryFileNames: '[name].js',
             exports: 'named',
         },
-        plugins: [resolve(), commonjs(), json()],
+        plugins: [resolve(), commonjs(), json(), terser()],
     },
     // Preserve modules CJS layout under dist/cjs (use .cjs extensions)
     {
@@ -60,6 +49,6 @@ module.exports = [
             entryFileNames: '[name].cjs',
             exports: 'named',
         },
-        plugins: [resolve(), commonjs(), json()],
+        plugins: [resolve(), commonjs(), json(), terser()],
     },
 ];
