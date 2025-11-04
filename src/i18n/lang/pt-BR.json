@@ -21,7 +21,17 @@
         "separator": "/"
     },
     "masks": {
-        "postalcode": "#####-###"
+        "postalcode": {
+            "default": "#####-###"
+        },
+        "mobileNumber": {
+            "local": "(##) #####-####",
+            "international": "+55 (##) #####-####"
+        },
+        "taxId": {
+            "CPF": "###.###.###-##",
+            "CNPJ": "##.###.###/####-##"
+        }
     },
     "validate": {
         "alpha": {

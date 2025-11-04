@@ -1,8 +1,10 @@
 export * from './algorithms/luhnCheck.js';
 export * from './algorithms/mod11.js';
+export * from './applyFormatMask/index.js';
 export * from './emailConstants.js';
 export * from './escapeRegExp/index.js';
 export * from './escapeRegExpCharClass/index.js';
+export * from './executeI18nValidationRule/index.js';
 export * from './getCreditCardPatterns/index.js';
 export * from './getNormalizedNumberString/index.js';
 export * from './getValidationRegex/index.js';
@@ -13,4 +15,3 @@ export * from './normalizeLocale/index.js';
 export * from './regexConstants.js';
 export * from './toString/index.js';
 export * from './typeOf/index.js';
-export * from './executeI18nValidationRule/index.js';

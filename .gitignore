@@ -36,7 +36,6 @@ $RECYCLE.BIN/
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
-
 # Logs
 logs
 *.log
@@ -79,6 +78,9 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+
+# Lock files
+package-lock.json
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

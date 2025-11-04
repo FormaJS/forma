@@ -1,7 +1,7 @@
-| Parser | Description & Parameters |
-|----------|--------------------------|
-| `toBoolean(str, options)` | Converts a string (locale-aware) to a boolean. - `str`: `string` — The string to convert (e.g. "yes", "1", "true"). - `options`: `object` — Options (should include 'locale'). |
-| `toDate(str, options)` | Converts a string (ISO 8601 or locale format) into a Date object. - `str`: `string` — The string to convert. - `options`: `object` — Options (should include 'locale'). |
-| `toFloat(str, options)` | Converts a string (locale-aware) to a floating point number. - `str`: `string` — The string to convert (e.g. "1.234,56"). - `options`: `object` — Options (should include 'locale'). |
-| `toInt(str, options)` | Converts a string (locale-aware) to an integer number. - `str`: `string` — The string to convert (e.g. "1.234,56"). - `options`: `object` — Options (should include 'locale'). |
-| `toJSON(str)` | Converts a JSON string into a JavaScript object/value. - `str`: `string` — The JSON string to convert. |
+| Parser                    | Description & Parameters                                                                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `toBoolean(str, options)` | Converts a string (locale-aware) to a boolean. - `str`: `string` — The string to convert (e.g. "yes", "1", "true"). - `options`: `object` — Options (should include 'locale').       |
+| `toDate(str, options)`    | Converts a string (ISO 8601 or locale format) into a Date object. - `str`: `string` — The string to convert. - `options`: `object` — Options (should include 'locale').              |
+| `toFloat(str, options)`   | Converts a string (locale-aware) to a floating point number. - `str`: `string` — The string to convert (e.g. "1.234,56"). - `options`: `object` — Options (should include 'locale'). |
+| `toInt(str, options)`     | Converts a string (locale-aware) to an integer number. - `str`: `string` — The string to convert (e.g. "1.234,56"). - `options`: `object` — Options (should include 'locale').       |
+| `toJSON(str)`             | Converts a JSON string into a JavaScript object/value. - `str`: `string` — The JSON string to convert.                                                                               |

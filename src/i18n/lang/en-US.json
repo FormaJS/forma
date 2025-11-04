@@ -17,7 +17,18 @@
         "separator": "/"
     },
     "masks": {
-        "postalcode": "#####-####"
+        "postalcode": {
+            "default": "#####-###"
+        },
+        "mobileNumber": {
+            "local": "(###) ###-####",
+            "international": "+1 (###) ###-####"
+        },
+        "taxId": {
+            "SSN": "###-##-####",
+            "ITIN": "###-##-####",
+            "EIN": "##-#######"
+        }
     },
     "validate": {
         "alpha": {
