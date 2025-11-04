@@ -40,7 +40,13 @@ export function formatPostalCode(str, options = {}) {
     }
 
     const localeData = getLocaleData(lang);
-    const mask = localeData?.masks?.postalcode;
+    const maskObj = localeData?.masks?.postalcode;
+
+    if (!maskObj || typeof maskObj !== 'object') {
+        return digits;
+    }
+
+    const mask = maskObj.default;
 
     if (!mask) {
         return digits;

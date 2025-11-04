@@ -179,8 +179,8 @@ const { validateEmail } = require('@formajs/formajs/validators/validateEmail');
 <!-- UMD (Browser/CDN) -->
 <script src="https://unpkg.com/@formajs/formajs@1/dist/formajs.umd.min.js"></script>
 <script>
-  // global continua sendo `forma` (definido no build UMD)
-  forma.validateEmail('john@example.com');
+    // The global remains forma (defined in the UMD build)
+    forma.validateEmail('john@example.com');
 </script>
 ```
 
