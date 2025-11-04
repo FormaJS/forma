@@ -1,4 +1,4 @@
-import { toString } from './toString/index.js';
+import { toString } from '../toString/index.js';
 
 /**
  * Applies a format mask (where '#' is a digit) to a string of digits.
