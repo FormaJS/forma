@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import FormaDefault, { Forma, forma, formaBR } from '../../src/index.js';
+import FormaDefault, { Forma, forma } from '../../src/index.js';
 import '../setup.js';
 
 describe('index / Forma integration', () => {
@@ -9,7 +9,6 @@ describe('index / Forma integration', () => {
     expect(typeof FormaDefault).toBe('object');
     expect(FormaDefault).toBe(forma);
     expect(forma).toBeDefined();
-    expect(formaBR).toBeDefined();
   });
 
   it('forma instance wraps validators and returns wrapped result shape', () => {

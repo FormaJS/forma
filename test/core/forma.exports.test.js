@@ -1,4 +1,4 @@
-import FormaDefault, { Forma as FormaNamed, forma, formaBR } from '../../src/index.js';
+import FormaDefault, { Forma as FormaNamed, forma } from '../../src/index.js';
 import { describe, it, expect } from 'vitest';
 import '../setup.js';
 
@@ -32,8 +32,6 @@ describe('core Forma exports and instance binding', () => {
     inst.setLocale('pt-BR');
     // now comma is decimal separator in pt-BR
     expect(inst.toFloat('1.234,56')).toBeCloseTo(1234.56);
-    // formaBR preconfigured instance also works
-    expect(formaBR.toFloat('1.234,56')).toBeCloseTo(1234.56);
     // the default preconfigured instance also parses en-US numbers
     expect(forma.toFloat('1.23')).toBeCloseTo(1.23);
   });

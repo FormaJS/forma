@@ -1,9 +1,9 @@
 // UMD entry wrapper: expose the default preconfigured instance as default
 // and also export the class and named exports for consumers.
-import { Forma, forma, formaBR } from './index.js';
+import { Forma, forma } from './index.js';
 
 // Re-export named symbols
-export { Forma, forma, formaBR };
+export { Forma, forma };
 
 // When used in a browser via the UMD bundle, some bundlers populate an
 // exports object on the global (e.g. window.forma = { default: ..., forma: ... }).

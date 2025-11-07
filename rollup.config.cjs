@@ -5,15 +5,6 @@ const _terserMod = require('@rollup/plugin-terser');
 const terser = _terserMod.terser || _terserMod.default || _terserMod;
 
 module.exports = [
-  // ESM + CJS builds
-  {
-    input: 'src/index.js',
-    output: [
-      { file: 'dist/index.esm.js', format: 'es', sourcemap: false, exports: 'named' },
-      { file: 'dist/index.cjs', format: 'cjs', sourcemap: false, exports: 'named' },
-    ],
-    plugins: [resolve(), commonjs(), json(), terser()],
-  },
   // UMD minified
   {
     input: 'src/umd-entry.js',
@@ -47,6 +38,18 @@ module.exports = [
       preserveModules: true,
       preserveModulesRoot: 'src',
       entryFileNames: '[name].cjs',
+      exports: 'named',
+    },
+    plugins: [resolve(), commonjs(), json(), terser()],
+  },
+  // Build locale wrappers
+  {
+    input: 'src/i18n/locales/pt-BR.js',
+    external: ['../index.js'],
+    output: {
+      dir: 'dist/esm/i18n/locales',
+      format: 'es',
+      entryFileNames: 'pt-BR.js',
       exports: 'named',
     },
     plugins: [resolve(), commonjs(), json(), terser()],

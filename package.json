@@ -4,6 +4,17 @@
   "description": "A lightweight, modular JavaScript library for validating, parsing, and sanitizing form inputs",
   "main": "dist/formajs.cjs.js",
   "module": "dist/formajs.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs"
+    },
+    "./i18n/pt-BR": "./dist/esm/i18n/locales/pt-BR.js",
+    "./i18n/*": "./dist/esm/i18n/locales/*.js"
+  },
+  "sideEffects": [
+    "./dist/esm/i18n/locales/*.js"
+  ],
   "files": [
     "dist",
     "README.md",
