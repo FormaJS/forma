@@ -4,3 +4,4 @@
 | `formatDate(dateObj, options)`     | Formats a Date object into a locale-aware string, using the format defined in the i18n file. - `dateObj`: `Date` — The Date object to format. - `options`: `object` — Options (must contain 'locale'). |
 | `formatMobileNumber(str, options)` | Applies a locale-aware mobile number formatting mask. - `str`: `string` — The string to format (e.g., "11987654321"). - `options`: `object` — Options.                                                 |
 | `formatPostalCode(str, options)`   | Applies postal code formatting mask (locale-aware) to a string of digits. - `str`: `string` — The string to be formatted (e.g., "09010140"). - `options`: `object` — Options (must contain 'locale').  |
+| `formatTaxId(str, options)`        | Applies a locale-aware Tax ID formatting mask based on a 'type'. - `str`: `string` — The string to format (e.g., "12345678901"). - `options`: `object` — Options.                                      |
