@@ -12,37 +12,37 @@ import { escapeRegExp } from '../../utils/escapeRegExp/index.js';
  * @returns {string} The transformed (slug) string.
  */
 export function toSlug(str, options = {}) {
-    let s = toString(str);
+  let s = toString(str);
 
-    const separator = options.separator || '-';
-    const doLowercase = options.lowercase !== false;
-    const doRemoveDiacritics = options.removeDiacritics !== false;
-    const doRemoveSpecial = options.removeSpecialChars !== false;
+  const separator = options.separator || '-';
+  const doLowercase = options.lowercase !== false;
+  const doRemoveDiacritics = options.removeDiacritics !== false;
+  const doRemoveSpecial = options.removeSpecialChars !== false;
 
-    const escapedSep = escapeRegExp(separator);
+  const escapedSep = escapeRegExp(separator);
 
-    if (doLowercase) {
-        s = s.toLowerCase();
-    }
+  if (doLowercase) {
+    s = s.toLowerCase();
+  }
 
-    if (doRemoveDiacritics) {
-        s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
+  if (doRemoveDiacritics) {
+    s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
 
-    s = s.replace(/\s+/g, separator);
+  s = s.replace(/\s+/g, separator);
 
-    if (doRemoveSpecial) {
-        const flags = doLowercase ? 'g' : 'gi';
-        const badChars = new RegExp(`[^a-z0-9${escapedSep}]`, flags);
-        s = s.replace(badChars, '');
-    }
+  if (doRemoveSpecial) {
+    const flags = doLowercase ? 'g' : 'gi';
+    const badChars = new RegExp(`[^a-z0-9${escapedSep}]`, flags);
+    s = s.replace(badChars, '');
+  }
 
-    const sepDupe = new RegExp(`${escapedSep}+`, 'g');
-    s = s.replace(sepDupe, separator);
+  const sepDupe = new RegExp(`${escapedSep}+`, 'g');
+  s = s.replace(sepDupe, separator);
 
-    const sepStart = new RegExp(`^${escapedSep}+`);
-    const sepEnd = new RegExp(`${escapedSep}+$`);
-    s = s.replace(sepStart, '').replace(sepEnd, '');
+  const sepStart = new RegExp(`^${escapedSep}+`);
+  const sepEnd = new RegExp(`${escapedSep}+$`);
+  s = s.replace(sepStart, '').replace(sepEnd, '');
 
-    return s;
+  return s;
 }

@@ -1,3 +1,3 @@
 export default function testThrow() {
-    throw new Error('test-throw');
+  throw new Error('test-throw');
 }

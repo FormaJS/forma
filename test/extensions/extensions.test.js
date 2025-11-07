@@ -3,22 +3,22 @@ import { addExtension, getExtensions, extensions } from '../../src/extensions/in
 import '../setup.js';
 
 describe('extensions module', () => {
-    it('starts with an array and exposes helpers', () => {
-        expect(Array.isArray(extensions)).toBe(true);
-        const before = getExtensions().length;
+  it('starts with an array and exposes helpers', () => {
+    expect(Array.isArray(extensions)).toBe(true);
+    const before = getExtensions().length;
 
-        function ext() {
-            return 'x';
-        }
+    function ext() {
+      return 'x';
+    }
 
-        addExtension(ext);
-        const after = getExtensions().length;
-        expect(after).toBe(before + 1);
-        // last extension is the function we added
-        expect(getExtensions()[getExtensions().length - 1]).toBe(ext);
-    });
+    addExtension(ext);
+    const after = getExtensions().length;
+    expect(after).toBe(before + 1);
+    // last extension is the function we added
+    expect(getExtensions()[getExtensions().length - 1]).toBe(ext);
+  });
 
-    it('throws when adding non-function', () => {
-        expect(() => addExtension({})).toThrow();
-    });
+  it('throws when adding non-function', () => {
+    expect(() => addExtension({})).toThrow();
+  });
 });

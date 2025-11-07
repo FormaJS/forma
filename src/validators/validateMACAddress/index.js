@@ -17,50 +17,50 @@ import { isString, toString, executeI18nValidationRule } from '../../utils/index
  * @returns {ValidationResult} Validation result object
  */
 export async function validateMACAddress(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const defaults = {
+    allowColons: true,
+    allowHyphens: true,
+    allowDots: true,
+  };
+
+  const opt = { ...defaults, ...options };
+
+  const s = toString(str).trim();
+  if (s === '') {
+    return { valid: false, error: 'isEmpty' };
+  }
+
+  const locale = opt.locale;
+
+  if (opt.allowColons) {
+    const res = await executeI18nValidationRule(locale, 'isMACAddress', s, { subKey: 'COLON' });
+    if (res && typeof res === 'object' && res.error === 'invalidRule') {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isMACAddress:COLON' } };
     }
+    if ((res && res.valid) || res === true) return { valid: true };
+  }
 
-    const defaults = {
-        allowColons: true,
-        allowHyphens: true,
-        allowDots: true,
-    };
-
-    const opt = { ...defaults, ...options };
-
-    const s = toString(str).trim();
-    if (s === '') {
-        return { valid: false, error: 'isEmpty' };
+  if (opt.allowHyphens) {
+    const res = await executeI18nValidationRule(locale, 'isMACAddress', s, {
+      subKey: 'HYPHEN',
+    });
+    if (res && typeof res === 'object' && res.error === 'invalidRule') {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isMACAddress:HYPHEN' } };
     }
+    if ((res && res.valid) || res === true) return { valid: true };
+  }
 
-    const locale = opt.locale;
-
-    if (opt.allowColons) {
-        const res = await executeI18nValidationRule(locale, 'isMACAddress', s, { subKey: 'COLON' });
-        if (res && typeof res === 'object' && res.error === 'invalidRule') {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isMACAddress:COLON' } };
-        }
-        if ((res && res.valid) || res === true) return { valid: true };
+  if (opt.allowDots) {
+    const res = await executeI18nValidationRule(locale, 'isMACAddress', s, { subKey: 'DOT' });
+    if (res && typeof res === 'object' && res.error === 'invalidRule') {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isMACAddress:DOT' } };
     }
+    if ((res && res.valid) || res === true) return { valid: true };
+  }
 
-    if (opt.allowHyphens) {
-        const res = await executeI18nValidationRule(locale, 'isMACAddress', s, {
-            subKey: 'HYPHEN',
-        });
-        if (res && typeof res === 'object' && res.error === 'invalidRule') {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isMACAddress:HYPHEN' } };
-        }
-        if ((res && res.valid) || res === true) return { valid: true };
-    }
-
-    if (opt.allowDots) {
-        const res = await executeI18nValidationRule(locale, 'isMACAddress', s, { subKey: 'DOT' });
-        if (res && typeof res === 'object' && res.error === 'invalidRule') {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isMACAddress:DOT' } };
-        }
-        if ((res && res.valid) || res === true) return { valid: true };
-    }
-
-    return { valid: false, error: 'validateMACAddressFormat' };
+  return { valid: false, error: 'validateMACAddressFormat' };
 }

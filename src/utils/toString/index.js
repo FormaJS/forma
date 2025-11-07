@@ -7,9 +7,9 @@ import { typeOf } from '../typeOf';
  * @returns {string} The value converted to string.
  */
 export function toString(val) {
-    if (val === null || typeOf(val) === 'undefined') {
-        return '';
-    }
+  if (val === null || typeOf(val) === 'undefined') {
+    return '';
+  }
 
-    return String(val);
+  return String(val);
 }

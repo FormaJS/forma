@@ -18,46 +18,46 @@ import { toDate } from '../../parsers/toDate/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateDate(str, options = {}) {
-    if (!isString(str) && typeof str !== 'number') {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str) && typeof str !== 'number') {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const dateObj = toDate(str, options);
+
+  if (dateObj === null) {
+    return { valid: false, error: 'validateDate' };
+  }
+
+  const { minDate, maxDate } = options;
+  const timestamp = dateObj.getTime();
+
+  if (minDate) {
+    const minDateObj = minDate instanceof Date ? minDate : toDate(minDate, options);
+
+    if (minDateObj) {
+      if (timestamp < minDateObj.getTime()) {
+        return {
+          valid: false,
+          error: 'validateDateMin',
+          context: { minDate: toString(minDate) },
+        };
+      }
     }
+  }
 
-    const dateObj = toDate(str, options);
+  if (maxDate) {
+    const maxDateObj = maxDate instanceof Date ? maxDate : toDate(maxDate, options);
 
-    if (dateObj === null) {
-        return { valid: false, error: 'validateDate' };
+    if (maxDateObj) {
+      if (timestamp > maxDateObj.getTime()) {
+        return {
+          valid: false,
+          error: 'validateDateMax',
+          context: { maxDate: toString(maxDate) },
+        };
+      }
     }
+  }
 
-    const { minDate, maxDate } = options;
-    const timestamp = dateObj.getTime();
-
-    if (minDate) {
-        const minDateObj = minDate instanceof Date ? minDate : toDate(minDate, options);
-
-        if (minDateObj) {
-            if (timestamp < minDateObj.getTime()) {
-                return {
-                    valid: false,
-                    error: 'validateDateMin',
-                    context: { minDate: toString(minDate) },
-                };
-            }
-        }
-    }
-
-    if (maxDate) {
-        const maxDateObj = maxDate instanceof Date ? maxDate : toDate(maxDate, options);
-
-        if (maxDateObj) {
-            if (timestamp > maxDateObj.getTime()) {
-                return {
-                    valid: false,
-                    error: 'validateDateMax',
-                    context: { maxDate: toString(maxDate) },
-                };
-            }
-        }
-    }
-
-    return { valid: true };
+  return { valid: true };
 }

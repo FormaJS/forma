@@ -16,25 +16,25 @@ import { isString, toString, escapeRegExp } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object.
  */
 export function validateIsWhitelisted(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const { chars, strict = true } = options;
-    if (!isString(chars) || chars.length === 0) {
-        return { valid: false, error: 'invalidRule', context: { rule: 'isWhitelisted(chars)' } };
-    }
+  const { chars, strict = true } = options;
+  if (!isString(chars) || chars.length === 0) {
+    return { valid: false, error: 'invalidRule', context: { rule: 'isWhitelisted(chars)' } };
+  }
 
-    const testStr = toString(str);
-    const flags = strict ? '' : 'i';
+  const testStr = toString(str);
+  const flags = strict ? '' : 'i';
 
-    const escapedChars = escapeRegExp(chars);
-    const regex = new RegExp(`[^${escapedChars}]`, flags);
+  const escapedChars = escapeRegExp(chars);
+  const regex = new RegExp(`[^${escapedChars}]`, flags);
 
-    const match = testStr.match(regex);
-    if (match) {
-        return { valid: false, error: 'validateIsWhitelisted', context: { char: match[0] } };
-    }
+  const match = testStr.match(regex);
+  if (match) {
+    return { valid: false, error: 'validateIsWhitelisted', context: { char: match[0] } };
+  }
 
-    return { valid: true };
+  return { valid: true };
 }

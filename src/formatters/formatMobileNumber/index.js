@@ -9,35 +9,35 @@ import { getLocaleData } from '../../i18n/index.js';
  * @returns {string} The formatted string (e.g., "(11) 98765-4321") or the digits string.
  */
 export function formatMobileNumber(str, options = {}) {
-    const digits = toString(str).replace(/\D/g, '');
+  const digits = toString(str).replace(/\D/g, '');
 
-    const lang = options.locale;
-    const defaults = { format: 'local' };
-    const opt = { ...defaults, ...options };
+  const lang = options.locale;
+  const defaults = { format: 'local' };
+  const opt = { ...defaults, ...options };
 
-    if (!lang) {
-        return digits;
-    }
-
-    const localeData = getLocaleData(lang);
-    const maskObject = localeData?.masks?.mobileNumber;
-
-    if (!maskObject || typeof maskObject !== 'object') {
-        return digits;
-    }
-
-    let mask = maskObject[opt.format];
-
-    if (!mask) {
-        mask = maskObject['local'];
-        if (!mask) return digits;
-    }
-
-    const expectedDigits = (mask.match(/#/g) || []).length;
-
-    if (digits.length === expectedDigits) {
-        return applyFormatMask(digits, mask);
-    }
-
+  if (!lang) {
     return digits;
+  }
+
+  const localeData = getLocaleData(lang);
+  const maskObject = localeData?.masks?.mobileNumber;
+
+  if (!maskObject || typeof maskObject !== 'object') {
+    return digits;
+  }
+
+  let mask = maskObject[opt.format];
+
+  if (!mask) {
+    mask = maskObject['local'];
+    if (!mask) return digits;
+  }
+
+  const expectedDigits = (mask.match(/#/g) || []).length;
+
+  if (digits.length === expectedDigits) {
+    return applyFormatMask(digits, mask);
+  }
+
+  return digits;
 }

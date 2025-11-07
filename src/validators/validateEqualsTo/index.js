@@ -17,32 +17,32 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateEqualsTo(str, comparison, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const { strict = true, ignoreWhitespace = false } = options;
+  const { strict = true, ignoreWhitespace = false } = options;
 
-    let testStr = toString(str);
-    let comparisonStr = toString(comparison);
+  let testStr = toString(str);
+  let comparisonStr = toString(comparison);
 
-    if (ignoreWhitespace) {
-        testStr = testStr.trim();
-        comparisonStr = comparisonStr.trim();
-    }
+  if (ignoreWhitespace) {
+    testStr = testStr.trim();
+    comparisonStr = comparisonStr.trim();
+  }
 
-    if (strict === false) {
-        testStr = testStr.toLowerCase();
-        comparisonStr = comparisonStr.toLowerCase();
-    }
+  if (strict === false) {
+    testStr = testStr.toLowerCase();
+    comparisonStr = comparisonStr.toLowerCase();
+  }
 
-    if (testStr === comparisonStr) {
-        return { valid: true };
-    } else {
-        return {
-            valid: false,
-            error: 'validateEqualsTo',
-            context: { comparison: toString(comparison) },
-        };
-    }
+  if (testStr === comparisonStr) {
+    return { valid: true };
+  } else {
+    return {
+      valid: false,
+      error: 'validateEqualsTo',
+      context: { comparison: toString(comparison) },
+    };
+  }
 }

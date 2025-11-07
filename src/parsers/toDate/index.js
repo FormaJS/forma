@@ -13,32 +13,32 @@ import { iso8601RegexLenient } from '../../utils/index.js';
  * representation, otherwise null.
  */
 function _parseISO8601(str) {
-    if (!iso8601RegexLenient.test(str)) {
-        return null;
+  if (!iso8601RegexLenient.test(str)) {
+    return null;
+  }
+
+  const date = new Date(str);
+  if (isNaN(date.getTime())) {
+    return null;
+  }
+
+  try {
+    const yearStr = str.substring(0, 4);
+    const monthStr = str.substring(5, 7);
+    const dayStr = str.substring(8, 10);
+
+    const dateYear = date.getUTCFullYear();
+    const dateMonth = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const dateDay = date.getUTCDate().toString().padStart(2, '0');
+
+    if (yearStr !== dateYear.toString() || monthStr !== dateMonth || dayStr !== dateDay) {
+      return null;
     }
+  } catch {
+    return null;
+  }
 
-    const date = new Date(str);
-    if (isNaN(date.getTime())) {
-        return null;
-    }
-
-    try {
-        const yearStr = str.substring(0, 4);
-        const monthStr = str.substring(5, 7);
-        const dayStr = str.substring(8, 10);
-
-        const dateYear = date.getUTCFullYear();
-        const dateMonth = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-        const dateDay = date.getUTCDate().toString().padStart(2, '0');
-
-        if (yearStr !== dateYear.toString() || monthStr !== dateMonth || dayStr !== dateDay) {
-            return null;
-        }
-    } catch {
-        return null;
-    }
-
-    return date;
+  return date;
 }
 
 /**
@@ -51,15 +51,15 @@ function _parseISO8601(str) {
  * @returns {number} The resolved full year (e.g. 2023) or NaN if parsing fails.
  */
 function _parseTwoDigitYear(yearStr) {
-    const year = parseInt(yearStr, 10);
-    if (isNaN(year)) return NaN;
-    const currentYear = new Date().getFullYear();
-    const currentCentury = Math.floor(currentYear / 100);
-    const currentTwoDigitYear = currentYear % 100;
-    if (year > currentTwoDigitYear + 30) {
-        return (currentCentury - 1) * 100 + year;
-    }
-    return currentCentury * 100 + year;
+  const year = parseInt(yearStr, 10);
+  if (isNaN(year)) return NaN;
+  const currentYear = new Date().getFullYear();
+  const currentCentury = Math.floor(currentYear / 100);
+  const currentTwoDigitYear = currentYear % 100;
+  if (year > currentTwoDigitYear + 30) {
+    return (currentCentury - 1) * 100 + year;
+  }
+  return currentCentury * 100 + year;
 }
 
 /**
@@ -78,58 +78,58 @@ function _parseTwoDigitYear(yearStr) {
  * @returns {Date|null} A Date (UTC) if parsing and validation succeed, otherwise null.
  */
 function _parseDateByFormat(str, format) {
-    try {
-        // Build token order by scanning the format left-to-right so capture
-        // groups are associated with the correct positions in the final regex.
-        const tokenRegex = /(yyyy|yy|mm|m|dd|d|[./-])/g;
-        const tokens = [];
-        let m;
-        while ((m = tokenRegex.exec(format)) !== null) {
-            const t = m[1];
-            if (t === 'yyyy' || t === 'yy') tokens.push('year');
-            else if (t === 'mm' || t === 'm') tokens.push('month');
-            else if (t === 'dd' || t === 'd') tokens.push('day');
-            // separators are ignored for capture mapping
-        }
-
-        const regexPattern = format
-            .replace(/([./-])/g, '\\$1')
-            .replace(/yyyy/g, '(\\d{4})')
-            .replace(/yy/g, '(\\d{2})')
-            .replace(/mm/g, '(\\d{2})')
-            .replace(/m/g, '(\\d{1,2})')
-            .replace(/dd/g, '(\\d{2})')
-            .replace(/d/g, '(\\d{1,2})');
-
-        const regex = new RegExp(`^${regexPattern}$`);
-        const match = str.match(regex);
-        if (!match) return null;
-
-        const dateParts = {};
-        tokens.forEach((groupName, index) => {
-            dateParts[groupName] = match[index + 1];
-        });
-
-        const year =
-            dateParts.year.length === 2
-                ? _parseTwoDigitYear(dateParts.year)
-                : parseInt(dateParts.year, 10);
-        const month = parseInt(dateParts.month, 10) - 1;
-        const day = parseInt(dateParts.day, 10);
-        if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
-
-        const date = new Date(Date.UTC(year, month, day, 0, 0, 0));
-        if (
-            date.getUTCFullYear() === year &&
-            date.getUTCMonth() === month &&
-            date.getUTCDate() === day
-        ) {
-            return date;
-        }
-        return null;
-    } catch {
-        return null;
+  try {
+    // Build token order by scanning the format left-to-right so capture
+    // groups are associated with the correct positions in the final regex.
+    const tokenRegex = /(yyyy|yy|mm|m|dd|d|[./-])/g;
+    const tokens = [];
+    let m;
+    while ((m = tokenRegex.exec(format)) !== null) {
+      const t = m[1];
+      if (t === 'yyyy' || t === 'yy') tokens.push('year');
+      else if (t === 'mm' || t === 'm') tokens.push('month');
+      else if (t === 'dd' || t === 'd') tokens.push('day');
+      // separators are ignored for capture mapping
     }
+
+    const regexPattern = format
+      .replace(/([./-])/g, '\\$1')
+      .replace(/yyyy/g, '(\\d{4})')
+      .replace(/yy/g, '(\\d{2})')
+      .replace(/mm/g, '(\\d{2})')
+      .replace(/m/g, '(\\d{1,2})')
+      .replace(/dd/g, '(\\d{2})')
+      .replace(/d/g, '(\\d{1,2})');
+
+    const regex = new RegExp(`^${regexPattern}$`);
+    const match = str.match(regex);
+    if (!match) return null;
+
+    const dateParts = {};
+    tokens.forEach((groupName, index) => {
+      dateParts[groupName] = match[index + 1];
+    });
+
+    const year =
+      dateParts.year.length === 2
+        ? _parseTwoDigitYear(dateParts.year)
+        : parseInt(dateParts.year, 10);
+    const month = parseInt(dateParts.month, 10) - 1;
+    const day = parseInt(dateParts.day, 10);
+    if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
+
+    const date = new Date(Date.UTC(year, month, day, 0, 0, 0));
+    if (
+      date.getUTCFullYear() === year &&
+      date.getUTCMonth() === month &&
+      date.getUTCDate() === day
+    ) {
+      return date;
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -139,28 +139,28 @@ function _parseDateByFormat(str, format) {
  * @returns {Date | null} Returns the Date object, or null on failure.
  */
 export function toDate(str, options = {}) {
-    if (typeof str !== 'string' && typeof str !== 'number') {
-        return null;
-    }
+  if (typeof str !== 'string' && typeof str !== 'number') {
+    return null;
+  }
 
-    const testStr = toString(str).trim();
+  const testStr = toString(str).trim();
 
-    const isoDate = _parseISO8601(testStr);
-    if (isoDate) {
-        return isoDate;
-    }
+  const isoDate = _parseISO8601(testStr);
+  if (isoDate) {
+    return isoDate;
+  }
 
-    const lang = options.locale;
-    if (!lang) {
-        return null;
-    }
+  const lang = options.locale;
+  if (!lang) {
+    return null;
+  }
 
-    const localeData = getLocaleData(lang);
-    const dateRules = localeData?.date;
+  const localeData = getLocaleData(lang);
+  const dateRules = localeData?.date;
 
-    if (!dateRules || !dateRules.format) {
-        return null;
-    }
+  if (!dateRules || !dateRules.format) {
+    return null;
+  }
 
-    return _parseDateByFormat(testStr, dateRules.format);
+  return _parseDateByFormat(testStr, dateRules.format);
 }

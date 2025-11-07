@@ -29,80 +29,80 @@ const tldInternationalRegex = new RegExp(`\\.${tldInternational}$`, 'u');
  * @returns {ValidationResult} Validation result object
  */
 export function validateURL(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  let testStr = toString(str).trim();
+  if (testStr === '') {
+    return { valid: false, error: 'isEmpty' };
+  }
+
+  const defaults = {
+    protocols: ['http', 'https', 'ftp'],
+    requireProtocol: false,
+    requireTLD: true,
+    allowIPDomain: true,
+    allowLocalhost: true,
+    allowFragments: true,
+    allowQueryParams: true,
+    allowAuthentication: false,
+    allowUTF8Domains: true,
+    ignoreMaxLength: false,
+  };
+  const opt = { ...defaults, ...options };
+
+  if (!testStr.includes('://')) {
+    if (opt.requireProtocol) {
+      return { valid: false, error: 'validateURLProtocolRequired' };
     }
-    let testStr = toString(str).trim();
-    if (testStr === '') {
-        return { valid: false, error: 'isEmpty' };
-    }
+    testStr = `http://${testStr}`;
+  }
 
-    const defaults = {
-        protocols: ['http', 'https', 'ftp'],
-        requireProtocol: false,
-        requireTLD: true,
-        allowIPDomain: true,
-        allowLocalhost: true,
-        allowFragments: true,
-        allowQueryParams: true,
-        allowAuthentication: false,
-        allowUTF8Domains: true,
-        ignoreMaxLength: false,
-    };
-    const opt = { ...defaults, ...options };
+  let url;
+  try {
+    url = new URL(testStr);
+  } catch {
+    return { valid: false, error: 'validateURL' };
+  }
 
-    if (!testStr.includes('://')) {
-        if (opt.requireProtocol) {
-            return { valid: false, error: 'validateURLProtocolRequired' };
-        }
-        testStr = `http://${testStr}`;
-    }
+  const protocol = url.protocol.replace(/:$/, '');
+  if (!opt.protocols.includes(protocol.toLowerCase())) {
+    return { valid: false, error: 'validateURLProtocolNotAllowed', context: { protocol } };
+  }
 
-    let url;
-    try {
-        url = new URL(testStr);
-    } catch {
-        return { valid: false, error: 'validateURL' };
-    }
+  if (!opt.allowAuthentication && (url.username || url.password)) {
+    return { valid: false, error: 'validateURLAuthNotAllowed' };
+  }
 
-    const protocol = url.protocol.replace(/:$/, '');
-    if (!opt.protocols.includes(protocol.toLowerCase())) {
-        return { valid: false, error: 'validateURLProtocolNotAllowed', context: { protocol } };
-    }
+  if (!opt.allowFragments && url.hash) {
+    return { valid: false, error: 'validateURLFragmentsNotAllowed' };
+  }
 
-    if (!opt.allowAuthentication && (url.username || url.password)) {
-        return { valid: false, error: 'validateURLAuthNotAllowed' };
-    }
+  if (!opt.allowQueryParams && url.search) {
+    return { valid: false, error: 'validateURLQueryNotAllowed' };
+  }
 
-    if (!opt.allowFragments && url.hash) {
-        return { valid: false, error: 'validateURLFragmentsNotAllowed' };
-    }
+  const host = url.hostname;
 
-    if (!opt.allowQueryParams && url.search) {
-        return { valid: false, error: 'validateURLQueryNotAllowed' };
-    }
-
-    const host = url.hostname;
-
-    if (opt.allowLocalhost && host === 'localhost') {
-        return { valid: true };
-    }
-
-    const ipResult = validateIP(host);
-
-    if (ipResult.valid) {
-        if (!opt.allowIPDomain) {
-            return { valid: false, error: 'validateURLIPNotAllowed' };
-        }
-    } else {
-        if (opt.requireTLD) {
-            const tldCheck = opt.allowUTF8Domains ? tldInternationalRegex : tldRegex;
-
-            if (!tldCheck.test(host)) {
-                return { valid: false, error: 'validateURLTLDRequired' };
-            }
-        }
-    }
-
+  if (opt.allowLocalhost && host === 'localhost') {
     return { valid: true };
+  }
+
+  const ipResult = validateIP(host);
+
+  if (ipResult.valid) {
+    if (!opt.allowIPDomain) {
+      return { valid: false, error: 'validateURLIPNotAllowed' };
+    }
+  } else {
+    if (opt.requireTLD) {
+      const tldCheck = opt.allowUTF8Domains ? tldInternationalRegex : tldRegex;
+
+      if (!tldCheck.test(host)) {
+        return { valid: false, error: 'validateURLTLDRequired' };
+      }
+    }
+  }
+
+  return { valid: true };
 }

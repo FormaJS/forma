@@ -13,9 +13,9 @@ import { isString, toString, luhnCheck, getValidationRegex } from '../../utils/i
  * @returns {string} (e.g., 20280378331005)
  */
 function _convertISINToNumeric(str) {
-    return str.replace(/[A-Z]/g, (char) => {
-        return (char.charCodeAt(0) - 55).toString();
-    });
+  return str.replace(/[A-Z]/g, (char) => {
+    return (char.charCodeAt(0) - 55).toString();
+  });
 }
 
 /**
@@ -24,31 +24,31 @@ function _convertISINToNumeric(str) {
  * @returns {ValidationResult} Validation result object
  */
 export function validateISINCode(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).trim().toUpperCase();
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isISINCode');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isISINCode' } };
     }
 
-    const testStr = toString(str).trim().toUpperCase();
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isISINCode');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isISINCode' } };
-        }
-
-        if (!regex.test(testStr)) {
-            return { valid: false, error: 'validateISINCodeFormat' };
-        }
-
-        const numericStr = _convertISINToNumeric(testStr);
-        if (!luhnCheck(numericStr)) {
-            return { valid: false, error: 'validateISINCodeChecksum' };
-        }
-
-        return { valid: true };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e.message } };
+    if (!regex.test(testStr)) {
+      return { valid: false, error: 'validateISINCodeFormat' };
     }
+
+    const numericStr = _convertISINToNumeric(testStr);
+    if (!luhnCheck(numericStr)) {
+      return { valid: false, error: 'validateISINCodeChecksum' };
+    }
+
+    return { valid: true };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e.message } };
+  }
 }

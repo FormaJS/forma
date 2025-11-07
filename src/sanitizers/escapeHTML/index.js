@@ -8,9 +8,9 @@ import { htmlEscapes, escapeRegex } from '../../utils/index.js';
  * @returns {string} The transformed (escaped) string.
  */
 export function escapeHTML(str) {
-    const s = toString(str);
+  const s = toString(str);
 
-    return s.replace(escapeRegex, (match) => {
-        return htmlEscapes[match];
-    });
+  return s.replace(escapeRegex, (match) => {
+    return htmlEscapes[match];
+  });
 }

@@ -14,20 +14,20 @@ import { validateNumeric } from '../validateNumeric/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateNegative(str, options = {}) {
-    const negativeOptions = {
-        ...options,
-        maxRange: 0,
-        strict: true,
-    };
+  const negativeOptions = {
+    ...options,
+    maxRange: 0,
+    strict: true,
+  };
 
-    const result = validateNumeric(str, negativeOptions);
+  const result = validateNumeric(str, negativeOptions);
 
-    if (!result.valid) {
-        if (result.error === 'validateNumericRangeMaxStrict') {
-            result.error = 'validateNumericNegative';
-            result.context = {};
-        }
+  if (!result.valid) {
+    if (result.error === 'validateNumericRangeMaxStrict') {
+      result.error = 'validateNumericNegative';
+      result.context = {};
     }
+  }
 
-    return result;
+  return result;
 }

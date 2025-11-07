@@ -13,23 +13,23 @@ import { isString, toString, executeI18nValidationRule } from '../../utils/index
  * @returns {ValidationResult} Validation result object
  */
 export async function validateSurrogatePair(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str);
+  const lang = '';
+
+  try {
+    const res = await executeI18nValidationRule(lang, 'isSurrogatePair', testStr);
+    if (res && res.error === 'invalidRule') {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isSurrogatePair' } };
     }
 
-    const testStr = toString(str);
-    const lang = '';
-
-    try {
-        const res = await executeI18nValidationRule(lang, 'isSurrogatePair', testStr);
-        if (res && res.error === 'invalidRule') {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isSurrogatePair' } };
-        }
-
-        const matched = (res && res.valid) || res === true;
-        if (matched) return { valid: true };
-        return { valid: false, error: 'validateSurrogatePair' };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e && e.message } };
-    }
+    const matched = (res && res.valid) || res === true;
+    if (matched) return { valid: true };
+    return { valid: false, error: 'validateSurrogatePair' };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e && e.message } };
+  }
 }

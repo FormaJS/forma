@@ -15,31 +15,31 @@ import { isString, toString, base64Regex, base64UrlSafeRegex } from '../../utils
  * @returns {ValidationResult} Validation result object
  */
 export function validateBase64(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str);
+  const { urlSafe = false } = options;
+
+  if (testStr.length === 0) {
+    return { valid: false, error: 'validateBase64' };
+  }
+
+  try {
+    let regex = urlSafe ? base64UrlSafeRegex : base64Regex;
+
+    // utils may export pattern strings; accept both string and RegExp
+    if (typeof regex === 'string') {
+      regex = new RegExp(regex);
     }
 
-    const testStr = toString(str);
-    const { urlSafe = false } = options;
-
-    if (testStr.length === 0) {
-        return { valid: false, error: 'validateBase64' };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      return { valid: false, error: 'validateBase64' };
     }
-
-    try {
-        let regex = urlSafe ? base64UrlSafeRegex : base64Regex;
-
-        // utils may export pattern strings; accept both string and RegExp
-        if (typeof regex === 'string') {
-            regex = new RegExp(regex);
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            return { valid: false, error: 'validateBase64' };
-        }
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e && e.message } };
-    }
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e && e.message } };
+  }
 }

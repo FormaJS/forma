@@ -8,20 +8,20 @@ import { getLocaleData } from '../../i18n/index.js';
  * @returns {string} (e.g., "09010-140")
  */
 function _applyFormatMask(digits, mask) {
-    let i = 0;
-    let result = '';
+  let i = 0;
+  let result = '';
 
-    for (const maskChar of mask) {
-        if (i >= digits.length) {
-            break;
-        }
-        if (maskChar === '#') {
-            result += digits[i++];
-        } else {
-            result += maskChar;
-        }
+  for (const maskChar of mask) {
+    if (i >= digits.length) {
+      break;
     }
-    return result;
+    if (maskChar === '#') {
+      result += digits[i++];
+    } else {
+      result += maskChar;
+    }
+  }
+  return result;
 }
 
 /**
@@ -32,31 +32,31 @@ function _applyFormatMask(digits, mask) {
  * if no format is applicable.
  */
 export function formatPostalCode(str, options = {}) {
-    const digits = toString(str).replace(/\D/g, '');
+  const digits = toString(str).replace(/\D/g, '');
 
-    const lang = options.locale;
-    if (!lang) {
-        return digits;
-    }
-
-    const localeData = getLocaleData(lang);
-    const maskObj = localeData?.masks?.postalcode;
-
-    if (!maskObj || typeof maskObj !== 'object') {
-        return digits;
-    }
-
-    const mask = maskObj.default;
-
-    if (!mask) {
-        return digits;
-    }
-
-    const expectedDigits = (mask.match(/#/g) || []).length;
-
-    if (digits.length === expectedDigits) {
-        return _applyFormatMask(digits, mask);
-    }
-
+  const lang = options.locale;
+  if (!lang) {
     return digits;
+  }
+
+  const localeData = getLocaleData(lang);
+  const maskObj = localeData?.masks?.postalcode;
+
+  if (!maskObj || typeof maskObj !== 'object') {
+    return digits;
+  }
+
+  const mask = maskObj.default;
+
+  if (!mask) {
+    return digits;
+  }
+
+  const expectedDigits = (mask.match(/#/g) || []).length;
+
+  if (digits.length === expectedDigits) {
+    return _applyFormatMask(digits, mask);
+  }
+
+  return digits;
 }

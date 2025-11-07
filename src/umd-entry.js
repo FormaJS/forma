@@ -10,16 +10,16 @@ export { Forma, forma, formaBR };
 // To make the UMD behave as documented (window.forma === instance), set the
 // actual instance onto the global object directly when available.
 (function () {
-    try {
-        if (typeof globalThis !== 'undefined' && globalThis) {
-            // Avoid overwriting if something else already set a proper instance
-            if (!globalThis.forma || (globalThis.forma && globalThis.forma.default)) {
-                globalThis.forma = forma;
-            }
-        }
-    } catch {
-        /* ignore non-critical failures */
+  try {
+    if (typeof globalThis !== 'undefined' && globalThis) {
+      // Avoid overwriting if something else already set a proper instance
+      if (!globalThis.forma || (globalThis.forma && globalThis.forma.default)) {
+        globalThis.forma = forma;
+      }
     }
+  } catch {
+    /* ignore non-critical failures */
+  }
 })();
 
 // Default export should be the instance for browser convenience

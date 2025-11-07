@@ -11,29 +11,29 @@ import { escapeRegExp } from '../../utils/escapeRegExp/index.js';
  * @returns {string} The transformed string.
  */
 export function whitelist(str, options = {}) {
-    let s = toString(str);
-    const { chars, words, strict = true } = options;
+  let s = toString(str);
+  const { chars, words, strict = true } = options;
 
-    let finalFlags = 'g';
-    if (strict === false) {
-        finalFlags += 'i';
-    }
+  let finalFlags = 'g';
+  if (strict === false) {
+    finalFlags += 'i';
+  }
 
-    if (isString(chars) && chars.length > 0) {
-        const escapedChars = escapeRegExp(chars);
-        const regex = new RegExp(`[^${escapedChars}]`, finalFlags);
-        return s.replace(regex, '');
-    }
+  if (isString(chars) && chars.length > 0) {
+    const escapedChars = escapeRegExp(chars);
+    const regex = new RegExp(`[^${escapedChars}]`, finalFlags);
+    return s.replace(regex, '');
+  }
 
-    if (Array.isArray(words) && words.length > 0) {
-        const escapedWords = words.map((word) => escapeRegExp(toString(word)));
+  if (Array.isArray(words) && words.length > 0) {
+    const escapedWords = words.map((word) => escapeRegExp(toString(word)));
 
-        const regex = new RegExp(escapedWords.join('|'), finalFlags);
+    const regex = new RegExp(escapedWords.join('|'), finalFlags);
 
-        const matches = s.match(regex);
+    const matches = s.match(regex);
 
-        return matches ? matches.join('') : '';
-    }
+    return matches ? matches.join('') : '';
+  }
 
-    return '';
+  return '';
 }

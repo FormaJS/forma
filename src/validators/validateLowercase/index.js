@@ -15,29 +15,29 @@ import { isString, toString, escapeRegExp } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateLowercase(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const alphaResult = validateAlpha(str, options);
-    if (!alphaResult.valid) {
-        return alphaResult;
-    }
+  const alphaResult = validateAlpha(str, options);
+  if (!alphaResult.valid) {
+    return alphaResult;
+  }
 
-    let testStr = toString(str);
-    if (options.ignoreSpace) {
-        testStr = testStr.replace(/ /g, '');
-    }
+  let testStr = toString(str);
+  if (options.ignoreSpace) {
+    testStr = testStr.replace(/ /g, '');
+  }
 
-    if (isString(options.ignoredChars) && options.ignoredChars.length > 0) {
-        const escaped = escapeRegExp(options.ignoredChars);
-        const ignoreRegex = new RegExp(`[${escaped}]`, 'g');
-        testStr = testStr.replace(ignoreRegex, '');
-    }
+  if (isString(options.ignoredChars) && options.ignoredChars.length > 0) {
+    const escaped = escapeRegExp(options.ignoredChars);
+    const ignoreRegex = new RegExp(`[${escaped}]`, 'g');
+    testStr = testStr.replace(ignoreRegex, '');
+  }
 
-    if (testStr === testStr.toLowerCase()) {
-        return { valid: true };
-    } else {
-        return { valid: false, error: 'validateLowercase' };
-    }
+  if (testStr === testStr.toLowerCase()) {
+    return { valid: true };
+  } else {
+    return { valid: false, error: 'validateLowercase' };
+  }
 }

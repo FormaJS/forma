@@ -8,13 +8,13 @@ import { isString, toString } from '../../utils/index.js';
  * or null if the input is not a string or parsing fails.
  */
 export function toJSON(str) {
-    if (!isString(str)) {
-        return null;
-    }
+  if (!isString(str)) {
+    return null;
+  }
 
-    try {
-        return JSON.parse(toString(str));
-    } catch {
-        return null;
-    }
+  try {
+    return JSON.parse(toString(str));
+  } catch {
+    return null;
+  }
 }

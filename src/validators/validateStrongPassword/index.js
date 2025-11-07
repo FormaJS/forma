@@ -21,80 +21,80 @@ import { uppercaseRegex, lowercaseRegex, numbersRegex, symbolsRegex } from '../.
  * @returns {ValidationResult} Validation result object
  */
 export function validateStrongPassword(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
-    const testStr = toString(str);
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  const testStr = toString(str);
 
-    const defaults = {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-        maxLength: undefined,
+  const defaults = {
+    minLength: 8,
+    minLowercase: 1,
+    minUppercase: 1,
+    minNumbers: 1,
+    minSymbols: 1,
+    maxLength: undefined,
+  };
+  const opt = { ...defaults, ...options };
+
+  if (testStr.length < opt.minLength) {
+    return {
+      valid: false,
+      error: 'validatePasswordMinLength',
+      context: { minLength: opt.minLength },
     };
-    const opt = { ...defaults, ...options };
+  }
 
-    if (testStr.length < opt.minLength) {
-        return {
-            valid: false,
-            error: 'validatePasswordMinLength',
-            context: { minLength: opt.minLength },
-        };
+  if (opt.maxLength !== undefined && testStr.length > opt.maxLength) {
+    return {
+      valid: false,
+      error: 'validatePasswordMaxLength',
+      context: { maxLength: opt.maxLength },
+    };
+  }
+
+  if (opt.minLowercase > 0) {
+    const count = (testStr.match(lowercaseRegex) || []).length;
+    if (count < opt.minLowercase) {
+      return {
+        valid: false,
+        error: 'validatePasswordLowercase',
+        context: { minLowercase: opt.minLowercase },
+      };
     }
+  }
 
-    if (opt.maxLength !== undefined && testStr.length > opt.maxLength) {
-        return {
-            valid: false,
-            error: 'validatePasswordMaxLength',
-            context: { maxLength: opt.maxLength },
-        };
+  if (opt.minUppercase > 0) {
+    const count = (testStr.match(uppercaseRegex) || []).length;
+    if (count < opt.minUppercase) {
+      return {
+        valid: false,
+        error: 'validatePasswordUppercase',
+        context: { minUppercase: opt.minUppercase },
+      };
     }
+  }
 
-    if (opt.minLowercase > 0) {
-        const count = (testStr.match(lowercaseRegex) || []).length;
-        if (count < opt.minLowercase) {
-            return {
-                valid: false,
-                error: 'validatePasswordLowercase',
-                context: { minLowercase: opt.minLowercase },
-            };
-        }
+  if (opt.minNumbers > 0) {
+    const count = (testStr.match(numbersRegex) || []).length;
+    if (count < opt.minNumbers) {
+      return {
+        valid: false,
+        error: 'validatePasswordNumbers',
+        context: { minNumbers: opt.minNumbers },
+      };
     }
+  }
 
-    if (opt.minUppercase > 0) {
-        const count = (testStr.match(uppercaseRegex) || []).length;
-        if (count < opt.minUppercase) {
-            return {
-                valid: false,
-                error: 'validatePasswordUppercase',
-                context: { minUppercase: opt.minUppercase },
-            };
-        }
+  if (opt.minSymbols > 0) {
+    const count = (testStr.match(symbolsRegex) || []).length;
+    if (count < opt.minSymbols) {
+      return {
+        valid: false,
+        error: 'validatePasswordSymbols',
+        context: { minSymbols: opt.minSymbols },
+      };
     }
+  }
 
-    if (opt.minNumbers > 0) {
-        const count = (testStr.match(numbersRegex) || []).length;
-        if (count < opt.minNumbers) {
-            return {
-                valid: false,
-                error: 'validatePasswordNumbers',
-                context: { minNumbers: opt.minNumbers },
-            };
-        }
-    }
-
-    if (opt.minSymbols > 0) {
-        const count = (testStr.match(symbolsRegex) || []).length;
-        if (count < opt.minSymbols) {
-            return {
-                valid: false,
-                error: 'validatePasswordSymbols',
-                context: { minSymbols: opt.minSymbols },
-            };
-        }
-    }
-
-    return { valid: true };
+  return { valid: true };
 }

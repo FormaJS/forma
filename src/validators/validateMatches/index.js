@@ -16,30 +16,30 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateMatches(str, pattern, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str);
+  const { flags } = options;
+
+  try {
+    let regex;
+
+    if (pattern instanceof RegExp) {
+      regex = pattern;
+    } else if (isString(pattern)) {
+      regex = new RegExp(pattern, flags);
+    } else {
+      return { valid: false, error: 'validateMatchesInvalid' };
     }
 
-    const testStr = toString(str);
-    const { flags } = options;
-
-    try {
-        let regex;
-
-        if (pattern instanceof RegExp) {
-            regex = pattern;
-        } else if (isString(pattern)) {
-            regex = new RegExp(pattern, flags);
-        } else {
-            return { valid: false, error: 'validateMatchesInvalid' };
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            return { valid: false, error: 'validateMatches' };
-        }
-    } catch (e) {
-        return { valid: false, error: 'validateMatchesInvalid', context: { details: e.message } };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      return { valid: false, error: 'validateMatches' };
     }
+  } catch (e) {
+    return { valid: false, error: 'validateMatchesInvalid', context: { details: e.message } };
+  }
 }

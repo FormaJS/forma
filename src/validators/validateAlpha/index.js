@@ -1,8 +1,8 @@
 import {
-    isString,
-    toString,
-    escapeRegExpCharClass,
-    getValidationRegex,
+  isString,
+  toString,
+  escapeRegExpCharClass,
+  getValidationRegex,
 } from '../../utils/index.js';
 
 /**
@@ -22,37 +22,37 @@ import {
  * @returns {ValidationResult} Validation result object
  */
 export function validateAlpha(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const lang = options.locale;
-    if (!lang) {
-        return { valid: false, error: 'localeRequired' };
-    }
+  const lang = options.locale;
+  if (!lang) {
+    return { valid: false, error: 'localeRequired' };
+  }
 
-    let testStr = toString(str);
-    const { ignoreSpace = false, ignoredChars = '' } = options;
+  let testStr = toString(str);
+  const { ignoreSpace = false, ignoredChars = '' } = options;
 
-    if (ignoreSpace) {
-        testStr = testStr.replace(/ /g, '');
-    }
+  if (ignoreSpace) {
+    testStr = testStr.replace(/ /g, '');
+  }
 
-    if (isString(ignoredChars) && ignoredChars.length > 0) {
-        const escaped = escapeRegExpCharClass(ignoredChars);
-        const ignoreRegex = new RegExp(`[${escaped}]`, 'g');
-        testStr = testStr.replace(ignoreRegex, '');
-    }
+  if (isString(ignoredChars) && ignoredChars.length > 0) {
+    const escaped = escapeRegExpCharClass(ignoredChars);
+    const ignoreRegex = new RegExp(`[${escaped}]`, 'g');
+    testStr = testStr.replace(ignoreRegex, '');
+  }
 
-    const regex = getValidationRegex(lang, 'alpha', options);
-    if (!regex) {
-        return { valid: false, error: 'invalidRule', context: { rule: 'alpha' } };
-    }
+  const regex = getValidationRegex(lang, 'alpha', options);
+  if (!regex) {
+    return { valid: false, error: 'invalidRule', context: { rule: 'alpha' } };
+  }
 
-    try {
-        if (regex.test(testStr)) return { valid: true };
-        return { valid: false, error: 'validateAlpha' };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e && e.message } };
-    }
+  try {
+    if (regex.test(testStr)) return { valid: true };
+    return { valid: false, error: 'validateAlpha' };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e && e.message } };
+  }
 }

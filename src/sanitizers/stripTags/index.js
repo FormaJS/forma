@@ -9,20 +9,20 @@ import { simpleTagRegex, complexTagRegex } from '../../utils/regexConstants.js';
  * @returns {string} The transformed string (without tags).
  */
 export function stripTags(str, options = {}) {
-    const s = toString(str);
-    const { allowTags } = options;
+  const s = toString(str);
+  const { allowTags } = options;
 
-    if (!Array.isArray(allowTags) || allowTags.length === 0) {
-        return s.replace(simpleTagRegex, '');
+  if (!Array.isArray(allowTags) || allowTags.length === 0) {
+    return s.replace(simpleTagRegex, '');
+  }
+
+  const allowedSet = new Set(allowTags.map((tag) => tag.toLowerCase()));
+
+  return s.replace(complexTagRegex, (match, isClosingSlash, tagName) => {
+    if (allowedSet.has(tagName.toLowerCase())) {
+      return match;
     }
 
-    const allowedSet = new Set(allowTags.map((tag) => tag.toLowerCase()));
-
-    return s.replace(complexTagRegex, (match, isClosingSlash, tagName) => {
-        if (allowedSet.has(tagName.toLowerCase())) {
-            return match;
-        }
-
-        return '';
-    });
+    return '';
+  });
 }

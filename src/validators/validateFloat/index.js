@@ -8,10 +8,10 @@ import { validateNumeric } from '../validateNumeric/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateFloat(str, options = {}) {
-    const floatOptions = {
-        ...options,
-        allowDecimal: true,
-        requireDecimal: false,
-    };
-    return validateNumeric(str, floatOptions);
+  const floatOptions = {
+    ...options,
+    allowDecimal: true,
+    requireDecimal: false,
+  };
+  return validateNumeric(str, floatOptions);
 }

@@ -8,9 +8,9 @@ import { htmlUnescapes, unescapeRegex } from '../../utils/index.js';
  * @returns {string} The transformed (unescaped) string.
  */
 export function unescapeHTML(str) {
-    const s = toString(str);
+  const s = toString(str);
 
-    return s.replace(unescapeRegex, (match) => {
-        return htmlUnescapes[match];
-    });
+  return s.replace(unescapeRegex, (match) => {
+    return htmlUnescapes[match];
+  });
 }

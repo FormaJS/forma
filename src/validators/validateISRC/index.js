@@ -16,26 +16,26 @@ const sanitizeRegex = /-/g;
  * @returns {ValidationResult} Validation result object
  */
 export function validateISRC(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).replace(sanitizeRegex, '').trim();
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isISRC');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isISRC' } };
     }
 
-    const testStr = toString(str).replace(sanitizeRegex, '').trim();
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isISRC');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isISRC' } };
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            return { valid: false, error: 'validateISRC' };
-        }
-    } catch {
-        return { valid: false, error: 'genericError' };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      return { valid: false, error: 'validateISRC' };
     }
+  } catch {
+    return { valid: false, error: 'genericError' };
+  }
 }

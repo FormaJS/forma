@@ -8,13 +8,13 @@ import { isString, getNormalizedNumberString } from '../../utils/index.js';
  * conversion fails (e.g. "abc") or the input is not a string.
  */
 export function toInt(str, options = {}) {
-    if (!isString(str)) {
-        return null;
-    }
+  if (!isString(str)) {
+    return null;
+  }
 
-    const normalizedStr = getNormalizedNumberString(str, options.locale || 'en-US');
+  const normalizedStr = getNormalizedNumberString(str, options.locale || 'en-US');
 
-    const num = parseInt(normalizedStr, 10);
+  const num = parseInt(normalizedStr, 10);
 
-    return isNaN(num) ? null : num;
+  return isNaN(num) ? null : num;
 }

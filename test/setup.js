@@ -2,9 +2,9 @@
 import { beforeEach, afterEach } from 'vitest';
 
 beforeEach(() => {
-    // Setup global para testes, se necessário
+  // Setup global para testes, se necessário
 });
 
 afterEach(() => {
-    // Limpeza global após cada teste, se necessário
+  // Limpeza global após cada teste, se necessário
 });
