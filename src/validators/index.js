@@ -57,4 +57,5 @@ export { validateStrongPassword } from './validateStrongPassword/index.js';
 export { validateSurrogatePair } from './validateSurrogatePair/index.js';
 export { validateTaxId } from './validateTaxId/index.js';
 export { validateURL } from './validateURL/index.js';
+export { validateUUID } from './validateUUID/index.js';
 export { validateUppercase } from './validateUppercase/index.js';

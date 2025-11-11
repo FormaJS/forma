@@ -40,11 +40,11 @@ export function validateUUID(str, options = {}) {
         if (regex.test(testStr)) {
             return { valid: true };
         } else {
-            if (options.version) {
+            if (version !== 'ALL') {
                 return {
                     valid: false,
                     error: 'validateUUIDVersion',
-                    context: { version: options.version },
+                    context: { version },
                 };
             }
             return { valid: false, error: 'validateUUID' };
