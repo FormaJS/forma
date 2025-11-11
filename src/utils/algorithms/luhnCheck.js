@@ -1,9 +1,10 @@
 /**
  * Apply the Luhn algorithm (modulus 10) to verify a checksum.
- * Commonly used to validate IMEIs, credit card numbers, and similar identifiers.
+ * Common use cases: credit cards, IMEI, SIREN/SIRET, ISIN tail, etc.
  * @param {string} numStr - String containing digits only.
  * @returns {boolean} True if the checksum is valid, false otherwise.
- * @throws {TypeError} If the input is not a string of digits.
+ * @example
+ * luhnCheck('79927398713') // true
  */
 export function luhnCheck(numStr) {
   if (typeof numStr !== 'string' || !/^\d+$/.test(numStr)) {

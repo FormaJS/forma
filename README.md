@@ -52,7 +52,7 @@ if (!res.valid) {
 import forma from '@formajs/formajs';
 
 // Import the locale module you want to enable (opt-in)
-// Available today: en-US (default), pt-BR, en-UK, es-ES, fr-FR, de-DE
+// Available today: en-US (default), pt-BR, en-UK, es-ES, fr-FR, de-DE, zh-CN
 import '@formajs/formajs/i18n/pt-BR';
 
 // Change locale at runtime
@@ -119,16 +119,21 @@ const r = validateEmail('bad@@example.com');
 Available locale modules today:
 
 ```js
-import '@formajs/formajs/i18n/en-US'; // already preloaded by default
-import '@formajs/formajs/i18n/pt-BR';
-import '@formajs/formajs/i18n/pt-PT';
-import '@formajs/formajs/i18n/en-UK';
-import '@formajs/formajs/i18n/es-ES';
-import '@formajs/formajs/i18n/es-AR';
-import '@formajs/formajs/i18n/es-MX';
-import '@formajs/formajs/i18n/fr-FR';
-import '@formajs/formajs/i18n/de-DE';
-import '@formajs/formajs/i18n/it-IT';
+import '@formajs/formajs/i18n/en-US'; // (English - USA) already preloaded by default
+import `@formajs/formajs/i18n/de-DE` // German - Germany
+import `@formajs/formajs/i18n/en-AU` // English - Australia
+import `@formajs/formajs/i18n/en-CA` // English - Canada
+import `@formajs/formajs/i18n/en-IN` // English - India
+import `@formajs/formajs/i18n/en-UK` // English - UK
+import `@formajs/formajs/i18n/es-AR` // Spanish - Argentina
+import `@formajs/formajs/i18n/es-ES` // Spanish - Spain
+import `@formajs/formajs/i18n/es-MX` // Spanish - Mexico
+import `@formajs/formajs/i18n/fr-CA` // French - Canada
+import `@formajs/formajs/i18n/fr-FR` // French - France
+import `@formajs/formajs/i18n/it-IT` // Italian - Italy
+import `@formajs/formajs/i18n/pt-BR` // Portuguese - Brazil
+import `@formajs/formajs/i18n/pt-PT` // Portuguese - Portugal
+import `@formajs/formajs/i18n/zh-CN` // Chinese - China
 ```
 
 Notes:

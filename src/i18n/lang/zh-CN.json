@@ -1,0 +1,173 @@
+{
+  "name": "简体中文",
+  "separators": {
+    "decimal": ".",
+    "thousand": ",",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "¥",
+    "symbol_before_digits": true,
+    "space_between_symbol_and_digits": false,
+    "decimal_digits": 2,
+    "negative_format": ["-{symbol}{amount}", "({symbol}{amount})"]
+  },
+  "date": {
+    "format": "yyyy/mm/dd",
+    "separator": "/"
+  },
+  "masks": {
+    "postalcode": {
+      "default": "######"
+    },
+    "mobileNumber": {
+      "local": "### #### ####",
+      "international": "+86 ### #### ####"
+    },
+    "taxId": {
+      "USCC": "**** **** **** **** **"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[\\u4e00-\\u9fa5\\u3400-\\u4dbf]+$",
+      "flags": ""
+    },
+    "alphanumeric": {
+      "pattern": "^[\\u4e00-\\u9fa5\\u3400-\\u4dbf0-9]+$",
+      "flags": ""
+    },
+    "mobilenumber": {
+      "pattern": "^(?:\\+?86\\s?)?1[3-9]\\d(?:\\s?\\d){8}$"
+    },
+    "licenseplate": {
+      "pattern": "^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳]$"
+    },
+    "postalcode": {
+      "pattern": "^\\d{6}$"
+    },
+    "taxid": "function:validateTaxId",
+    "boolean": {
+      "strictTrue": ["true", "真"],
+      "strictFalse": ["false", "假"],
+      "looseTrue": ["1", "是", "对"],
+      "looseFalse": ["0", "否", "不是"]
+    }
+  },
+  "messages": {
+    "genericError": "验证过程中发生意外错误。",
+    "invalidRule": "未找到验证规则 '{rule}' 或该规则无效。",
+    "invalidType": "提供的值不是字符串。",
+    "isEmpty": "字段不能为空。",
+    "localeRequired": "此验证需要提供 'locale' 选项。",
+    "validateAlpha": "字段只能包含字母字符。",
+    "validateByteLengthMax": "字段最多可包含 {max} 字节。",
+    "validateByteLengthMin": "字段至少需要 {min} 字节。",
+    "validateLengthExact": "字段必须恰好为 {min} 个字符。",
+    "validateLengthMax": "字段最多可包含 {max} 个字符。",
+    "validateLengthMin": "字段至少需要 {min} 个字符。",
+    "validateAlphanumeric": "字段只能包含字母数字字符。",
+    "validateMatches": "字段与所需模式不匹配。",
+    "validateMatchesInvalid": "提供的正则表达式模式无效。",
+    "validateAscii": "字段只能包含 ASCII 字符。",
+    "validateBase64": "字段必须是有效的 Base64 字符串。",
+    "validateNumericFormat": "字段必须是有效数字。",
+    "validateNumericInvalid": "字段包含无效的数值。",
+    "validateNumericRangeMin": "值必须为 {minRange} 或更大。",
+    "validateNumericRangeMax": "值必须为 {maxRange} 或更小。",
+    "validateNumericRangeMinStrict": "值必须大于 {minRange}。",
+    "validateNumericRangeMaxStrict": "值必须小于 {maxRange}。",
+    "validateNumericNotInt": "字段必须是整数（无小数）。",
+    "validateNumericNotDecimal": "字段必须包含小数部分。",
+    "validateHexadecimal": "字段必须是有效的十六进制字符串。",
+    "validateHexColor": "字段必须是有效的十六进制颜色（例如：#F00、#FF0000、#FF0000FF）。",
+    "validatePortRange": "字段必须是有效的端口号（0-65535）。",
+    "validateNumericPositive": "字段必须是正数（大于 0）。",
+    "validateNumericNegative": "字段必须是负数（小于 0）。",
+    "validateLowercase": "字段只能包含小写字母字符。",
+    "validateUppercase": "字段只能包含大写字母字符。",
+    "validateMultibyte": "字段必须包含一个或多个多字节字符。",
+    "validateSurrogatePair": "字段必须包含一个或多个代理对字符。",
+    "validateURL": "字段必须是有效的 URL。",
+    "validateURLProtocol": "URL 必须使用允许的协议之一。",
+    "validateFQDN": "字段必须是有效的完全限定域名 (FQDN)。",
+    "validateFQDNFormat": "FQDN 格式无效。",
+    "validateFQDNLength": "FQDN 长度超出允许的限制。",
+    "validateIP": "字段必须是有效的 IP 地址。",
+    "validateIPV4": "字段必须是有效的 IPv4 地址。",
+    "validateIPV6": "字段必须是有效的 IPv6 地址。",
+    "validateIPRange": "字段必须是有效的 IP 范围（CIDR 格式）。",
+    "validateEmail": "字段必须是有效的电子邮件地址。",
+    "validateEmailFormat": "电子邮件地址格式无效。",
+    "validateEmailDomain": "电子邮件域名无效。",
+    "validateMACAddress": "字段必须是有效的 MAC 地址。",
+    "validatePostalCode": "字段必须是有效的邮政编码。",
+    "validateMobileNumber": "字段必须是有效的手机号码。",
+    "validateLicensePlate": "字段必须是有效的车牌号。",
+    "validateTaxId": "字段必须是有效的税号。",
+    "validateCurrency": "字段必须是有效的货币金额。",
+    "validateCurrencyFormat": "货币格式无效。",
+    "validateCurrencySymbol": "货币符号与所需货币不匹配。",
+    "validateCurrencyIsEmpty": "货币金额不能为空。",
+    "validateCurrencyNegativeNotAllowed": "不允许负货币金额。",
+    "validateCurrencyDecimalDigits": "货币必须有 {digits} 位小数。",
+    "validateCreditCard": "字段必须是有效的信用卡号。",
+    "validateCreditCardLength": "信用卡号长度无效。",
+    "validateCreditCardChecksum": "信用卡号校验和无效。",
+    "validateCreditCardProvider": "不支持信用卡提供商。",
+    "validateIBAN": "字段必须是有效的 IBAN。",
+    "validateIBANFormat": "IBAN 格式无效。",
+    "validateIBANChecksum": "IBAN 校验和无效。",
+    "validateBIC": "字段必须是有效的 BIC/SWIFT 代码。",
+    "validateISBN": "字段必须是有效的 ISBN。",
+    "validateISBNFormat": "ISBN 格式无效。",
+    "validateISBNChecksum": "ISBN 校验和无效。",
+    "validateISSN": "字段必须是有效的 ISSN。",
+    "validateISSNFormat": "ISSN 格式无效。",
+    "validateISSNChecksum": "ISSN 校验和无效。",
+    "validateISIN": "字段必须是有效的 ISIN。",
+    "validateISINCodeFormat": "ISIN 格式无效。",
+    "validateISINCodeChecksum": "ISIN 校验和无效。",
+    "validateISRC": "字段必须是有效的 ISRC。",
+    "validateIMEI": "字段必须是有效的 IMEI。",
+    "validateIMEIFormat": "IMEI 格式无效。",
+    "validateIMEIChecksum": "IMEI 校验和无效。",
+    "validateUUID": "字段必须是有效的 UUID。",
+    "validateUUIDVersion": "UUID 必须是版本 {version}。",
+    "validateMongoId": "字段必须是有效的 MongoDB ObjectId。",
+    "validateJSON": "字段必须是有效的 JSON 字符串。",
+    "validateJWT": "字段必须是有效的 JWT 令牌。",
+    "validateDataURI": "字段必须是有效的数据 URI。",
+    "validateMimeType": "字段必须是有效的 MIME 类型。",
+    "validateHSL": "字段必须是有效的 HSL 颜色。",
+    "validateISO": "字段必须是有效的 ISO 代码。",
+    "validateISOStandardRequired": "需要指定 ISO 标准（例如：3166-1）。",
+    "validateISOUnknownStandard": "不支持 ISO 标准：{standard}。",
+    "validateSemVer": "字段必须是有效的语义版本。",
+    "validateDate": "字段必须是有效的日期。",
+    "validateDateFormat": "日期格式与区域设置格式不匹配。",
+    "validateDateInvalid": "日期无效（例如：2 月 30 日）。",
+    "validateDecimal": "字段必须是有效的十进制数。",
+    "validateDecimalNegativeNotAllowed": "不允许负十进制数。",
+    "validateDecimalDigits": "十进制数必须有 {digits} 位小数。",
+    "validateBoolean": "字段必须是布尔值。",
+    "validateBooleanStrict": "字段必须是严格的布尔值（真/假）。",
+    "validateInt": "字段必须是有效的整数。",
+    "validateFloat": "字段必须是有效的浮点数。",
+    "validateDivisibleBy": "值必须能被 {divisor} 整除。",
+    "validateContains": "字段必须包含子字符串 '{seed}'。",
+    "validateEquals": "字段必须等于 '{comparison}'。",
+    "validateStartsWith": "字段必须以 '{seed}' 开头。",
+    "validateEndsWith": "字段必须以 '{seed}' 结尾。",
+    "validateIsIn": "字段必须是以下之一：{values}。",
+    "validateIsBlacklisted": "字段包含不允许的字符。",
+    "validateIsWhitelisted": "字段包含不允许的字符。",
+    "validateStrongPassword": "密码不够强。",
+    "validateStrongPasswordMinLength": "密码必须至少包含 {minLength} 个字符。",
+    "validateStrongPasswordMinLowercase": "密码必须至少包含 {minLowercase} 个小写字母。",
+    "validateStrongPasswordMinUppercase": "密码必须至少包含 {minUppercase} 个大写字母。",
+    "validateStrongPasswordMinNumbers": "密码必须至少包含 {minNumbers} 个数字。",
+    "validateStrongPasswordMinSymbols": "密码必须至少包含 {minSymbols} 个符号。",
+    "validateSlug": "字段必须是有效的 slug（URL 友好字符串）。"
+  }
+}

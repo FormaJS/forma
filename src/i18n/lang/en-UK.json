@@ -1,0 +1,59 @@
+{
+  "name": "English (UK)",
+  "separators": {
+    "decimal": ".",
+    "thousand": ",",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "£",
+    "symbol_before_digits": true,
+    "space_between_symbol_and_digits": false,
+    "decimal_digits": 2,
+    "negative_format": ["-{symbol}{amount}", "({symbol}{amount})", "{symbol}({amount})"]
+  },
+  "date": {
+    "format": "dd/mm/yyyy",
+    "separator": "/"
+  },
+  "masks": {
+    "mobileNumber": {
+      "local": "##### ######",
+      "international": "+44 ##### ######"
+    },
+    "taxId": {
+      "NI": "AA ## ## ## A",
+      "UTR": "##########"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[A-Z]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-Z0-9]+$",
+      "flags": "i"
+    },
+    "mobilenumber": {
+      "pattern": "^(?:(?:\\+44\\s?|0)(?:7\\d{3}|800\\d{2}|845\\d{2})\\s?\\d{6})$",
+      "flags": ""
+    },
+    "licenseplate": {
+      "pattern": "^[A-Z]{2}[0-9]{2}\\s?[A-Z]{3}$",
+      "flags": "i"
+    },
+    "postalcode": {
+      "pattern": "^[A-Z]{1,2}\\d{1,2}[A-Z]?\\s?\\d[A-Z]{2}$",
+      "flags": "i"
+    },
+    "taxid": "function:validateTaxId",
+    "boolean": {
+      "strictTrue": ["true"],
+      "strictFalse": ["false"],
+      "looseTrue": ["1", "yes", "y"],
+      "looseFalse": ["0", "no", "n"]
+    }
+  },
+  "messages": {}
+}

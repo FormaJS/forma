@@ -1,41 +1,69 @@
 import { describe, it, expect } from 'vitest';
+import { registerLocale } from '../../src/i18n/index.js';
 import { getValidationRegex } from '../../src/utils/getValidationRegex/index.js';
-import '../setup.js';
 
-describe('utils/getValidationRegex', () => {
-  it('returns regex for slash pattern in global and respects flags', () => {
-    const rx = getValidationRegex('en-US', 'slashPattern');
-    expect(rx).toBeInstanceOf(RegExp);
-    expect(rx.test('abc')).toBe(true);
-    expect(rx.test('ABC')).toBe(true);
+registerLocale('xx-XX', {
+  validate: {
+    directPattern: { pattern: '^abc$', flags: 'i' },
+    statePattern: {
+      CA: { pattern: '^ca-[0-9]{3}$' },
+      NY: { pattern: '^ny-[0-9]{3}$', flags: 'i' },
+    },
+    slashWithFlags: '/^foo.+bar$/i',
+    slashNoFlags: '/^noFlags[0-9]+$/',
+    plainString: '^plain[A-Z]{2}$',
+  },
+});
+
+describe('getValidationRegex utility', () => {
+  it('returns regex from direct object pattern with flags', () => {
+    const re = getValidationRegex('xx-XX', 'directPattern');
+    expect(re).toBeInstanceOf(RegExp);
+    expect(re.flags).toContain('i');
+    expect('ABC').toMatch(re);
   });
 
-  it('returns regex for object pattern with flags', () => {
-    const rx = getValidationRegex('en-US', 'alpha');
-    expect(rx).toBeInstanceOf(RegExp);
-    expect(rx.test('abc')).toBe(true);
+  it('returns null when subKey required but not provided', () => {
+    const re = getValidationRegex('xx-XX', 'statePattern');
+    expect(re).toBeNull();
   });
 
-  it('returns regex for subkey when options.state provided', () => {
-    const rx = getValidationRegex('en-US', 'licenseplate', { state: 'CA' });
-    expect(rx).toBeInstanceOf(RegExp);
-    // CA pattern expects a leading digit then 3 letters then 3 digits
-    expect('1ABC123'.match(rx)).toBeTruthy();
+  it('returns regex for provided subKey via options.state', () => {
+    const re = getValidationRegex('xx-XX', 'statePattern', { state: 'ca' });
+    expect(re).toBeInstanceOf(RegExp);
+    expect('ca-123').toMatch(re);
+    expect('ny-123').not.toMatch(re);
   });
 
-  it('returns null for missing mask or missing subKey', () => {
-    expect(getValidationRegex('en-US', 'nonexistent')).toBeNull();
-    expect(getValidationRegex('en-US', 'licenseplate')).toBeNull();
+  it('returns regex for provided subKey via options.subKey (case-insensitive key lookup)', () => {
+    const re = getValidationRegex('xx-XX', 'statePattern', { subKey: 'ny' });
+    expect(re).toBeInstanceOf(RegExp);
+    expect('NY-999').toMatch(re);
   });
 
-  // additional smoke tests for other locales (increase coverage)
-  it('parses patterns and subkeys in other locale/global entries', () => {
-    const rx2 = getValidationRegex('pt-BR', 'isHexadecimal');
-    expect(rx2).toBeInstanceOf(RegExp);
-    expect(rx2.test('a0f')).toBe(true);
+  it('parses string regex with flags (/pattern/flags)', () => {
+    const re = getValidationRegex('xx-XX', 'slashWithFlags');
+    expect(re).toBeInstanceOf(RegExp);
+    expect(re.flags).toBe('i');
+    expect('FOO something BAR').toMatch(re);
+  });
 
-    const rx3 = getValidationRegex('pt-BR', 'isMACAddress', { subKey: 'HYPHEN' });
-    expect(rx3).toBeInstanceOf(RegExp);
-    expect(rx3.test('AA-BB-CC-DD-EE-FF')).toBe(true);
+  it('parses string regex wrapped in slashes without flags (/pattern/)', () => {
+    const re = getValidationRegex('xx-XX', 'slashNoFlags');
+    expect(re).toBeInstanceOf(RegExp);
+    expect(re.flags).toBe('');
+    expect('noFlags123').toMatch(re);
+  });
+
+  it('builds regex from plain string pattern (no leading slash)', () => {
+    const re = getValidationRegex('xx-XX', 'plainString');
+    expect(re).toBeInstanceOf(RegExp);
+    expect('plainAB').toMatch(re);
+    expect('plainAb').not.toMatch(re);
+  });
+
+  it('returns null for unknown key (locale + global fallback miss)', () => {
+    const re = getValidationRegex('xx-XX', 'doesNotExist');
+    expect(re).toBeNull();
   });
 });

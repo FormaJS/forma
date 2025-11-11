@@ -79,29 +79,57 @@ function _parseTwoDigitYear(yearStr) {
  */
 function _parseDateByFormat(str, format) {
   try {
-    // Build token order by scanning the format left-to-right so capture
-    // groups are associated with the correct positions in the final regex.
     const tokenRegex = /(yyyy|yy|mm|m|dd|d|[./-])/g;
     const tokens = [];
+    let pattern = '';
+    let lastIndex = 0;
     let m;
     while ((m = tokenRegex.exec(format)) !== null) {
+      if (m.index > lastIndex) {
+        const literal = format.slice(lastIndex, m.index).replace(/([.*+?^${}()|[\]\\])/g, '\\$1');
+        pattern += literal;
+      }
+      lastIndex = tokenRegex.lastIndex;
+
       const t = m[1];
-      if (t === 'yyyy' || t === 'yy') tokens.push('year');
-      else if (t === 'mm' || t === 'm') tokens.push('month');
-      else if (t === 'dd' || t === 'd') tokens.push('day');
-      // separators are ignored for capture mapping
+      switch (t) {
+        case 'yyyy':
+          tokens.push('year');
+          pattern += '(\\d{4})';
+          break;
+        case 'yy':
+          tokens.push('year');
+          pattern += '(\\d{2})';
+          break;
+        case 'mm':
+          tokens.push('month');
+          pattern += '(\\d{2})';
+          break;
+        case 'm':
+          tokens.push('month');
+          pattern += '(\\d{1,2})';
+          break;
+        case 'dd':
+          tokens.push('day');
+          pattern += '(\\d{2})';
+          break;
+        case 'd':
+          tokens.push('day');
+          pattern += '(\\d{1,2})';
+          break;
+        default: {
+          const sep = t.replace(/([.*+?^${}()|[\]\\])/g, '\\$1');
+          pattern += sep;
+        }
+      }
     }
 
-    const regexPattern = format
-      .replace(/([./-])/g, '\\$1')
-      .replace(/yyyy/g, '(\\d{4})')
-      .replace(/yy/g, '(\\d{2})')
-      .replace(/mm/g, '(\\d{2})')
-      .replace(/m/g, '(\\d{1,2})')
-      .replace(/dd/g, '(\\d{2})')
-      .replace(/d/g, '(\\d{1,2})');
+    if (lastIndex < format.length) {
+      const literal = format.slice(lastIndex).replace(/([.*+?^${}()|[\]\\])/g, '\\$1');
+      pattern += literal;
+    }
 
-    const regex = new RegExp(`^${regexPattern}$`);
+    const regex = new RegExp(`^${pattern}$`);
     const match = str.match(regex);
     if (!match) return null;
 

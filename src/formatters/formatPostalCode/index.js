@@ -1,62 +1,71 @@
-import { toString } from '../../utils/toString/index.js';
+import { toString, applyFormatMask } from '../../utils/index.js';
 import { getLocaleData } from '../../i18n/index.js';
 
 /**
- * Applies a format mask to a string of digits.
- * @param {string} digits - The string of digits (e.g., "09010140")
- * @param {string} mask - The format (e.g., "#####-###")
- * @returns {string} (e.g., "09010-140")
+ * Counts the number of placeholder characters in a mask.
+ * Placeholders: '#' (digit), 'A' (letter), 'a' (letter), '*' (alphanumeric)
+ * @param {string} mask - The format mask
+ * @returns {number} The number of placeholders
  */
-function _applyFormatMask(digits, mask) {
-  let i = 0;
-  let result = '';
-
-  for (const maskChar of mask) {
-    if (i >= digits.length) {
-      break;
-    }
-    if (maskChar === '#') {
-      result += digits[i++];
-    } else {
-      result += maskChar;
-    }
-  }
-  return result;
+function countPlaceholders(mask) {
+  return (mask.match(/[#Aa*]/g) || []).length;
 }
 
 /**
- * Applies postal code formatting mask (locale-aware) to a string of digits.
- * @param {string} str - The string to be formatted (e.g., "09010140").
- * @param {object} [options={}] - Options (must contain 'locale').
- * @returns {string} The formatted string (e.g., "09010-140") or the digit string
- * if no format is applicable.
+ * Applies postal code formatting mask (locale-aware) to a string.
+ * Supports alphanumeric postal codes (e.g., UK: "SW1A 1AA").
+ *
+ * @param {string} str - The string to be formatted (e.g., "09010140" or "SW1A1AA")
+ * @param {object} [options={}] - Options
+ * @param {string} options.locale - The locale for formatting
+ * @param {boolean} [options.normalize=false] - If true, normalizes accented characters
+ * @returns {string} The formatted string (e.g., "09010-140" or "SW1A 1AA")
+ * or the cleaned input if no format is applicable
+ *
+ * @example
+ * formatPostalCode('09010140', { locale: 'pt-BR' }) // => '09010-140'
+ * formatPostalCode('SW1A1AA', { locale: 'en-UK' }) // => 'SW1A 1AA'
+ * formatPostalCode('H2X1Y4', { locale: 'fr-CA' }) // => 'H2X 1Y4'
  */
 export function formatPostalCode(str, options = {}) {
-  const digits = toString(str).replace(/\D/g, '');
+  // Clean input: remove spaces, hyphens, but keep alphanumeric
+  const cleaned = toString(str).replace(/[\s-]/g, '').toUpperCase();
 
   const lang = options.locale;
   if (!lang) {
-    return digits;
+    return cleaned;
+  }
+
+  // Special handling for UK postcodes (variable format)
+  // UK format: outward code (2-4 chars) + space + inward code (3 chars always)
+  if (lang === 'en-UK' || lang === 'en-GB') {
+    if (cleaned.length >= 5 && cleaned.length <= 7) {
+      // Inward code is always last 3 characters
+      const inward = cleaned.slice(-3);
+      const outward = cleaned.slice(0, -3);
+      return `${outward} ${inward}`;
+    }
+    return cleaned;
   }
 
   const localeData = getLocaleData(lang);
   const maskObj = localeData?.masks?.postalcode;
 
   if (!maskObj || typeof maskObj !== 'object') {
-    return digits;
+    return cleaned;
   }
 
   const mask = maskObj.default;
 
   if (!mask) {
-    return digits;
+    return cleaned;
   }
 
-  const expectedDigits = (mask.match(/#/g) || []).length;
+  const expectedChars = countPlaceholders(mask);
 
-  if (digits.length === expectedDigits) {
-    return _applyFormatMask(digits, mask);
+  if (cleaned.length === expectedChars) {
+    return applyFormatMask(cleaned, mask, { normalize: options.normalize });
   }
 
-  return digits;
+  return cleaned;
 }

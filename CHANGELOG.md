@@ -16,16 +16,21 @@ This release focuses on significantly reducing the published package size and ma
 ### Added
 
 - i18n registry and per-locale wrapper modules that self-register on import:
-  - `@formajs/formajs/i18n/en-US` (English - USA)
+  - `@formajs/formajs/i18n/en-US` (English - USA) - Default
+  - `@formajs/formajs/i18n/de-DE` (German - Germany)
+  - `@formajs/formajs/i18n/en-AU` (English - Australia)
+  - `@formajs/formajs/i18n/en-CA` (English - Canada)
+  - `@formajs/formajs/i18n/en-IN` (English - India)
+  - `@formajs/formajs/i18n/en-UK` (English - UK)
+  - `@formajs/formajs/i18n/es-AR` (Spanish - Argentina)
+  - `@formajs/formajs/i18n/es-ES` (Spanish - Spain)
+  - `@formajs/formajs/i18n/es-MX` (Spanish - Mexico)
+  - `@formajs/formajs/i18n/fr-CA` (French - Canada)
+  - `@formajs/formajs/i18n/fr-FR` (French - France)
+  - `@formajs/formajs/i18n/it-IT` (Italian - Italy)
   - `@formajs/formajs/i18n/pt-BR` (Portuguese - Brazil)
   - `@formajs/formajs/i18n/pt-PT` (Portuguese - Portugal)
-  - `@formajs/formajs/i18n/en-UK` (English - UK)
-  - `@formajs/formajs/i18n/es-ES` (Spanish - Spain)
-  - `@formajs/formajs/i18n/es-AR` (Spanish - Argentina)
-  - `@formajs/formajs/i18n/es-MX` (Spanish - Mexico)
-  - `@formajs/formajs/i18n/fr-FR` (French - France)
-  - `@formajs/formajs/i18n/de-DE` (German - Germany)
-  - `@formajs/formajs/i18n/it-IT` (Italian - Italy)
+  - `@formajs/formajs/i18n/zh-CN` (Chinese - China)
 
 ### Changed
 

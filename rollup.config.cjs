@@ -43,15 +43,29 @@ module.exports = [
     plugins: [resolve(), commonjs(), json(), terser()],
   },
   // Build locale wrappers
-  {
-    input: 'src/i18n/locales/pt-BR.js',
+  ...[
+    'pt-BR',
+    'es-AR',
+    'de-DE',
+    'en-UK',
+    'es-ES',
+    'es-MX',
+    'it-IT',
+    'pt-PT',
+    'fr-FR',
+    'en-AU',
+    'en-IN',
+    'en-CA',
+    'fr-CA',
+  ].map((locale) => ({
+    input: `src/i18n/locales/${locale}.js`,
     external: ['../index.js'],
     output: {
       dir: 'dist/esm/i18n/locales',
       format: 'es',
-      entryFileNames: 'pt-BR.js',
+      entryFileNames: `${locale}.js`,
       exports: 'named',
     },
     plugins: [resolve(), commonjs(), json(), terser()],
-  },
+  })),
 ];

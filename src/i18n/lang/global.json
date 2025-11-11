@@ -142,11 +142,5 @@
         "flags": "i"
       }
     }
-  },
-  "messages": {
-    "invalidType": "The provided value is not a string.",
-    "isEmpty": "The field cannot be empty.",
-    "validateByteLengthMin": "The field must be at least {min} bytes.",
-    "validateByteLengthMax": "The field must be at most {max} bytes."
   }
 }

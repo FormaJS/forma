@@ -1,0 +1,151 @@
+{
+  "name": "Português (Portugal)",
+  "separators": {
+    "decimal": ",",
+    "thousand": " ",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "€",
+    "symbol_before_digits": false,
+    "space_between_symbol_and_digits": true,
+    "decimal_digits": 2,
+    "negative_format": ["-{amount} {symbol}", "({amount} {symbol})", "{amount} {symbol} -"]
+  },
+  "date": {
+    "format": "dd/mm/yyyy",
+    "separator": "/"
+  },
+  "masks": {
+    "postalcode": {
+      "default": "####-###"
+    },
+    "mobileNumber": {
+      "local": "### ### ###",
+      "international": "+351 ### ### ###"
+    },
+    "taxId": {
+      "NIF": "# #### ####"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇÜ]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇÜ0-9]+$",
+      "flags": "i"
+    },
+    "mobilenumber": {
+      "pattern": "^(?:\\+351\\s?)?(?:9[1236])\\d{7}$",
+      "flags": ""
+    },
+    "licenseplate": {
+      "pattern": "^(?:[A-Z]{2}-\\d{2}-[A-Z]{2}|[A-Z]{2}-\\d{2}-\\d{2}|\\d{2}-[A-Z]{2}-\\d{2}|\\d{2}-\\d{2}-[A-Z]{2})$",
+      "flags": "i"
+    },
+    "postalcode": {
+      "pattern": "^\\d{4}-\\d{3}$",
+      "flags": ""
+    },
+    "taxid": "function:validateTaxId",
+    "boolean": {
+      "strictTrue": ["verdadeiro", "true"],
+      "strictFalse": ["falso", "false"],
+      "looseTrue": ["1", "sim", "s"],
+      "looseFalse": ["0", "não", "nao", "n"]
+    }
+  },
+  "messages": {
+    "genericError": "Ocorreu um erro inesperado durante a validação.",
+    "invalidRule": "Não foi possível encontrar a regra de validação '{rule}' ou não é válida.",
+    "invalidType": "O valor fornecido não é uma cadeia de texto.",
+    "isEmpty": "O campo não pode estar vazio.",
+    "localeRequired": "É necessária uma opção de configuração regional para esta validação.",
+    "validateAlpha": "O campo deve conter apenas caracteres alfabéticos.",
+    "validateByteLengthMax": "O campo deve ter no máximo {max} bytes.",
+    "validateByteLengthMin": "O campo deve ter pelo menos {min} bytes.",
+    "validateLengthExact": "O campo deve ter exatamente {min} caracteres.",
+    "validateLengthMax": "O campo deve ter no máximo {max} caracteres.",
+    "validateLengthMin": "O campo deve ter pelo menos {min} caracteres.",
+    "validateAlphanumeric": "O campo deve conter apenas caracteres alfanuméricos.",
+    "validateMatches": "O campo não corresponde ao padrão requerido.",
+    "validateMatchesInvalid": "O padrão RegEx fornecido não é válido.",
+    "validateAscii": "O campo deve conter apenas caracteres ASCII.",
+    "validateBase64": "O campo deve ser uma cadeia Base64 válida.",
+    "validateNumericFormat": "O campo deve ser um número válido.",
+    "validateNumericInvalid": "O campo contém um valor numérico inválido.",
+    "validateNumericRangeMin": "O valor deve ser {minRange} ou maior.",
+    "validateNumericRangeMax": "O valor deve ser {maxRange} ou menor.",
+    "validateNumericRangeMinStrict": "O valor deve ser maior que {minRange}.",
+    "validateNumericRangeMaxStrict": "O valor deve ser menor que {maxRange}.",
+    "validateNumericNotInt": "O campo deve ser um número inteiro (sem decimais).",
+    "validateNumericNotDecimal": "O campo deve incluir uma parte decimal.",
+    "validateHexadecimal": "O campo deve ser uma cadeia hexadecimal válida.",
+    "validateHexColor": "O campo deve ser uma cor hexadecimal válida (ex., #F00, #FF0000, #FF0000FF).",
+    "validatePortRange": "O campo deve ser um número de porta válido (0-65535).",
+    "validateNumericPositive": "O campo deve ser um número positivo (maior que 0).",
+    "validateNumericNegative": "O campo deve ser um número negativo (menor que 0).",
+    "validateLowercase": "O campo deve conter apenas caracteres alfabéticos minúsculos.",
+    "validateUppercase": "O campo deve conter apenas caracteres alfabéticos maiúsculos.",
+    "validateMongoId": "O campo deve ser um MongoId válido de 24 caracteres.",
+    "validateMultibyte": "O campo deve conter um ou mais caracteres multibyte.",
+    "validateSurrogatePair": "O campo deve conter um ou mais caracteres de par substituto (ex., emojis).",
+    "validateBoolean": "O campo deve ser um valor booleano válido (ex., verdadeiro, falso, 1, 0).",
+    "validateContains": "O campo deve conter o texto: {seed}.",
+    "validateContainsMin": "O campo deve conter '{seed}' pelo menos {minOccurrences} vez(es).",
+    "validateContainsMax": "O campo deve conter '{seed}' no máximo {maxOccurrences} vez(es).",
+    "validateCreditCard": "O campo deve ser um número de cartão de crédito válido.",
+    "validateCurrency": "O campo deve ser um valor de moeda válido.",
+    "validateDate": "O campo deve ser uma data válida.",
+    "validateDecimal": "O campo deve ser um número decimal válido.",
+    "validateEmail": "O campo deve ser um endereço de e-mail válido.",
+    "validateFQDN": "O campo deve ser um nome de domínio totalmente qualificado válido.",
+    "validateFloat": "O campo deve ser um número de ponto flutuante válido.",
+    "validateFullWidth": "O campo deve conter caracteres de largura completa.",
+    "validateHalfWidth": "O campo deve conter caracteres de meia largura.",
+    "validateVariableWidth": "O campo deve conter uma mistura de caracteres de largura completa e meia.",
+    "validateHSL": "O campo deve ser uma cor HSL válida.",
+    "validateIBAN": "O campo deve ser um IBAN válido.",
+    "validateBIC": "O campo deve ser um código BIC válido.",
+    "validateIMEI": "O campo deve ser um número IMEI válido.",
+    "validateIP": "O campo deve ser um endereço IP válido.",
+    "validateIPRange": "O campo deve ser um intervalo de IP válido.",
+    "validateISBN": "O campo deve ser um ISBN válido.",
+    "validateISIN": "O campo deve ser um código ISIN válido.",
+    "validateISO8601": "O campo deve ser uma data ISO 8601 válida.",
+    "validateISO31661Alpha2": "O campo deve ser um código de país ISO 3166-1 alfa-2 válido.",
+    "validateISO31661Alpha3": "O campo deve ser um código de país ISO 3166-1 alfa-3 válido.",
+    "validateISRC": "O campo deve ser um código ISRC válido.",
+    "validateISSN": "O campo deve ser um ISSN válido.",
+    "validateJSON": "O campo deve ser uma string JSON válida.",
+    "validateJWT": "O campo deve ser um token JWT válido.",
+    "validateLatLong": "O campo deve ser uma coordenada de latitude/longitude válida.",
+    "validateLicensePlate": "O campo deve ser uma matrícula válida.",
+    "validateLocale": "O campo deve ser um código de configuração regional válido.",
+    "validateMACAddress": "O campo deve ser um endereço MAC válido.",
+    "validateMagnetURI": "O campo deve ser um URI Magnet válido.",
+    "validateMD5": "O campo deve ser um hash MD5 válido.",
+    "validateMimeType": "O campo deve ser um tipo MIME válido.",
+    "validateMobileNumber": "O campo deve ser um número de telemóvel válido.",
+    "validateNotEmpty": "O campo não pode estar vazio.",
+    "validatePostalCode": "O campo deve ser um código postal válido.",
+    "validateRgbColor": "O campo deve ser uma cor RGB válida.",
+    "validateSemVer": "O campo deve ser uma versão semântica válida.",
+    "validateSlug": "O campo deve ser um slug válido.",
+    "validateStrongPassword": "A palavra-passe não é suficientemente forte.",
+    "validateTaxId": "O campo deve ser um NIF válido.",
+    "validateURL": "O campo deve ser um URL válido.",
+    "validateUUID": "O campo deve ser um UUID válido.",
+    "validateDataURI": "O campo deve ser um URI de dados válido.",
+    "validateDivisibleBy": "O campo deve ser divisível por {divisor}.",
+    "validateEndsWith": "O campo deve terminar com '{substring}'.",
+    "validateStartsWith": "O campo deve começar com '{substring}'.",
+    "validateEqualsTo": "O campo deve ser igual a '{comparison}'.",
+    "validateIsIn": "O campo deve ser um dos seguintes valores: {values}.",
+    "validateIsBlacklisted": "O campo contém um valor não permitido.",
+    "validateIsWhitelisted": "O campo não contém apenas valores permitidos.",
+    "validateInt": "O campo deve ser um número inteiro válido."
+  }
+}
