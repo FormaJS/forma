@@ -4,6 +4,8 @@
 [![npm downloads](https://img.shields.io/npm/dm/%40formajs%2Fformajs.svg)](https://www.npmjs.com/package/@formajs/formajs)
 [![license](https://img.shields.io/npm/l/%40formajs%2Fformajs.svg)](LICENSE.md)
 
+> **Validate Reliably, Effortlessly.**
+
 A lightweight, modular JavaScript library for validating, parsing, and sanitizing form inputs — with built‑in internationalization (i18n), zero external dependencies, and an extensible rule system.
 
 ## Features
