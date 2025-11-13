@@ -22,7 +22,15 @@ export function validateDate(str, options = {}) {
     return { valid: false, error: 'invalidType' };
   }
 
-  const dateObj = toDate(str, options);
+  // Parse the main value using locale-aware parsing first.
+  let dateObj = toDate(str, options);
+
+  // If parsing failed but the caller provided minDate/maxDate, allow an
+  // ISO/no-locale fallback so range comparisons can be performed with
+  // ISO-formatted inputs (some consumers pass ISO strings for ranges).
+  if (dateObj === null && (options.minDate || options.maxDate)) {
+    dateObj = toDate(str, {});
+  }
 
   if (dateObj === null) {
     return { valid: false, error: 'validateDate' };
@@ -32,7 +40,11 @@ export function validateDate(str, options = {}) {
   const timestamp = dateObj.getTime();
 
   if (minDate) {
-    const minDateObj = minDate instanceof Date ? minDate : toDate(minDate, options);
+    const minDateObj =
+      minDate instanceof Date
+        ? minDate
+        : // Try parsing minDate as ISO (no locale) first, then fallback to locale-aware parsing
+          toDate(minDate, {}) || toDate(minDate, options);
 
     if (minDateObj) {
       if (timestamp < minDateObj.getTime()) {
@@ -46,7 +58,11 @@ export function validateDate(str, options = {}) {
   }
 
   if (maxDate) {
-    const maxDateObj = maxDate instanceof Date ? maxDate : toDate(maxDate, options);
+    const maxDateObj =
+      maxDate instanceof Date
+        ? maxDate
+        : // Try parsing maxDate as ISO (no locale) first, then fallback to locale-aware parsing
+          toDate(maxDate, {}) || toDate(maxDate, options);
 
     if (maxDateObj) {
       if (timestamp > maxDateObj.getTime()) {

@@ -173,22 +173,33 @@ export function toDate(str, options = {}) {
 
   const testStr = toString(str).trim();
 
+  // If a locale is provided, try parsing with the locale format first. This
+  // avoids accepting ISO-like strings when the locale expects a different
+  // ordering/format (e.g. ja-JP uses yyyy/mm/dd and tests expect '2020-12-31'
+  // to be rejected for the locale parser).
+  const lang = options.locale;
+  if (lang) {
+    const localeData = getLocaleData(lang);
+    const dateRules = localeData?.date;
+
+    if (dateRules && dateRules.format) {
+      const localParsed = _parseDateByFormat(testStr, dateRules.format);
+      if (localParsed) return localParsed;
+
+      // Locale provided and locale-specific format exists, but parsing failed.
+      // In this strict mode we reject the input rather than attempting to
+      // fallback to ISO parsing. This enforces that locale-aware parsing is
+      // authoritative when a locale is explicitly requested (tests expect
+      // locale-specific formats to be enforced).
+      return null;
+    }
+  }
+
+  // Fallback to ISO parsing when allowed
   const isoDate = _parseISO8601(testStr);
   if (isoDate) {
     return isoDate;
   }
 
-  const lang = options.locale;
-  if (!lang) {
-    return null;
-  }
-
-  const localeData = getLocaleData(lang);
-  const dateRules = localeData?.date;
-
-  if (!dateRules || !dateRules.format) {
-    return null;
-  }
-
-  return _parseDateByFormat(testStr, dateRules.format);
+  return null;
 }

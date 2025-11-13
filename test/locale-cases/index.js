@@ -10,8 +10,10 @@ import { esMXCases } from './es-MX.js';
 import { frCACases } from './fr-CA.js';
 import { frFRCases } from './fr-FR.js';
 import { itITCases } from './it-IT.js';
+import { jaJPCases } from './ja-JP.js';
 import { ptBRCases } from './pt-BR.js';
 import { ptPTCases } from './pt-PT.js';
+import { trTRCases } from './tr-TR.js';
 import { zhCNCases } from './zh-CN.js';
 
 export const LOCALE_CASES = [
@@ -27,7 +29,9 @@ export const LOCALE_CASES = [
   frCACases,
   frFRCases,
   itITCases,
+  jaJPCases,
   ptBRCases,
   ptPTCases,
+  trTRCases,
   zhCNCases,
 ];

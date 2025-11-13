@@ -131,8 +131,10 @@ import `@formajs/formajs/i18n/es-MX` // Spanish - Mexico
 import `@formajs/formajs/i18n/fr-CA` // French - Canada
 import `@formajs/formajs/i18n/fr-FR` // French - France
 import `@formajs/formajs/i18n/it-IT` // Italian - Italy
+import `@formajs/formajs/i18n/ja-JP` // Japanese - Japan
 import `@formajs/formajs/i18n/pt-BR` // Portuguese - Brazil
 import `@formajs/formajs/i18n/pt-PT` // Portuguese - Portugal
+import `@formajs/formajs/i18n/tr-TR` // Turkish - Turkey
 import `@formajs/formajs/i18n/zh-CN` // Chinese - China
 ```
 
