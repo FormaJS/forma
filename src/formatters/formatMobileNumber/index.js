@@ -9,35 +9,60 @@ import { getLocaleData } from '../../i18n/index.js';
  * @returns {string} The formatted string (e.g., "(11) 98765-4321") or the digits string.
  */
 export function formatMobileNumber(str, options = {}) {
-  const digits = toString(str).replace(/\D/g, '');
+  const rawDigits = toString(str).replace(/\D/g, '');
 
   const lang = options.locale;
   const defaults = { format: 'local' };
   const opt = { ...defaults, ...options };
 
   if (!lang) {
-    return digits;
+    return rawDigits;
   }
 
   const localeData = getLocaleData(lang);
   const maskObject = localeData?.masks?.mobileNumber;
 
   if (!maskObject || typeof maskObject !== 'object') {
-    return digits;
+    return rawDigits;
   }
 
   let mask = maskObject[opt.format];
 
   if (!mask) {
     mask = maskObject['local'];
-    if (!mask) return digits;
+    if (!mask) return rawDigits;
   }
 
+  // When formatting international numbers, some locales provide input with a
+  // leading zero (national trunk prefix). Many international masks expect the
+  // number without the leading zero, so strip it temporarily for matching.
+  const digits = rawDigits;
+
+  // Try several candidate digit strings and return the first fully-applied mask
+  // (we consider the mask fully applied when the output length equals the
+  // mask length, since every placeholder expands to a single char).
   const expectedDigits = (mask.match(/#/g) || []).length;
 
-  if (digits.length === expectedDigits) {
-    return applyFormatMask(digits, mask);
+  let candidates = [digits];
+
+  // If the mask expects one fewer/more digit than provided, try adding/removing a trunk '0'
+  // but be conservative: only try stripping for international masks and only try
+  // prefixing for local masks when the digit counts differ by exactly one.
+  const maskIsInternational = typeof mask === 'string' && mask.trim().startsWith('+');
+
+  if (maskIsInternational && digits.startsWith('0') && digits.length === expectedDigits + 1) {
+    candidates.unshift(digits.slice(1)); // prefer stripped
   }
 
-  return digits;
+  if (!maskIsInternational && !digits.startsWith('0') && digits.length === expectedDigits - 1) {
+    candidates.unshift('0' + digits); // prefer prefixed
+  }
+
+  for (const d of candidates) {
+    const out = applyFormatMask(d, mask);
+    if (out.length === mask.length) return out;
+  }
+
+  // Fallback: return the raw digits string if we couldn't apply the mask
+  return rawDigits;
 }
