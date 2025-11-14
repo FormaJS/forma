@@ -31,6 +31,7 @@ This release focuses on significantly reducing the published package size and ma
   - `@formajs/formajs/i18n/ja-JP` (Japanese - Japan)
   - `@formajs/formajs/i18n/pt-BR` (Portuguese - Brazil)
   - `@formajs/formajs/i18n/pt-PT` (Portuguese - Portugal)
+  - `@formajs/formajs/i18n/ru-RU` (Russian - Russia)
   - `@formajs/formajs/i18n/tr-TR` (Turkish - Turkey)
   - `@formajs/formajs/i18n/zh-CN` (Chinese - China)
 

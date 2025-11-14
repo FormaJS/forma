@@ -13,6 +13,7 @@ import { itITCases } from './it-IT.js';
 import { jaJPCases } from './ja-JP.js';
 import { ptBRCases } from './pt-BR.js';
 import { ptPTCases } from './pt-PT.js';
+import { ruRUCases } from './ru-RU.js';
 import { trTRCases } from './tr-TR.js';
 import { zhCNCases } from './zh-CN.js';
 
@@ -32,6 +33,7 @@ export const LOCALE_CASES = [
   jaJPCases,
   ptBRCases,
   ptPTCases,
+  ruRUCases,
   trTRCases,
   zhCNCases,
 ];

@@ -15,6 +15,7 @@ import '../src/i18n/locales/it-IT.js';
 import '../src/i18n/locales/ja-JP.js';
 import '../src/i18n/locales/pt-BR.js';
 import '../src/i18n/locales/pt-PT.js';
+import '../src/i18n/locales/ru-RU.js';
 import '../src/i18n/locales/tr-TR.js';
 import '../src/i18n/locales/zh-CN.js';
 

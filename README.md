@@ -134,6 +134,7 @@ import `@formajs/formajs/i18n/it-IT` // Italian - Italy
 import `@formajs/formajs/i18n/ja-JP` // Japanese - Japan
 import `@formajs/formajs/i18n/pt-BR` // Portuguese - Brazil
 import `@formajs/formajs/i18n/pt-PT` // Portuguese - Portugal
+import `@formajs/formajs/i18n/ru-RU` // Russian - Russia
 import `@formajs/formajs/i18n/tr-TR` // Turkish - Turkey
 import `@formajs/formajs/i18n/zh-CN` // Chinese - China
 ```
