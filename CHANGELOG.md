@@ -2,7 +2,7 @@
 
 All notable changes to this package will be documented in this file.
 
-## [v2.0.0] - 2025-11-06
+## [v2.0.0] - 2025-12-03
 
 This release focuses on significantly reducing the published package size and making i18n locales opt-in. It also removes the legacy `formaBR` export.
 
