@@ -1,8 +1,8 @@
 import {
-    isString,
-    toString,
-    calculateMod11,
-    getNormalizedNumberString,
+  isString,
+  toString,
+  calculateMod11,
+  getNormalizedNumberString,
 } from '../../../utils/index.js';
 
 /**
@@ -12,15 +12,15 @@ import {
  * @returns {boolean} True if the CPF is valid.
  */
 function _validateCPF(tid) {
-    if (!tid) return false;
-    // Rejects repeated digit sequences
-    if (/^(\d)\1{10}$/.test(tid)) return false;
+  if (!tid) return false;
+  // Rejects repeated digit sequences
+  if (/^(\d)\1{10}$/.test(tid)) return false;
 
-    // Normalizes and left-pads to 11 digits
-    tid = getNormalizedNumberString(tid, 'pt-BR').padStart(11, '0');
+  // Normalizes and left-pads to 11 digits
+  tid = getNormalizedNumberString(tid, 'pt-BR').padStart(11, '0');
 
-    // Applies check digit calculation (modulo 11)
-    return calculateMod11(tid, 2, 2, 11);
+  // Applies check digit calculation (modulo 11)
+  return calculateMod11(tid, 2, 2, 11);
 }
 
 /**
@@ -30,15 +30,15 @@ function _validateCPF(tid) {
  * @returns {boolean} True if the CNPJ is valid.
  */
 function _validateCNPJ(tid) {
-    if (!tid) return false;
-    // Rejects repeated digit sequences
-    if (/^(\d)\1{13}$/.test(tid)) return false;
+  if (!tid) return false;
+  // Rejects repeated digit sequences
+  if (/^(\d)\1{13}$/.test(tid)) return false;
 
-    // Normalizes and left-pads to 14 digits
-    tid = getNormalizedNumberString(tid, 'pt-BR').padStart(14, '0');
+  // Normalizes and left-pads to 14 digits
+  tid = getNormalizedNumberString(tid, 'pt-BR').padStart(14, '0');
 
-    // Applies check digit calculation (modulo 11)
-    return calculateMod11(tid, 2, 2, 9);
+  // Applies check digit calculation (modulo 11)
+  return calculateMod11(tid, 2, 2, 9);
 }
 
 /**
@@ -48,28 +48,28 @@ function _validateCNPJ(tid) {
  * @returns {boolean} True if it is a valid CPF or CNPJ.
  */
 function validateTaxId(tid) {
-    if (!isString(tid)) return false;
+  if (!isString(tid)) return false;
 
-    // Removes non-numeric characters
-    const normalizedTid = toString(tid).replace(/\D/g, '');
+  // Removes non-numeric characters
+  const normalizedTid = toString(tid).replace(/\D/g, '');
 
-    // If too long for either, reject
-    if (normalizedTid.length > 14) return false;
+  // If too long for either, reject
+  if (normalizedTid.length > 14) return false;
 
-    // Try to validate as CPF
-    // _validateCPF will left-pad with '0' if < 11 digits
-    if (_validateCPF(normalizedTid)) {
-        return true;
-    }
+  // Try to validate as CPF
+  // _validateCPF will left-pad with '0' if < 11 digits
+  if (_validateCPF(normalizedTid)) {
+    return true;
+  }
 
-    // Try to validate as CNPJ
-    // _validateCNPJ will left-pad with '0' if < 14 digits
-    if (_validateCNPJ(normalizedTid)) {
-        return true;
-    }
+  // Try to validate as CNPJ
+  // _validateCNPJ will left-pad with '0' if < 14 digits
+  if (_validateCNPJ(normalizedTid)) {
+    return true;
+  }
 
-    // Failed both
-    return false;
+  // Failed both
+  return false;
 }
 
 export { validateTaxId };

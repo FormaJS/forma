@@ -1,8 +1,8 @@
 import {
-    isString,
-    toString,
-    isValidISODateString,
-    executeI18nValidationRule,
+  isString,
+  toString,
+  isValidISODateString,
+  executeI18nValidationRule,
 } from '../../utils/index.js';
 
 /**
@@ -19,45 +19,45 @@ import {
  * @returns {ValidationResult} Validation result object.
  */
 async function _validateISO3166_1(str, options) {
-    const { alpha, caseSensitive, locale } = options;
-    let isValid = false;
-    let errorKey = 'validateISO_3166-1';
-    let context = {};
+  const { alpha, caseSensitive, locale } = options;
+  let isValid = false;
+  let errorKey = 'validateISO_3166-1';
+  let context = {};
 
-    try {
-        const patternKey2 = 'ISO3166-1-alpha-2';
-        const patternKey3 = 'ISO3166-1-alpha-3';
+  try {
+    const patternKey2 = 'ISO3166-1-alpha-2';
+    const patternKey3 = 'ISO3166-1-alpha-3';
 
-        const res2 = await executeI18nValidationRule(locale || 'en-US', patternKey2, str, {
-            caseSensitive,
-        });
-        const res3 = await executeI18nValidationRule(locale || 'en-US', patternKey3, str, {
-            caseSensitive,
-        });
+    const res2 = await executeI18nValidationRule(locale || 'en-US', patternKey2, str, {
+      caseSensitive,
+    });
+    const res3 = await executeI18nValidationRule(locale || 'en-US', patternKey3, str, {
+      caseSensitive,
+    });
 
-        const has2 = !(res2 && res2.error === 'invalidRule');
-        const has3 = !(res3 && res3.error === 'invalidRule');
+    const has2 = !(res2 && res2.error === 'invalidRule');
+    const has3 = !(res3 && res3.error === 'invalidRule');
 
-        const valid2 = (res2 && res2.valid) || res2 === true;
-        const valid3 = (res3 && res3.valid) || res3 === true;
+    const valid2 = (res2 && res2.valid) || res2 === true;
+    const valid3 = (res3 && res3.valid) || res3 === true;
 
-        if (alpha === '2' && has2) {
-            isValid = valid2;
-            errorKey = 'validateISO_ISO3166-1-alpha-2';
-        } else if (alpha === '3' && has3) {
-            isValid = valid3;
-            errorKey = 'validateISO_ISO3166-1-alpha-3';
-        } else if (!alpha && has2 && has3) {
-            isValid = valid2 || valid3;
-        } else {
-            isValid = false;
-            errorKey = 'invalidRule';
-            context = { rule: `ISO3166-1-alpha-${alpha || '2/3'}` };
-        }
-        return isValid ? { valid: true } : { valid: false, error: errorKey, context };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e && e.message } };
+    if (alpha === '2' && has2) {
+      isValid = valid2;
+      errorKey = 'validateISO_ISO3166-1-alpha-2';
+    } else if (alpha === '3' && has3) {
+      isValid = valid3;
+      errorKey = 'validateISO_ISO3166-1-alpha-3';
+    } else if (!alpha && has2 && has3) {
+      isValid = valid2 || valid3;
+    } else {
+      isValid = false;
+      errorKey = 'invalidRule';
+      context = { rule: `ISO3166-1-alpha-${alpha || '2/3'}` };
     }
+    return isValid ? { valid: true } : { valid: false, error: errorKey, context };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e && e.message } };
+  }
 }
 
 /**
@@ -67,10 +67,10 @@ async function _validateISO3166_1(str, options) {
  * @returns {ValidationResult} Validation result object.
  */
 function _validateISO8601(str, options) {
-    const { strict } = options;
-    const isValid = isValidISODateString(str, { strict });
-    const errorKey = strict ? 'validateISO_8601_strict' : 'validateISO_8601_lenient';
-    return isValid ? { valid: true } : { valid: false, error: errorKey };
+  const { strict } = options;
+  const isValid = isValidISODateString(str, { strict });
+  const errorKey = strict ? 'validateISO_8601_strict' : 'validateISO_8601_lenient';
+  return isValid ? { valid: true } : { valid: false, error: errorKey };
 }
 
 /**
@@ -81,22 +81,22 @@ function _validateISO8601(str, options) {
  * @returns {ValidationResult} Validation result object.
  */
 async function _validateSimpleISOCode(str, standardKey, options) {
-    const { caseSensitive, locale } = options;
-    const errorKey = `validateISO_${standardKey}`;
-    let context = {};
+  const { caseSensitive, locale } = options;
+  const errorKey = `validateISO_${standardKey}`;
+  let context = {};
 
-    try {
-        const res = await executeI18nValidationRule(locale, standardKey, str, { caseSensitive });
+  try {
+    const res = await executeI18nValidationRule(locale, standardKey, str, { caseSensitive });
 
-        if (res && res.error === 'invalidRule') {
-            return { valid: false, error: 'invalidRule', context: { rule: standardKey } };
-        }
-
-        const isValid = (res && res.valid) || res === true;
-        return isValid ? { valid: true } : { valid: false, error: errorKey, context };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e && e.message } };
+    if (res && res.error === 'invalidRule') {
+      return { valid: false, error: 'invalidRule', context: { rule: standardKey } };
     }
+
+    const isValid = (res && res.valid) || res === true;
+    return isValid ? { valid: true } : { valid: false, error: errorKey, context };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e && e.message } };
+  }
 }
 
 /**
@@ -110,44 +110,44 @@ async function _validateSimpleISOCode(str, standardKey, options) {
  * @returns {ValidationResult} Validation result object.
  */
 export async function validateISO(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
-    const testStr = toString(str).trim();
-    if (testStr === '') {
-        return { valid: false, error: 'isEmpty' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  const testStr = toString(str).trim();
+  if (testStr === '') {
+    return { valid: false, error: 'isEmpty' };
+  }
 
-    const defaults = {
-        standard: undefined,
-        alpha: undefined,
-        caseSensitive: false,
-        strict: false,
-    };
-    const opt = { ...defaults, ...options };
+  const defaults = {
+    standard: undefined,
+    alpha: undefined,
+    caseSensitive: false,
+    strict: false,
+  };
+  const opt = { ...defaults, ...options };
 
-    if (!opt.standard) {
-        return { valid: false, error: 'validateISOStandardRequired' };
-    }
+  if (!opt.standard) {
+    return { valid: false, error: 'validateISOStandardRequired' };
+  }
 
-    switch (opt.standard.toUpperCase()) {
-        case '3166-1':
-            return await _validateISO3166_1(testStr, opt);
-        case '8601':
-            return _validateISO8601(testStr, opt);
-        case '639-1':
-            return await _validateSimpleISOCode(testStr, 'ISO639-1', opt);
-        case '4217':
-            return await _validateSimpleISOCode(testStr, 'ISO4217', opt);
-        case '3166-1-ALPHA-2':
-            return await _validateSimpleISOCode(testStr, 'ISO3166-1-alpha-2', opt);
-        case '3166-1-ALPHA-3':
-            return await _validateSimpleISOCode(testStr, 'ISO3166-1-alpha-3', opt);
-        default:
-            return {
-                valid: false,
-                error: 'validateISOUnknownStandard',
-                context: { standard: opt.standard },
-            };
-    }
+  switch (opt.standard.toUpperCase()) {
+    case '3166-1':
+      return await _validateISO3166_1(testStr, opt);
+    case '8601':
+      return _validateISO8601(testStr, opt);
+    case '639-1':
+      return await _validateSimpleISOCode(testStr, 'ISO639-1', opt);
+    case '4217':
+      return await _validateSimpleISOCode(testStr, 'ISO4217', opt);
+    case '3166-1-ALPHA-2':
+      return await _validateSimpleISOCode(testStr, 'ISO3166-1-alpha-2', opt);
+    case '3166-1-ALPHA-3':
+      return await _validateSimpleISOCode(testStr, 'ISO3166-1-alpha-3', opt);
+    default:
+      return {
+        valid: false,
+        error: 'validateISOUnknownStandard',
+        context: { standard: opt.standard },
+      };
+  }
 }

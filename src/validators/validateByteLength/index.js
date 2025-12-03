@@ -14,23 +14,23 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateByteLength(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const { min = 0, max } = options;
+  const { min = 0, max } = options;
 
-    const testStr = toString(str);
+  const testStr = toString(str);
 
-    const byteLength = new TextEncoder().encode(testStr).length;
+  const byteLength = new TextEncoder().encode(testStr).length;
 
-    if (byteLength < min) {
-        return { valid: false, error: 'validateByteLengthMin', context: { min } };
-    }
+  if (byteLength < min) {
+    return { valid: false, error: 'validateByteLengthMin', context: { min } };
+  }
 
-    if (typeof max !== 'undefined' && byteLength > max) {
-        return { valid: false, error: 'validateByteLengthMax', context: { max } };
-    }
+  if (typeof max !== 'undefined' && byteLength > max) {
+    return { valid: false, error: 'validateByteLengthMax', context: { max } };
+  }
 
-    return { valid: true };
+  return { valid: true };
 }

@@ -1,0 +1,74 @@
+{
+  "accessible": {
+    "ones": ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"],
+    "teens": [
+      "ten",
+      "eleven",
+      "twelve",
+      "thirteen",
+      "fourteen",
+      "fifteen",
+      "sixteen",
+      "seventeen",
+      "eighteen",
+      "nineteen"
+    ],
+    "tens": ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
+    "scales": ["", "thousand", "million", "billion", "trillion", "quadrillion"]
+  },
+  "separators": {
+    "decimal": ".",
+    "thousand": ",",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "$",
+    "code": "CAD",
+    "symbol_before_digits": true,
+    "space_between_symbol_and_digits": false,
+    "decimal_digits": 2,
+    "negative_format": ["-{symbol}{amount}", "({symbol}{amount})", "{symbol}({amount})"]
+  },
+  "date": {
+    "format": "mm/dd/yyyy",
+    "separator": "/"
+  },
+  "masks": {
+    "postalcode": {
+      "default": "A#A #A#"
+    },
+    "mobileNumber": {
+      "local": "(###) ###-####",
+      "international": "+1 (###) ###-####"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[A-Z]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-Z0-9]+$",
+      "flags": "i"
+    },
+    "mobilenumber": {
+      "pattern": "^(?:\\+?1[ .-]?)?\\(?[2-9]\\d{2}\\)?[ .-]?[2-9]\\d{2}[ .-]?\\d{4}$"
+    },
+    "postalcode": {
+      "pattern": "^[A-Z]\\d[A-Z] ?\\d[A-Z]\\d$",
+      "flags": "i"
+    },
+    "licenseplate": {
+      "pattern": "^[A-Z]{4}-?\\d{3}$",
+      "flags": "i"
+    },
+    "taxid": "function:validateTaxId",
+    "boolean": {
+      "strictTrue": ["true"],
+      "strictFalse": ["false"],
+      "looseTrue": ["1", "yes", "y"],
+      "looseFalse": ["0", "no", "n"]
+    }
+  },
+  "messages": {}
+}

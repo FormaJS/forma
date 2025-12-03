@@ -4,9 +4,9 @@
  * @returns {string} Type of the object (e.g., 'string', 'number', 'array', etc).
  */
 export function typeOf(obj) {
-    const typeString = Object.prototype.toString.call(obj);
+  const typeString = Object.prototype.toString.call(obj);
 
-    const typeName = typeString.slice(8, -1);
+  const typeName = typeString.slice(8, -1);
 
-    return typeName.toLowerCase();
+  return typeName.toLowerCase();
 }

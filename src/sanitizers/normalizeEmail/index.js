@@ -1,9 +1,9 @@
 import { toString } from '../../utils/index.js';
 import {
-    domainsWithSubaddressing,
-    domainsWithDots,
-    domainAliases,
-    displayNameRegex,
+  domainsWithSubaddressing,
+  domainsWithDots,
+  domainAliases,
+  displayNameRegex,
 } from '../../utils/index.js';
 
 /**
@@ -17,43 +17,43 @@ import {
  * @returns {string} The transformed (normalized) email string.
  */
 export function normalizeEmail(str, options = {}) {
-    let s = toString(str).trim();
+  let s = toString(str).trim();
 
-    const doLowercase = options.lowercase !== false;
-    const doNormalizeDots = options.normalizeDots !== false;
-    const doNormalizeSubaddressing = options.normalizeSubaddressing !== false;
-    const doAllowDisplayName = options.allowDisplayName !== false;
+  const doLowercase = options.lowercase !== false;
+  const doNormalizeDots = options.normalizeDots !== false;
+  const doNormalizeSubaddressing = options.normalizeSubaddressing !== false;
+  const doAllowDisplayName = options.allowDisplayName !== false;
 
-    if (doAllowDisplayName) {
-        const match = s.match(displayNameRegex);
-        if (match) {
-            s = match[1];
-        }
+  if (doAllowDisplayName) {
+    const match = s.match(displayNameRegex);
+    if (match) {
+      s = match[1];
     }
+  }
 
-    if (doLowercase) {
-        s = s.toLowerCase();
-    }
+  if (doLowercase) {
+    s = s.toLowerCase();
+  }
 
-    const parts = s.split('@');
-    if (parts.length !== 2) {
-        return s;
-    }
+  const parts = s.split('@');
+  if (parts.length !== 2) {
+    return s;
+  }
 
-    let local = parts[0];
-    let domain = parts[1];
+  let local = parts[0];
+  let domain = parts[1];
 
-    if (domainAliases[domain]) {
-        domain = domainAliases[domain];
-    }
+  if (domainAliases[domain]) {
+    domain = domainAliases[domain];
+  }
 
-    if (doNormalizeSubaddressing && domainsWithSubaddressing.has(domain)) {
-        local = local.replace(/\+.*$/, '');
-    }
+  if (doNormalizeSubaddressing && domainsWithSubaddressing.has(domain)) {
+    local = local.replace(/\+.*$/, '');
+  }
 
-    if (doNormalizeDots && domainsWithDots.has(domain)) {
-        local = local.replace(/\./g, '');
-    }
+  if (doNormalizeDots && domainsWithDots.has(domain)) {
+    local = local.replace(/\./g, '');
+  }
 
-    return local + '@' + domain;
+  return local + '@' + domain;
 }

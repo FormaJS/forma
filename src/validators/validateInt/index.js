@@ -8,9 +8,9 @@ import { validateNumeric } from '../validateNumeric/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateInt(str, options = {}) {
-    const intOptions = {
-        ...options,
-        allowDecimal: false,
-    };
-    return validateNumeric(str, intOptions);
+  const intOptions = {
+    ...options,
+    allowDecimal: false,
+  };
+  return validateNumeric(str, intOptions);
 }

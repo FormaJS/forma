@@ -13,25 +13,25 @@ import { validateInt } from '../validateInt/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validatePort(str) {
-    const portOptions = {
-        minRange: 0,
-        maxRange: 65535,
-        strict: false,
-    };
+  const portOptions = {
+    minRange: 0,
+    maxRange: 65535,
+    strict: false,
+  };
 
-    const result = validateInt(str, portOptions);
+  const result = validateInt(str, portOptions);
 
-    if (!result.valid) {
-        if (
-            result.error === 'validateNumericRangeMin' ||
-            result.error === 'validateNumericRangeMax' ||
-            result.error === 'validateNumericRangeMinStrict' ||
-            result.error === 'validateNumericRangeMaxStrict'
-        ) {
-            result.error = 'validatePortRange';
-            result.context = {};
-        }
+  if (!result.valid) {
+    if (
+      result.error === 'validateNumericRangeMin' ||
+      result.error === 'validateNumericRangeMax' ||
+      result.error === 'validateNumericRangeMinStrict' ||
+      result.error === 'validateNumericRangeMaxStrict'
+    ) {
+      result.error = 'validatePortRange';
+      result.context = {};
     }
+  }
 
-    return result;
+  return result;
 }

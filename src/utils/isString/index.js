@@ -6,5 +6,5 @@ import { typeOf } from '../typeOf';
  * @returns {boolean} Returns true if it is a string, otherwise false.
  */
 export function isString(val) {
-    return typeOf(val) === 'string';
+  return typeOf(val) === 'string';
 }

@@ -1,12 +1,12 @@
 import { isString, toString } from '../../utils/index.js';
 import { validateIP } from '../validateIP/index.js';
 import {
-    displayNameRegex,
-    localAscii,
-    internationalChars,
-    domainSegment,
-    tldAscii,
-    tldInternational,
+  displayNameRegex,
+  localAscii,
+  internationalChars,
+  domainSegment,
+  tldAscii,
+  tldInternational,
 } from '../../utils/regexConstants.js';
 
 /**
@@ -20,8 +20,8 @@ import {
 const asciiLocalPartRegex = new RegExp(`^[${localAscii}]+(?:\\.[${localAscii}]+)*$`);
 // UTF-8 pattern (allows Unicode letters)
 const utf8LocalPartRegex = new RegExp(
-    `^[${localAscii}${internationalChars}]+(?:\\.[${localAscii}${internationalChars}]+)*$`,
-    'u'
+  `^[${localAscii}${internationalChars}]+(?:\\.[${localAscii}${internationalChars}]+)*$`,
+  'u'
 );
 
 // Hostname pattern (ASCII) - (e.g., 'my.domain.com' or 'localhost')
@@ -46,100 +46,100 @@ const tldInternationalRegex = new RegExp(`\\.${tldInternational}$`, 'u');
  * @returns {ValidationResult} Validation result object.
  */
 export function validateEmail(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const defaults = {
+    allowDisplayName: true,
+    requireDisplayName: false,
+    allowUTF8LocalPart: true,
+    requireTLD: true,
+    allowIPDomain: false,
+    ignoreMaxLength: false,
+    hostBlacklist: [],
+    hostWhitelist: [],
+  };
+  const opt = { ...defaults, ...options };
+
+  let testStr = toString(str).trim();
+
+  if (!opt.ignoreMaxLength && testStr.length > 254) {
+    return { valid: false, error: 'validateEmailMaxLength' };
+  }
+
+  const match = testStr.match(displayNameRegex);
+  if (match) {
+    if (!opt.allowDisplayName) {
+      return { valid: false, error: 'validateEmailDisplayNameNotAllowed' };
+    }
+    testStr = match[1];
+  } else if (opt.requireDisplayName) {
+    return { valid: false, error: 'validateEmailDisplayNameRequired' };
+  }
+
+  const parts = testStr.split('@');
+  if (parts.length !== 2) {
+    return { valid: false, error: 'validateEmailFormat' };
+  }
+  const [localPart, domainPart] = parts;
+
+  if (localPart === '') {
+    return { valid: false, error: 'validateEmailLocalPart' };
+  }
+  const localRegex = opt.allowUTF8LocalPart ? utf8LocalPartRegex : asciiLocalPartRegex;
+  if (!localRegex.test(localPart)) {
+    return { valid: false, error: 'validateEmailLocalPart' };
+  }
+
+  const isIPDomain = domainPart.startsWith('[') && domainPart.endsWith(']');
+
+  if (isIPDomain) {
+    if (!opt.allowIPDomain) {
+      return { valid: false, error: 'validateEmailDomainIPNotAllowed' };
     }
 
-    const defaults = {
-        allowDisplayName: true,
-        requireDisplayName: false,
-        allowUTF8LocalPart: true,
-        requireTLD: true,
-        allowIPDomain: false,
-        ignoreMaxLength: false,
-        hostBlacklist: [],
-        hostWhitelist: [],
-    };
-    const opt = { ...defaults, ...options };
+    const ip = domainPart.slice(1, -1);
 
-    let testStr = toString(str).trim();
+    const ipToValidate = ip.startsWith('IPv6:') ? ip.slice(5) : ip;
 
-    if (!opt.ignoreMaxLength && testStr.length > 254) {
-        return { valid: false, error: 'validateEmailMaxLength' };
+    const ipResult = validateIP(ipToValidate);
+    if (!ipResult.valid) {
+      return { valid: false, error: 'validateEmailDomainPart' };
+    }
+  } else {
+    if (!hostnameRegex.test(domainPart)) {
+      return { valid: false, error: 'validateEmailDomainPart' };
     }
 
-    const match = testStr.match(displayNameRegex);
-    if (match) {
-        if (!opt.allowDisplayName) {
-            return { valid: false, error: 'validateEmailDisplayNameNotAllowed' };
-        }
-        testStr = match[1];
-    } else if (opt.requireDisplayName) {
-        return { valid: false, error: 'validateEmailDisplayNameRequired' };
+    if (opt.requireTLD) {
+      const tldCheck = opt.allowUTF8LocalPart ? tldInternationalRegex : tldRegex;
+      if (!tldCheck.test(domainPart)) {
+        return { valid: false, error: 'validateEmailTLDRequired' };
+      }
     }
+  }
 
-    const parts = testStr.split('@');
-    if (parts.length !== 2) {
-        return { valid: false, error: 'validateEmailFormat' };
+  const lowerDomain = domainPart.toLowerCase();
+  if (opt.hostBlacklist.length > 0) {
+    for (const host of opt.hostBlacklist) {
+      if (lowerDomain.endsWith(host.toLowerCase())) {
+        return { valid: false, error: 'validateEmailHostBlacklisted', context: { host } };
+      }
     }
-    const [localPart, domainPart] = parts;
-
-    if (localPart === '') {
-        return { valid: false, error: 'validateEmailLocalPart' };
+  }
+  if (opt.hostWhitelist.length > 0) {
+    let inWhitelist = false;
+    for (const host of opt.hostWhitelist) {
+      if (lowerDomain.endsWith(host.toLowerCase())) {
+        inWhitelist = true;
+        break;
+      }
     }
-    const localRegex = opt.allowUTF8LocalPart ? utf8LocalPartRegex : asciiLocalPartRegex;
-    if (!localRegex.test(localPart)) {
-        return { valid: false, error: 'validateEmailLocalPart' };
+    if (!inWhitelist) {
+      return { valid: false, error: 'validateEmailHostWhitelist' };
     }
+  }
 
-    const isIPDomain = domainPart.startsWith('[') && domainPart.endsWith(']');
-
-    if (isIPDomain) {
-        if (!opt.allowIPDomain) {
-            return { valid: false, error: 'validateEmailDomainIPNotAllowed' };
-        }
-
-        const ip = domainPart.slice(1, -1);
-
-        const ipToValidate = ip.startsWith('IPv6:') ? ip.slice(5) : ip;
-
-        const ipResult = validateIP(ipToValidate);
-        if (!ipResult.valid) {
-            return { valid: false, error: 'validateEmailDomainPart' };
-        }
-    } else {
-        if (!hostnameRegex.test(domainPart)) {
-            return { valid: false, error: 'validateEmailDomainPart' };
-        }
-
-        if (opt.requireTLD) {
-            const tldCheck = opt.allowUTF8LocalPart ? tldInternationalRegex : tldRegex;
-            if (!tldCheck.test(domainPart)) {
-                return { valid: false, error: 'validateEmailTLDRequired' };
-            }
-        }
-    }
-
-    const lowerDomain = domainPart.toLowerCase();
-    if (opt.hostBlacklist.length > 0) {
-        for (const host of opt.hostBlacklist) {
-            if (lowerDomain.endsWith(host.toLowerCase())) {
-                return { valid: false, error: 'validateEmailHostBlacklisted', context: { host } };
-            }
-        }
-    }
-    if (opt.hostWhitelist.length > 0) {
-        let inWhitelist = false;
-        for (const host of opt.hostWhitelist) {
-            if (lowerDomain.endsWith(host.toLowerCase())) {
-                inWhitelist = true;
-                break;
-            }
-        }
-        if (!inWhitelist) {
-            return { valid: false, error: 'validateEmailHostWhitelist' };
-        }
-    }
-
-    return { valid: true };
+  return { valid: true };
 }

@@ -16,12 +16,12 @@ const sanitizeRegex = /[\s-]/g;
  * @returns {boolean}
  */
 function _checkISSNChecksum(digits) {
-    let sum = 0;
-    for (let i = 0; i < 8; i++) {
-        const digit = digits[i].toUpperCase() === 'X' ? 10 : parseInt(digits[i], 10);
-        sum += digit * (8 - i);
-    }
-    return sum % 11 === 0;
+  let sum = 0;
+  for (let i = 0; i < 8; i++) {
+    const digit = digits[i].toUpperCase() === 'X' ? 10 : parseInt(digits[i], 10);
+    sum += digit * (8 - i);
+  }
+  return sum % 11 === 0;
 }
 
 /**
@@ -30,30 +30,30 @@ function _checkISSNChecksum(digits) {
  * @returns {ValidationResult} Validation result object
  */
 export function validateISSN(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).replace(sanitizeRegex, '').toUpperCase();
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isISSN');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isISSN' } };
     }
 
-    const testStr = toString(str).replace(sanitizeRegex, '').toUpperCase();
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isISSN');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isISSN' } };
-        }
-
-        if (!regex.test(testStr)) {
-            return { valid: false, error: 'validateISSNFormat' };
-        }
-
-        if (!_checkISSNChecksum(testStr)) {
-            return { valid: false, error: 'validateISSNChecksum' };
-        }
-
-        return { valid: true };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e.message } };
+    if (!regex.test(testStr)) {
+      return { valid: false, error: 'validateISSNFormat' };
     }
+
+    if (!_checkISSNChecksum(testStr)) {
+      return { valid: false, error: 'validateISSNChecksum' };
+    }
+
+    return { valid: true };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e.message } };
+  }
 }

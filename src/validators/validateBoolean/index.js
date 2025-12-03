@@ -17,38 +17,38 @@ import { getLocaleData } from '../../i18n/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateBoolean(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const testStr = toString(str).trim().toLowerCase();
+  const testStr = toString(str).trim().toLowerCase();
 
-    const lang = options.locale;
-    if (!lang) {
-        return { valid: false, error: 'localeRequired' };
-    }
+  const lang = options.locale;
+  if (!lang) {
+    return { valid: false, error: 'localeRequired' };
+  }
 
-    const localeData = getLocaleData(lang);
-    const booleanRules = localeData?.validate?.boolean;
+  const localeData = getLocaleData(lang);
+  const booleanRules = localeData?.validate?.boolean;
 
-    if (!booleanRules) {
-        return { valid: false, error: 'invalidRule', context: { rule: `boolean-${lang}` } };
-    }
+  if (!booleanRules) {
+    return { valid: false, error: 'invalidRule', context: { rule: `boolean-${lang}` } };
+  }
 
-    const { strict = false } = options;
+  const { strict = false } = options;
 
-    let allowedValues = [...(booleanRules.strictTrue || []), ...(booleanRules.strictFalse || [])];
+  let allowedValues = [...(booleanRules.strictTrue || []), ...(booleanRules.strictFalse || [])];
 
-    if (strict === false) {
-        allowedValues = allowedValues.concat([
-            ...(booleanRules.looseTrue || []),
-            ...(booleanRules.looseFalse || []),
-        ]);
-    }
+  if (strict === false) {
+    allowedValues = allowedValues.concat([
+      ...(booleanRules.looseTrue || []),
+      ...(booleanRules.looseFalse || []),
+    ]);
+  }
 
-    if (allowedValues.includes(testStr)) {
-        return { valid: true };
-    } else {
-        return { valid: false, error: 'validateBoolean' };
-    }
+  if (allowedValues.includes(testStr)) {
+    return { valid: true };
+  } else {
+    return { valid: false, error: 'validateBoolean' };
+  }
 }

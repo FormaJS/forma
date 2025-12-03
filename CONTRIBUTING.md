@@ -63,12 +63,12 @@ npm run docs
 ## Project structure (high level)
 
 - `src/` — library source code
-    - `core/` — engine (`Forma` class)
-    - `validators/` — validation rules
-    - `sanitizers/` — string sanitizers
-    - `parsers/` — value parsers, e.g. `toInt`, `toFloat`, `toDate`
-    - `i18n/` — locale data and messages
-    - `index.js` — public exports (plus deep exports configured in `package.json`)
+  - `core/` — engine (`Forma` class)
+  - `validators/` — validation rules
+  - `sanitizers/` — string sanitizers
+  - `parsers/` — value parsers, e.g. `toInt`, `toFloat`, `toDate`
+  - `i18n/` — locale data and messages
+  - `index.js` — public exports (plus deep exports configured in `package.json`)
 - `docs/` — local documentation, reads generated tables
 - `scripts/` — helpers (e.g., docs generator)
 - `dist/` — build outputs (ESM/CJS/UMD)
@@ -88,16 +88,16 @@ npm run docs
 
 - Standalone validator functions return:
 
-    ```js
-    { valid: boolean, error?: string, context?: object }
-    ```
+  ```js
+  { valid: boolean, error?: string, context?: object }
+  ```
 
 - Calls via the `Forma` instance return a localized message when invalid:
 
-    ```js
-    { valid: true, message: null } // success
-    { valid: false, message: string, error?: string, context?: object } // failure
-    ```
+  ```js
+  { valid: true, message: null } // success
+  { valid: false, message: string, error?: string, context?: object } // failure
+  ```
 
 - Options are passed as the last argument and merged with the instance locale when used via `Forma`.
 - Async validators are supported; instance methods will propagate Promises.

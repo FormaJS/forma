@@ -13,26 +13,26 @@ import { getValidationRegex, isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateSemVer(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).trim();
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isSemVer');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isSemVer' } };
     }
 
-    const testStr = toString(str).trim();
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isSemVer');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isSemVer' } };
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            return { valid: false, error: 'validateSemVer' };
-        }
-    } catch {
-        return { valid: false, error: 'genericError' };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      return { valid: false, error: 'validateSemVer' };
     }
+  } catch {
+    return { valid: false, error: 'genericError' };
+  }
 }

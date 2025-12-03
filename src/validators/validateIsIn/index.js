@@ -17,45 +17,45 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateIsIn(str, comparisonArray, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    if (!Array.isArray(comparisonArray)) {
-        return { valid: false, error: 'invalidRule', context: { rule: 'isIn(array)' } };
-    }
+  if (!Array.isArray(comparisonArray)) {
+    return { valid: false, error: 'invalidRule', context: { rule: 'isIn(array)' } };
+  }
 
-    const { strict = true, ignoreWhitespace = false } = options;
+  const { strict = true, ignoreWhitespace = false } = options;
 
-    let testStr = toString(str);
+  let testStr = toString(str);
+  if (ignoreWhitespace) {
+    testStr = testStr.trim();
+  }
+  if (strict === false) {
+    testStr = testStr.toLowerCase();
+  }
+
+  const allowedValues = comparisonArray.map((item) => {
+    let normalizedItem = toString(item);
     if (ignoreWhitespace) {
-        testStr = testStr.trim();
+      normalizedItem = normalizedItem.trim();
     }
     if (strict === false) {
-        testStr = testStr.toLowerCase();
+      normalizedItem = normalizedItem.toLowerCase();
     }
+    return normalizedItem;
+  });
 
-    const allowedValues = comparisonArray.map((item) => {
-        let normalizedItem = toString(item);
-        if (ignoreWhitespace) {
-            normalizedItem = normalizedItem.trim();
-        }
-        if (strict === false) {
-            normalizedItem = normalizedItem.toLowerCase();
-        }
-        return normalizedItem;
-    });
+  if (allowedValues.includes(testStr)) {
+    return { valid: true };
+  } else {
+    const contextSeed =
+      comparisonArray.slice(0, 10).join(', ') + (comparisonArray.length > 10 ? '...' : '');
 
-    if (allowedValues.includes(testStr)) {
-        return { valid: true };
-    } else {
-        const contextSeed =
-            comparisonArray.slice(0, 10).join(', ') + (comparisonArray.length > 10 ? '...' : '');
-
-        return {
-            valid: false,
-            error: 'validateIsIn',
-            context: { allowed: contextSeed },
-        };
-    }
+    return {
+      valid: false,
+      error: 'validateIsIn',
+      context: { allowed: contextSeed },
+    };
+  }
 }

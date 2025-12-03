@@ -17,33 +17,33 @@ import { isString, toString, escapeRegExp } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateSlug(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
-    const testStr = toString(str);
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  const testStr = toString(str);
 
-    if (testStr.trim() === '') {
-        return { valid: false, error: 'isEmpty' };
-    }
+  if (testStr.trim() === '') {
+    return { valid: false, error: 'isEmpty' };
+  }
 
-    const { separator = '-', requireLowercase = true } = options;
+  const { separator = '-', requireLowercase = true } = options;
 
-    const escapedSep = escapeRegExp(separator);
+  const escapedSep = escapeRegExp(separator);
 
-    let charSet = '0-9';
-    let flags = 'g';
+  let charSet = '0-9';
+  let flags = 'g';
 
-    if (requireLowercase) {
-        charSet += 'a-z';
-    } else {
-        charSet += 'a-zA-Z';
-    }
+  if (requireLowercase) {
+    charSet += 'a-z';
+  } else {
+    charSet += 'a-zA-Z';
+  }
 
-    const slugRegex = new RegExp(`^[${charSet}]+(${escapedSep}[${charSet}]+)*$`, flags);
+  const slugRegex = new RegExp(`^[${charSet}]+(${escapedSep}[${charSet}]+)*$`, flags);
 
-    if (slugRegex.test(testStr)) {
-        return { valid: true };
-    } else {
-        return { valid: false, error: 'validateSlug' };
-    }
+  if (slugRegex.test(testStr)) {
+    return { valid: true };
+  } else {
+    return { valid: false, error: 'validateSlug' };
+  }
 }

@@ -13,23 +13,23 @@ import { isString, toString, executeI18nValidationRule } from '../../utils/index
  * @returns {ValidationResult} Validation result object
  */
 export async function validateHexadecimal(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str);
+  const lang = '';
+
+  try {
+    const res = await executeI18nValidationRule(lang, 'isHexadecimal', testStr);
+    if (res && res.error === 'invalidRule') {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isHexadecimal' } };
     }
 
-    const testStr = toString(str);
-    const lang = '';
-
-    try {
-        const res = await executeI18nValidationRule(lang, 'isHexadecimal', testStr);
-        if (res && res.error === 'invalidRule') {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isHexadecimal' } };
-        }
-
-        const matched = (res && res.valid) || res === true;
-        if (matched) return { valid: true };
-        return { valid: false, error: 'validateHexadecimal' };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e && e.message } };
-    }
+    const matched = (res && res.valid) || res === true;
+    if (matched) return { valid: true };
+    return { valid: false, error: 'validateHexadecimal' };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e && e.message } };
+  }
 }

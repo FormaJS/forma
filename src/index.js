@@ -10,7 +10,6 @@ export { locales } from './i18n/index.js';
  * forma.isFloat('1,23');
  */
 export const forma = new Forma('en-US');
-export const formaBR = new Forma('pt-BR');
 
 // Default export is the instance for convenience (Option B)
 export default forma;

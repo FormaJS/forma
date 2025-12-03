@@ -15,41 +15,41 @@ import { getValidationRegex, isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateUUID(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).trim();
+
+  const lang = '';
+
+  const version = options.version ? String(options.version).toUpperCase() : 'ALL';
+
+  const supportedVersions = ['3', '4', '5', 'ALL'];
+  if (!supportedVersions.includes(version)) {
+    return { valid: false, error: 'invalidRule', context: { rule: `UUID-v${version}` } };
+  }
+
+  try {
+    const regex = getValidationRegex(lang, 'isUUID', { subKey: version });
+
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: `isUUID:${version}` } };
     }
 
-    const testStr = toString(str).trim();
-
-    const lang = '';
-
-    const version = options.version ? String(options.version).toUpperCase() : 'ALL';
-
-    const supportedVersions = ['3', '4', '5', 'ALL'];
-    if (!supportedVersions.includes(version)) {
-        return { valid: false, error: 'invalidRule', context: { rule: `UUID-v${version}` } };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      if (version !== 'ALL') {
+        return {
+          valid: false,
+          error: 'validateUUIDVersion',
+          context: { version },
+        };
+      }
+      return { valid: false, error: 'validateUUID' };
     }
-
-    try {
-        const regex = getValidationRegex(lang, 'isUUID', { subKey: version });
-
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: `isUUID:${version}` } };
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            if (version !== 'ALL') {
-                return {
-                    valid: false,
-                    error: 'validateUUIDVersion',
-                    context: { version },
-                };
-            }
-            return { valid: false, error: 'validateUUID' };
-        }
-    } catch {
-        return { valid: false, error: 'genericError' };
-    }
+  } catch {
+    return { valid: false, error: 'genericError' };
+  }
 }

@@ -13,28 +13,28 @@ import { escapeRegExp } from '../../utils/escapeRegExp/index.js';
  * @returns {string} The transformed string.
  */
 export function blacklist(str, options = {}) {
-    let s = toString(str);
-    const { chars, words, replacementChar, strict = true } = options;
+  let s = toString(str);
+  const { chars, words, replacementChar, strict = true } = options;
 
-    let finalFlags = 'g';
-    if (strict === false) {
-        finalFlags += 'i';
-    }
+  let finalFlags = 'g';
+  if (strict === false) {
+    finalFlags += 'i';
+  }
 
-    const baseReplacement = isString(replacementChar) ? replacementChar : '';
-    const literalReplacement = baseReplacement.replace(/\$/g, '$$$$');
+  const baseReplacement = isString(replacementChar) ? replacementChar : '';
+  const literalReplacement = baseReplacement.replace(/\$/g, '$$$$');
 
-    if (Array.isArray(words) && words.length > 0) {
-        const escapedWords = words.map((word) => escapeRegExp(toString(word)));
-        const regex = new RegExp(escapedWords.join('|'), finalFlags);
-        s = s.replace(regex, literalReplacement);
-    }
+  if (Array.isArray(words) && words.length > 0) {
+    const escapedWords = words.map((word) => escapeRegExp(toString(word)));
+    const regex = new RegExp(escapedWords.join('|'), finalFlags);
+    s = s.replace(regex, literalReplacement);
+  }
 
-    if (isString(chars) && chars.length > 0) {
-        const escapedChars = escapeRegExp(chars);
-        const regex = new RegExp(`[${escapedChars}]`, finalFlags);
-        s = s.replace(regex, literalReplacement);
-    }
+  if (isString(chars) && chars.length > 0) {
+    const escapedChars = escapeRegExp(chars);
+    const regex = new RegExp(`[${escapedChars}]`, finalFlags);
+    s = s.replace(regex, literalReplacement);
+  }
 
-    return s;
+  return s;
 }

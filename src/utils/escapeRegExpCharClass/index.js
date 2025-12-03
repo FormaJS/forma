@@ -7,5 +7,5 @@ import { toString } from '../toString/index.js';
  * @returns {string} The string with RegExp characters escaped.
  */
 export function escapeRegExpCharClass(str) {
-    return toString(str).replace(/[\\\]-]/g, '\\$&');
+  return toString(str).replace(/[\\\]-]/g, '\\$&');
 }

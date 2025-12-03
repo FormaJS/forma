@@ -20,54 +20,54 @@ const ipv6Regex = new RegExp(`^${ipv6Address}$`);
  * @returns {ValidationResult} Validation result object
  */
 export function validateIPRange(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
-    const testStr = toString(str);
-    const version = toString(options.version);
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  const testStr = toString(str);
+  const version = toString(options.version);
 
-    const parts = testStr.split('/');
-    if (parts.length !== 2) {
-        return { valid: false, error: 'validateIPRange' };
-    }
-
-    const ip = parts[0];
-    const maskStr = parts[1];
-
-    const ipResult = validateIP(ip, options);
-    if (!ipResult.valid) {
-        if (version === '4') return { valid: false, error: 'validateIPRangeV4' };
-        if (version === '6') return { valid: false, error: 'validateIPRangeV6' };
-        return { valid: false, error: 'validateIPRange' };
-    }
-
-    if (!/^\d+$/.test(maskStr)) {
-        return { valid: false, error: 'validateIPRange' };
-    }
-    const mask = parseInt(maskStr, 10);
-
-    let ipVersion;
-    if (version === '4' || version === '6') {
-        ipVersion = version;
-    } else {
-        if (ipv4Regex.test(ip)) ipVersion = '4';
-        else if (ipv6Regex.test(ip)) ipVersion = '6';
-        else return { valid: false, error: 'validateIPRange' };
-    }
-
-    if (ipVersion === '4') {
-        if (mask >= 0 && mask <= 32) {
-            return { valid: true };
-        }
-        return { valid: false, error: 'validateIPRangeV4' };
-    }
-
-    if (ipVersion === '6') {
-        if (mask >= 0 && mask <= 128) {
-            return { valid: true };
-        }
-        return { valid: false, error: 'validateIPRangeV6' };
-    }
-
+  const parts = testStr.split('/');
+  if (parts.length !== 2) {
     return { valid: false, error: 'validateIPRange' };
+  }
+
+  const ip = parts[0];
+  const maskStr = parts[1];
+
+  const ipResult = validateIP(ip, options);
+  if (!ipResult.valid) {
+    if (version === '4') return { valid: false, error: 'validateIPRangeV4' };
+    if (version === '6') return { valid: false, error: 'validateIPRangeV6' };
+    return { valid: false, error: 'validateIPRange' };
+  }
+
+  if (!/^\d+$/.test(maskStr)) {
+    return { valid: false, error: 'validateIPRange' };
+  }
+  const mask = parseInt(maskStr, 10);
+
+  let ipVersion;
+  if (version === '4' || version === '6') {
+    ipVersion = version;
+  } else {
+    if (ipv4Regex.test(ip)) ipVersion = '4';
+    else if (ipv6Regex.test(ip)) ipVersion = '6';
+    else return { valid: false, error: 'validateIPRange' };
+  }
+
+  if (ipVersion === '4') {
+    if (mask >= 0 && mask <= 32) {
+      return { valid: true };
+    }
+    return { valid: false, error: 'validateIPRangeV4' };
+  }
+
+  if (ipVersion === '6') {
+    if (mask >= 0 && mask <= 128) {
+      return { valid: true };
+    }
+    return { valid: false, error: 'validateIPRangeV6' };
+  }
+
+  return { valid: false, error: 'validateIPRange' };
 }

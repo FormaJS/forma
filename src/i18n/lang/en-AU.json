@@ -1,0 +1,77 @@
+{
+  "accessible": {
+    "ones": ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"],
+    "teens": [
+      "ten",
+      "eleven",
+      "twelve",
+      "thirteen",
+      "fourteen",
+      "fifteen",
+      "sixteen",
+      "seventeen",
+      "eighteen",
+      "nineteen"
+    ],
+    "tens": ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
+    "scales": ["", "thousand", "million", "billion", "trillion", "quadrillion"]
+  },
+  "separators": {
+    "decimal": ".",
+    "thousand": ",",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "$",
+    "code": "AUD",
+    "symbol_before_digits": true,
+    "space_between_symbol_and_digits": false,
+    "decimal_digits": 2,
+    "negative_format": ["-{symbol}{amount}", "({symbol}{amount})", "{symbol}({amount})"]
+  },
+  "date": {
+    "format": "dd/mm/yyyy",
+    "separator": "/"
+  },
+  "masks": {
+    "postalcode": {
+      "default": "####"
+    },
+    "mobileNumber": {
+      "local": "04## ### ###",
+      "international": "+61 4## ### ###"
+    },
+    "taxId": {
+      "TFN": "### ### ###",
+      "ABN": "## ### ### ###"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[A-Z]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-Z0-9]+$",
+      "flags": "i"
+    },
+    "mobilenumber": {
+      "pattern": "^(?:\\+?61|0)4\\d{2}\\s?\\d{3}\\s?\\d{3}$"
+    },
+    "postalcode": {
+      "pattern": "^\\d{4}$"
+    },
+    "licenseplate": {
+      "pattern": "^[A-Z]{2,3}[\\s-]?\\d{2,3}[A-Z]{0,2}$",
+      "flags": "i"
+    },
+    "boolean": {
+      "strictTrue": ["true"],
+      "strictFalse": ["false"],
+      "looseTrue": ["1", "yes", "y"],
+      "looseFalse": ["0", "no", "n"]
+    },
+    "taxid": "function:validateTaxId"
+  },
+  "messages": {}
+}

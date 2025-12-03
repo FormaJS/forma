@@ -9,17 +9,17 @@ import { toString } from '../../utils/index.js';
  * @returns {string} The transformed string.
  */
 export function padStart(str, options = {}) {
-    const s = toString(str);
+  const s = toString(str);
 
-    const defaults = {
-        length: undefined,
-        char: ' ',
-    };
-    const opt = { ...defaults, ...options };
+  const defaults = {
+    length: undefined,
+    char: ' ',
+  };
+  const opt = { ...defaults, ...options };
 
-    if (typeof opt.length === 'undefined' || opt.length === null) {
-        return s;
-    }
+  if (typeof opt.length === 'undefined' || opt.length === null) {
+    return s;
+  }
 
-    return s.padStart(opt.length, opt.char);
+  return s.padStart(opt.length, opt.char);
 }

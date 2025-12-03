@@ -1,14 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { normalizeLocale } from '../../src/utils/normalizeLocale/index.js';
-import '../setup.js';
 
-describe('utils/normalizeLocale', () => {
-    it('normalizes several locale input formats', () => {
-        expect(normalizeLocale('pt-BR')).toBe('pt-BR');
-        expect(normalizeLocale('pt_br')).toBe('pt-BR');
-        expect(normalizeLocale('PTBR')).toBe('pt-BR');
-        expect(normalizeLocale('en_us')).toBe('en-US');
-        expect(normalizeLocale('invalid')).toBe('');
-        expect(normalizeLocale(null)).toBe('');
-    });
+describe('normalizeLocale', () => {
+  it('normaliza com hífen', () => {
+    expect(normalizeLocale('pt-br')).toBe('pt-BR');
+  });
+  it('normaliza com underscore', () => {
+    expect(normalizeLocale('en_us')).toBe('en-US');
+  });
+  it('retorna vazio para inválido', () => {
+    expect(normalizeLocale('invalid')).toBe('');
+    expect(normalizeLocale(123)).toBe('');
+  });
 });

@@ -17,32 +17,32 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateStartsWith(str, seed, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    if (seed === null || typeof seed === 'undefined') {
-        return { valid: false, error: 'invalidRule', context: { rule: 'startsWith(seed)' } };
-    }
+  if (seed === null || typeof seed === 'undefined') {
+    return { valid: false, error: 'invalidRule', context: { rule: 'startsWith(seed)' } };
+  }
 
-    const { strict = true, ignoreWhitespace = false } = options;
+  const { strict = true, ignoreWhitespace = false } = options;
 
-    let testStr = toString(str);
-    let seedStr = toString(seed);
+  let testStr = toString(str);
+  let seedStr = toString(seed);
 
-    if (ignoreWhitespace) {
-        testStr = testStr.trimStart();
-        seedStr = seedStr.trim();
-    }
+  if (ignoreWhitespace) {
+    testStr = testStr.trimStart();
+    seedStr = seedStr.trim();
+  }
 
-    if (strict === false) {
-        testStr = testStr.toLowerCase();
-        seedStr = seedStr.toLowerCase();
-    }
+  if (strict === false) {
+    testStr = testStr.toLowerCase();
+    seedStr = seedStr.toLowerCase();
+  }
 
-    if (testStr.startsWith(seedStr)) {
-        return { valid: true };
-    } else {
-        return { valid: false, error: 'validateStartsWith', context: { seed: toString(seed) } };
-    }
+  if (testStr.startsWith(seedStr)) {
+    return { valid: true };
+  } else {
+    return { valid: false, error: 'validateStartsWith', context: { seed: toString(seed) } };
+  }
 }

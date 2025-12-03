@@ -1,0 +1,100 @@
+{
+  "name": "Русский",
+  "separators": {
+    "decimal": ",",
+    "thousand": " ",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "₽",
+    "symbol_before_digits": false,
+    "space_between_symbol_and_digits": true,
+    "decimal_digits": 2,
+    "negative_format": ["-{amount} {symbol}", "({amount} {symbol})", "{amount} {symbol}-"]
+  },
+  "date": {
+    "format": "dd.mm.yyyy",
+    "separator": "."
+  },
+  "masks": {
+    "postalcode": {
+      "default": "######"
+    },
+    "mobileNumber": {
+      "local": "(###) ###-##-##",
+      "international": "+7 (###) ###-##-##"
+    },
+    "taxId": {
+      "INN": "## #### #### ##",
+      "OGRN": "# #### ##### ####"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[A-ZА-ЯЁ]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-Z0-9А-ЯЁ]+$",
+      "flags": "i"
+    },
+    "mobilenumber": {
+      "pattern": "^(?:\\+?7[\\s.-]?)?\\(?[489][0-9]{2}\\)?[\\s.-]?[0-9]{3}[\\s.-]?[0-9]{2}[\\s.-]?[0-9]{2}$"
+    },
+    "postalcode": {
+      "pattern": "^\\d{6}$"
+    },
+    "taxid": "function:validateTaxId",
+    "boolean": {
+      "strictTrue": ["true", "да", "истина"],
+      "strictFalse": ["false", "нет", "ложь"],
+      "looseTrue": ["1", "yes", "y"],
+      "looseFalse": ["0", "no", "n"]
+    }
+  },
+  "formatters": {
+    "alpha": {
+      "replace": "[^A-ZА-ЯЁ]",
+      "flags": "gi"
+    },
+    "alphanumeric": {
+      "replace": "[^A-Z0-9А-ЯЁ]",
+      "flags": "gi"
+    },
+    "postalcode": {
+      "regex": "\\D",
+      "flags": "g",
+      "maxLength": 6
+    },
+    "mobilenumber": {
+      "regex": "\\D",
+      "flags": "g"
+    },
+    "taxid": {
+      "regex": "\\D",
+      "flags": "g"
+    }
+  },
+  "parsers": {
+    "boolean": {
+      "strictTrue": ["true", "да", "истина"],
+      "strictFalse": ["false", "нет", "ложь"],
+      "looseTrue": ["1", "yes", "y"],
+      "looseFalse": ["0", "no", "n"]
+    },
+    "date": {
+      "format": "dd.mm.yyyy"
+    }
+  },
+  "sanitizers": {
+    "alpha": {
+      "replace": "[^A-ZА-ЯЁ]",
+      "flags": "gi"
+    },
+    "alphanumeric": {
+      "replace": "[^A-Z0-9А-ЯЁ]",
+      "flags": "gi"
+    }
+  },
+  "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }
+}

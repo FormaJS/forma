@@ -12,19 +12,19 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateNotEmpty(str) {
-    if (!isString(str)) {
-        const testStr = toString(str).trim();
+  if (!isString(str)) {
+    const testStr = toString(str).trim();
 
-        if (testStr.length === 0) {
-            return { valid: false, error: 'isEmpty' };
-        }
-    } else {
-        const testStr = str.trim();
-
-        if (testStr.length === 0) {
-            return { valid: false, error: 'isEmpty' };
-        }
+    if (testStr.length === 0) {
+      return { valid: false, error: 'isEmpty' };
     }
+  } else {
+    const testStr = str.trim();
 
-    return { valid: true };
+    if (testStr.length === 0) {
+      return { valid: false, error: 'isEmpty' };
+    }
+  }
+
+  return { valid: true };
 }

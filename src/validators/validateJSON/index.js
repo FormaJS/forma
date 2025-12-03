@@ -16,32 +16,32 @@ import { isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateJSON(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const testStr = toString(str);
+  const testStr = toString(str);
 
-    if (testStr.trim() === '') {
-        return { valid: false, error: 'isEmpty' };
-    }
+  if (testStr.trim() === '') {
+    return { valid: false, error: 'isEmpty' };
+  }
 
-    let parsed;
-    try {
-        parsed = JSON.parse(testStr);
-    } catch {
-        return { valid: false, error: 'validateJSON' };
-    }
+  let parsed;
+  try {
+    parsed = JSON.parse(testStr);
+  } catch {
+    return { valid: false, error: 'validateJSON' };
+  }
 
-    const { allowPrimitives = true } = options;
+  const { allowPrimitives = true } = options;
 
-    if (allowPrimitives) {
-        return { valid: true };
-    }
+  if (allowPrimitives) {
+    return { valid: true };
+  }
 
-    if (parsed !== null && typeof parsed === 'object') {
-        return { valid: true };
-    } else {
-        return { valid: false, error: 'validateJSONNotObject' };
-    }
+  if (parsed !== null && typeof parsed === 'object') {
+    return { valid: true };
+  } else {
+    return { valid: false, error: 'validateJSONNotObject' };
+  }
 }

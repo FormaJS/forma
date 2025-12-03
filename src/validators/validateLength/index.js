@@ -14,25 +14,25 @@ import { toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateLength(str, options = {}) {
-    const testStr = toString(str);
-    const len = testStr.length;
+  const testStr = toString(str);
+  const len = testStr.length;
 
-    const { min = 0, max } = options;
+  const { min = 0, max } = options;
 
-    if (typeof max !== 'undefined' && min === max) {
-        if (len !== min) {
-            return { valid: false, error: 'validateLengthExact', context: { min } };
-        }
-        return { valid: true };
+  if (typeof max !== 'undefined' && min === max) {
+    if (len !== min) {
+      return { valid: false, error: 'validateLengthExact', context: { min } };
     }
-
-    if (len < min) {
-        return { valid: false, error: 'validateLengthMin', context: { min } };
-    }
-
-    if (typeof max !== 'undefined' && len > max) {
-        return { valid: false, error: 'validateLengthMax', context: { max } };
-    }
-
     return { valid: true };
+  }
+
+  if (len < min) {
+    return { valid: false, error: 'validateLengthMin', context: { min } };
+  }
+
+  if (typeof max !== 'undefined' && len > max) {
+    return { valid: false, error: 'validateLengthMax', context: { max } };
+  }
+
+  return { valid: true };
 }

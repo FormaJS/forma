@@ -9,28 +9,28 @@ import { escapeRegExp } from '../escapeRegExp/index.js';
  * @returns {string} The normalized string (e.g., "1234.56")
  */
 export function getNormalizedNumberString(str, locale) {
-    let decimalSep = '.';
-    let thousandSep = ',';
+  let decimalSep = '.';
+  let thousandSep = ',';
 
-    if (locale) {
-        const localeData = getLocaleData(locale);
-        if (localeData && localeData.separators) {
-            decimalSep = localeData.separators.decimal;
-            thousandSep = localeData.separators.thousand;
-        }
+  if (locale) {
+    const localeData = getLocaleData(locale);
+    if (localeData && localeData.separators) {
+      decimalSep = localeData.separators.decimal;
+      thousandSep = localeData.separators.thousand;
     }
+  }
 
-    let numStr = toString(str);
+  let numStr = toString(str);
 
-    if (thousandSep && thousandSep !== decimalSep) {
-        const thousandRegex = new RegExp(escapeRegExp(thousandSep), 'g');
-        numStr = numStr.replace(thousandRegex, '');
-    }
+  if (thousandSep && thousandSep !== decimalSep) {
+    const thousandRegex = new RegExp(escapeRegExp(thousandSep), 'g');
+    numStr = numStr.replace(thousandRegex, '');
+  }
 
-    if (decimalSep !== '.') {
-        const decimalRegex = new RegExp(escapeRegExp(decimalSep), 'g');
-        numStr = numStr.replace(decimalRegex, '.');
-    }
+  if (decimalSep !== '.') {
+    const decimalRegex = new RegExp(escapeRegExp(decimalSep), 'g');
+    numStr = numStr.replace(decimalRegex, '.');
+  }
 
-    return numStr;
+  return numStr;
 }

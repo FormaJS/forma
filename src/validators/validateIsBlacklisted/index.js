@@ -17,37 +17,37 @@ import { isString, toString, escapeRegExp } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object.
  */
 export function validateIsBlacklisted(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str);
+  const { chars, words, strict = true } = options;
+
+  const flags = strict ? '' : 'i';
+
+  if (isString(chars) && chars.length > 0) {
+    const escapedChars = escapeRegExp(chars);
+    const regex = new RegExp(`[${escapedChars}]`, flags);
+
+    if (regex.test(testStr)) {
+      return { valid: false, error: 'validateIsBlacklistedChars' };
     }
+  }
 
-    const testStr = toString(str);
-    const { chars, words, strict = true } = options;
+  if (Array.isArray(words) && words.length > 0) {
+    const escapedWords = words.map((word) => escapeRegExp(toString(word)));
+    const regex = new RegExp(`(${escapedWords.join('|')})`, flags);
 
-    const flags = strict ? '' : 'i';
-
-    if (isString(chars) && chars.length > 0) {
-        const escapedChars = escapeRegExp(chars);
-        const regex = new RegExp(`[${escapedChars}]`, flags);
-
-        if (regex.test(testStr)) {
-            return { valid: false, error: 'validateIsBlacklistedChars' };
-        }
+    const match = testStr.match(regex);
+    if (match) {
+      return {
+        valid: false,
+        error: 'validateIsBlacklistedWords',
+        context: { word: match[0] },
+      };
     }
+  }
 
-    if (Array.isArray(words) && words.length > 0) {
-        const escapedWords = words.map((word) => escapeRegExp(toString(word)));
-        const regex = new RegExp(`(${escapedWords.join('|')})`, flags);
-
-        const match = testStr.match(regex);
-        if (match) {
-            return {
-                valid: false,
-                error: 'validateIsBlacklistedWords',
-                context: { word: match[0] },
-            };
-        }
-    }
-
-    return { valid: true };
+  return { valid: true };
 }

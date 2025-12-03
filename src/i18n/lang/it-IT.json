@@ -1,0 +1,190 @@
+{
+  "accessible": {
+    "ones": ["", "uno", "due", "tre", "quattro", "cinque", "sei", "sette", "otto", "nove"],
+    "teens": [
+      "dieci",
+      "undici",
+      "dodici",
+      "tredici",
+      "quattordici",
+      "quindici",
+      "sedici",
+      "diciassette",
+      "diciotto",
+      "diciannove"
+    ],
+    "tens": [
+      "",
+      "",
+      "venti",
+      "trenta",
+      "quaranta",
+      "cinquanta",
+      "sessanta",
+      "settanta",
+      "ottanta",
+      "novanta"
+    ],
+    "hundreds": [
+      "",
+      "cento",
+      "duecento",
+      "trecento",
+      "quattrocento",
+      "cinquecento",
+      "seicento",
+      "settecento",
+      "ottocento",
+      "novecento"
+    ],
+    "scales": ["", "mille", "milione", "miliardo", "bilione", "biliardo"]
+  },
+  "separators": {
+    "decimal": ",",
+    "thousand": ".",
+    "thousandDigits": 3
+  },
+  "currency": {
+    "symbol": "€",
+    "symbol_before_digits": true,
+    "space_between_symbol_and_digits": true,
+    "decimal_digits": 2,
+    "negative_format": ["-{symbol} {amount}", "({symbol} {amount})", "{symbol} {amount} -"]
+  },
+  "date": {
+    "format": "dd/mm/yyyy",
+    "separator": "/"
+  },
+  "masks": {
+    "postalcode": {
+      "default": "#####"
+    },
+    "mobileNumber": {
+      "local": "### ### ####",
+      "international": "+39 ### ### ####"
+    },
+    "taxId": {
+      "CodiceFiscale": "AAAAAAA##A##A###A"
+    }
+  },
+  "validate": {
+    "alpha": {
+      "pattern": "^[A-ZÀÈÉÌÍÎÒÓÙÚ]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-ZÀÈÉÌÍÎÒÓÙÚ0-9]+$",
+      "flags": "i"
+    },
+    "mobilenumber": {
+      "pattern": "^(?:\\+39\\s?)?3\\d{8,9}$",
+      "flags": ""
+    },
+    "licenseplate": {
+      "pattern": "^[A-Z]{2}\\d{3}[A-Z]{2}$",
+      "flags": "i"
+    },
+    "postalcode": {
+      "pattern": "^\\d{5}$",
+      "flags": ""
+    },
+    "taxid": "function:validateTaxId",
+    "boolean": {
+      "strictTrue": ["vero", "true"],
+      "strictFalse": ["falso", "false"],
+      "looseTrue": ["1", "sì", "si", "s"],
+      "looseFalse": ["0", "no", "n"]
+    }
+  },
+  "messages": {
+    "genericError": "Si è verificato un errore imprevisto durante la convalida.",
+    "invalidRule": "Impossibile trovare la regola di convalida '{rule}' o non è valida.",
+    "invalidType": "Il valore fornito non è una stringa di testo.",
+    "isEmpty": "Il campo non può essere vuoto.",
+    "localeRequired": "È richiesta un'opzione di configurazione regionale per questa convalida.",
+    "validateAlpha": "Il campo deve contenere solo caratteri alfabetici.",
+    "validateByteLengthMax": "Il campo deve avere al massimo {max} byte.",
+    "validateByteLengthMin": "Il campo deve avere almeno {min} byte.",
+    "validateLengthExact": "Il campo deve avere esattamente {min} caratteri.",
+    "validateLengthMax": "Il campo deve avere al massimo {max} caratteri.",
+    "validateLengthMin": "Il campo deve avere almeno {min} caratteri.",
+    "validateAlphanumeric": "Il campo deve contenere solo caratteri alfanumerici.",
+    "validateMatches": "Il campo non corrisponde al modello richiesto.",
+    "validateMatchesInvalid": "Il modello RegEx fornito non è valido.",
+    "validateAscii": "Il campo deve contenere solo caratteri ASCII.",
+    "validateBase64": "Il campo deve essere una stringa Base64 valida.",
+    "validateNumericFormat": "Il campo deve essere un numero valido.",
+    "validateNumericInvalid": "Il campo contiene un valore numerico non valido.",
+    "validateNumericRangeMin": "Il valore deve essere {minRange} o maggiore.",
+    "validateNumericRangeMax": "Il valore deve essere {maxRange} o minore.",
+    "validateNumericRangeMinStrict": "Il valore deve essere maggiore di {minRange}.",
+    "validateNumericRangeMaxStrict": "Il valore deve essere minore di {maxRange}.",
+    "validateNumericNotInt": "Il campo deve essere un numero intero (senza decimali).",
+    "validateNumericNotDecimal": "Il campo deve includere una parte decimale.",
+    "validateHexadecimal": "Il campo deve essere una stringa esadecimale valida.",
+    "validateHexColor": "Il campo deve essere un colore esadecimale valido (es., #F00, #FF0000, #FF0000FF).",
+    "validatePortRange": "Il campo deve essere un numero di porta valido (0-65535).",
+    "validateNumericPositive": "Il campo deve essere un numero positivo (maggiore di 0).",
+    "validateNumericNegative": "Il campo deve essere un numero negativo (minore di 0).",
+    "validateLowercase": "Il campo deve contenere solo caratteri alfabetici minuscoli.",
+    "validateUppercase": "Il campo deve contenere solo caratteri alfabetici maiuscoli.",
+    "validateMongoId": "Il campo deve essere un MongoId valido di 24 caratteri.",
+    "validateMultibyte": "Il campo deve contenere uno o più caratteri multibyte.",
+    "validateSurrogatePair": "Il campo deve contenere uno o più caratteri di coppia surrogata (es., emoji).",
+    "validateBoolean": "Il campo deve essere un valore booleano valido (es., vero, falso, 1, 0).",
+    "validateContains": "Il campo deve contenere il testo: {seed}.",
+    "validateContainsMin": "Il campo deve contenere '{seed}' almeno {minOccurrences} volta/e.",
+    "validateContainsMax": "Il campo deve contenere '{seed}' al massimo {maxOccurrences} volta/e.",
+    "validateCreditCard": "Il campo deve essere un numero di carta di credito valido.",
+    "validateCurrency": "Il campo deve essere un valore di valuta valido.",
+    "validateDate": "Il campo deve essere una data valida.",
+    "validateDecimal": "Il campo deve essere un numero decimale valido.",
+    "validateEmail": "Il campo deve essere un indirizzo email valido.",
+    "validateFQDN": "Il campo deve essere un nome di dominio completo valido.",
+    "validateFloat": "Il campo deve essere un numero in virgola mobile valido.",
+    "validateFullWidth": "Il campo deve contenere caratteri a larghezza intera.",
+    "validateHalfWidth": "Il campo deve contenere caratteri a mezza larghezza.",
+    "validateVariableWidth": "Il campo deve contenere un mix di caratteri a larghezza intera e mezza.",
+    "validateHSL": "Il campo deve essere un colore HSL valido.",
+    "validateIBAN": "Il campo deve essere un IBAN valido.",
+    "validateBIC": "Il campo deve essere un codice BIC valido.",
+    "validateIMEI": "Il campo deve essere un numero IMEI valido.",
+    "validateIP": "Il campo deve essere un indirizzo IP valido.",
+    "validateIPRange": "Il campo deve essere un intervallo IP valido.",
+    "validateISBN": "Il campo deve essere un ISBN valido.",
+    "validateISIN": "Il campo deve essere un codice ISIN valido.",
+    "validateISO8601": "Il campo deve essere una data ISO 8601 valida.",
+    "validateISO31661Alpha2": "Il campo deve essere un codice paese ISO 3166-1 alpha-2 valido.",
+    "validateISO31661Alpha3": "Il campo deve essere un codice paese ISO 3166-1 alpha-3 valido.",
+    "validateISRC": "Il campo deve essere un codice ISRC valido.",
+    "validateISSN": "Il campo deve essere un ISSN valido.",
+    "validateJSON": "Il campo deve essere una stringa JSON valida.",
+    "validateJWT": "Il campo deve essere un token JWT valido.",
+    "validateLatLong": "Il campo deve essere una coordinata latitudine/longitudine valida.",
+    "validateLicensePlate": "Il campo deve essere una targa valida.",
+    "validateLocale": "Il campo deve essere un codice di configurazione regionale valido.",
+    "validateMACAddress": "Il campo deve essere un indirizzo MAC valido.",
+    "validateMagnetURI": "Il campo deve essere un URI Magnet valido.",
+    "validateMD5": "Il campo deve essere un hash MD5 valido.",
+    "validateMimeType": "Il campo deve essere un tipo MIME valido.",
+    "validateMobileNumber": "Il campo deve essere un numero di cellulare valido.",
+    "validateNotEmpty": "Il campo non può essere vuoto.",
+    "validatePostalCode": "Il campo deve essere un codice postale valido.",
+    "validateRgbColor": "Il campo deve essere un colore RGB valido.",
+    "validateSemVer": "Il campo deve essere una versione semantica valida.",
+    "validateSlug": "Il campo deve essere uno slug valido.",
+    "validateStrongPassword": "La password non è abbastanza forte.",
+    "validateTaxId": "Il campo deve essere un Codice Fiscale valido.",
+    "validateURL": "Il campo deve essere un URL valido.",
+    "validateUUID": "Il campo deve essere un UUID valido.",
+    "validateDataURI": "Il campo deve essere un URI dati valido.",
+    "validateDivisibleBy": "Il campo deve essere divisibile per {divisor}.",
+    "validateEndsWith": "Il campo deve terminare con '{substring}'.",
+    "validateStartsWith": "Il campo deve iniziare con '{substring}'.",
+    "validateEqualsTo": "Il campo deve essere uguale a '{comparison}'.",
+    "validateIsIn": "Il campo deve essere uno dei seguenti valori: {values}.",
+    "validateIsBlacklisted": "Il campo contiene un valore non consentito.",
+    "validateIsWhitelisted": "Il campo non contiene solo valori consentiti.",
+    "validateInt": "Il campo deve essere un numero intero valido."
+  }
+}

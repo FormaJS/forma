@@ -20,58 +20,58 @@ import { isString, toString, escapeRegExp } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateContains(str, seed, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    if (seed === null || typeof seed === 'undefined') {
-        return { valid: false, error: 'invalidRule', context: { rule: 'contains(seed)' } };
-    }
+  if (seed === null || typeof seed === 'undefined') {
+    return { valid: false, error: 'invalidRule', context: { rule: 'contains(seed)' } };
+  }
 
-    const { strict = true, ignoreWhitespace = false, minOccurrences = 1, maxOccurrences } = options;
+  const { strict = true, ignoreWhitespace = false, minOccurrences = 1, maxOccurrences } = options;
 
-    let testStr = toString(str);
-    let seedStr = toString(seed);
-    const originalSeed = seedStr;
+  let testStr = toString(str);
+  let seedStr = toString(seed);
+  const originalSeed = seedStr;
 
-    if (ignoreWhitespace) {
-        testStr = testStr.replace(/\s/g, '');
-        seedStr = seedStr.replace(/\s/g, '');
-    }
+  if (ignoreWhitespace) {
+    testStr = testStr.replace(/\s/g, '');
+    seedStr = seedStr.replace(/\s/g, '');
+  }
 
-    if (strict === false) {
-        testStr = testStr.toLowerCase();
-        seedStr = seedStr.toLowerCase();
-    }
+  if (strict === false) {
+    testStr = testStr.toLowerCase();
+    seedStr = seedStr.toLowerCase();
+  }
 
-    if (seedStr === '') {
-        return minOccurrences === 0
-            ? { valid: true }
-            : { valid: false, error: 'invalidRule', context: { rule: 'contains(empty_seed)' } };
-    }
+  if (seedStr === '') {
+    return minOccurrences === 0
+      ? { valid: true }
+      : { valid: false, error: 'invalidRule', context: { rule: 'contains(empty_seed)' } };
+  }
 
-    const escapedSeed = escapeRegExp(seedStr);
-    const flags = strict ? 'g' : 'gi';
-    const regex = new RegExp(escapedSeed, flags);
+  const escapedSeed = escapeRegExp(seedStr);
+  const flags = strict ? 'g' : 'gi';
+  const regex = new RegExp(escapedSeed, flags);
 
-    const matches = testStr.match(regex);
-    const count = matches ? matches.length : 0;
+  const matches = testStr.match(regex);
+  const count = matches ? matches.length : 0;
 
-    if (count < minOccurrences) {
-        return {
-            valid: false,
-            error: 'validateContainsMin',
-            context: { seed: originalSeed, minOccurrences },
-        };
-    }
+  if (count < minOccurrences) {
+    return {
+      valid: false,
+      error: 'validateContainsMin',
+      context: { seed: originalSeed, minOccurrences },
+    };
+  }
 
-    if (typeof maxOccurrences !== 'undefined' && count > maxOccurrences) {
-        return {
-            valid: false,
-            error: 'validateContainsMax',
-            context: { seed: originalSeed, maxOccurrences },
-        };
-    }
+  if (typeof maxOccurrences !== 'undefined' && count > maxOccurrences) {
+    return {
+      valid: false,
+      error: 'validateContainsMax',
+      context: { seed: originalSeed, maxOccurrences },
+    };
+  }
 
-    return { valid: true };
+  return { valid: true };
 }

@@ -16,14 +16,14 @@ import { jwtRegex } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateJWT(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
-    const testStr = toString(str).trim();
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  const testStr = toString(str).trim();
 
-    if (jwtRegex.test(testStr)) {
-        return { valid: true };
-    } else {
-        return { valid: false, error: 'validateJWT' };
-    }
+  if (jwtRegex.test(testStr)) {
+    return { valid: true };
+  } else {
+    return { valid: false, error: 'validateJWT' };
+  }
 }

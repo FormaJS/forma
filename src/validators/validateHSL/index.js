@@ -13,26 +13,26 @@ import { getValidationRegex, isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateHSL(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).trim();
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isHSL');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isHSL' } };
     }
 
-    const testStr = toString(str).trim();
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isHSL');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isHSL' } };
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            return { valid: false, error: 'validateHSL' };
-        }
-    } catch {
-        return { valid: false, error: 'genericError' };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      return { valid: false, error: 'validateHSL' };
     }
+  } catch {
+    return { valid: false, error: 'genericError' };
+  }
 }

@@ -1,3 +1,4 @@
+export * from './algorithms/iso7064.js';
 export * from './algorithms/luhnCheck.js';
 export * from './algorithms/mod11.js';
 export * from './applyFormatMask/index.js';
@@ -12,6 +13,7 @@ export * from './htmlEntities.js';
 export * from './isString/index.js';
 export * from './isValidISODateString/index.js';
 export * from './normalizeLocale/index.js';
+export * from './normalizeString/index.js';
 export * from './regexConstants.js';
 export * from './toString/index.js';
 export * from './typeOf/index.js';

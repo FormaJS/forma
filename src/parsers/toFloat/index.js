@@ -8,13 +8,13 @@ import { isString, getNormalizedNumberString } from '../../utils/index.js';
  * the conversion fails (e.g. "abc") or the input is not a string.
  */
 export function toFloat(str, options = {}) {
-    if (!isString(str)) {
-        return null;
-    }
+  if (!isString(str)) {
+    return null;
+  }
 
-    const normalizedStr = getNormalizedNumberString(str, options.locale);
+  const normalizedStr = getNormalizedNumberString(str, options.locale);
 
-    const num = parseFloat(normalizedStr);
+  const num = parseFloat(normalizedStr);
 
-    return isNaN(num) ? null : num;
+  return isNaN(num) ? null : num;
 }

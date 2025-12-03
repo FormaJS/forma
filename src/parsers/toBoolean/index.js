@@ -9,25 +9,25 @@ import { getLocaleData } from '../../i18n/index.js';
  * otherwise returns false.
  */
 export function toBoolean(str, options = {}) {
-    const testStr = toString(str).trim().toLowerCase();
+  const testStr = toString(str).trim().toLowerCase();
 
-    const lang = options.locale;
-    if (!lang) {
-        return false;
-    }
-
-    const localeData = getLocaleData(lang);
-    const booleanRules = localeData?.validate?.boolean;
-
-    if (!booleanRules) {
-        return false;
-    }
-
-    const truthyValues = [...(booleanRules.strictTrue || []), ...(booleanRules.looseTrue || [])];
-
-    if (truthyValues.includes(testStr)) {
-        return true;
-    }
-
+  const lang = options.locale;
+  if (!lang) {
     return false;
+  }
+
+  const localeData = getLocaleData(lang);
+  const booleanRules = localeData?.validate?.boolean;
+
+  if (!booleanRules) {
+    return false;
+  }
+
+  const truthyValues = [...(booleanRules.strictTrue || []), ...(booleanRules.looseTrue || [])];
+
+  if (truthyValues.includes(testStr)) {
+    return true;
+  }
+
+  return false;
 }

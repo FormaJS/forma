@@ -20,30 +20,30 @@ const ipv6Regex = new RegExp(`^${ipv6Address}$`);
  * @returns {ValidationResult} Validation result object
  */
 export function validateIP(str, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+  const testStr = toString(str);
+
+  const version = toString(options.version);
+
+  if (version === '4') {
+    if (ipv4Regex.test(testStr)) {
+      return { valid: true };
     }
-    const testStr = toString(str);
+    return { valid: false, error: 'validateIPV4' };
+  }
 
-    const version = toString(options.version);
-
-    if (version === '4') {
-        if (ipv4Regex.test(testStr)) {
-            return { valid: true };
-        }
-        return { valid: false, error: 'validateIPV4' };
+  if (version === '6') {
+    if (ipv6Regex.test(testStr)) {
+      return { valid: true };
     }
+    return { valid: false, error: 'validateIPV6' };
+  }
 
-    if (version === '6') {
-        if (ipv6Regex.test(testStr)) {
-            return { valid: true };
-        }
-        return { valid: false, error: 'validateIPV6' };
-    }
+  if (ipv4Regex.test(testStr) || ipv6Regex.test(testStr)) {
+    return { valid: true };
+  }
 
-    if (ipv4Regex.test(testStr) || ipv6Regex.test(testStr)) {
-        return { valid: true };
-    }
-
-    return { valid: false, error: 'validateIP' };
+  return { valid: false, error: 'validateIP' };
 }

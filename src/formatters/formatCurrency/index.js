@@ -10,15 +10,15 @@ import { getLocaleData } from '../../i18n/index.js';
  * @returns {string} (e.g., "1.234,56").
  */
 function _formatAmount(num, decimalDigits, decimalSep, thousandSep) {
-    const fixedNum = num.toFixed(decimalDigits);
+  const fixedNum = num.toFixed(decimalDigits);
 
-    const parts = fixedNum.split('.');
-    const integerPart = parts[0];
-    const decimalPart = parts[1] || '';
+  const parts = fixedNum.split('.');
+  const integerPart = parts[0];
+  const decimalPart = parts[1] || '';
 
-    const integerFormatted = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandSep);
+  const integerFormatted = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandSep);
 
-    return integerFormatted + (decimalPart ? decimalSep + decimalPart : '');
+  return integerFormatted + (decimalPart ? decimalSep + decimalPart : '');
 }
 
 /**
@@ -29,54 +29,54 @@ function _formatAmount(num, decimalDigits, decimalSep, thousandSep) {
  * or 'null' if the input is invalid.
  */
 export function formatCurrency(value, options = {}) {
-    if (typeof value !== 'string' && typeof value !== 'number') {
-        return null;
-    }
-    const num = parseFloat(toString(value));
-    if (isNaN(num)) {
-        return null;
-    }
+  if (typeof value !== 'string' && typeof value !== 'number') {
+    return null;
+  }
+  const num = parseFloat(toString(value));
+  if (isNaN(num)) {
+    return null;
+  }
 
-    const lang = options.locale;
-    if (!lang) {
-        return null;
-    }
+  const lang = options.locale;
+  if (!lang) {
+    return null;
+  }
 
-    const localeData = getLocaleData(lang);
-    const currencyRules = localeData?.currency;
-    const separatorRules = localeData?.separators;
+  const localeData = getLocaleData(lang);
+  const currencyRules = localeData?.currency;
+  const separatorRules = localeData?.separators;
 
-    if (!currencyRules || !separatorRules) {
-        return null;
-    }
+  if (!currencyRules || !separatorRules) {
+    return null;
+  }
 
-    const isNegative = num < 0;
-    const absNum = Math.abs(num);
-    const amountStr = _formatAmount(
-        absNum,
-        currencyRules.decimal_digits,
-        separatorRules.decimal,
-        separatorRules.thousand
-    );
+  const isNegative = num < 0;
+  const absNum = Math.abs(num);
+  const amountStr = _formatAmount(
+    absNum,
+    currencyRules.decimal_digits,
+    separatorRules.decimal,
+    separatorRules.thousand
+  );
 
-    const symbol = currencyRules.symbol;
-    const space = currencyRules.space_between_symbol_and_digits ? ' ' : '';
+  const symbol = currencyRules.symbol;
+  const space = currencyRules.space_between_symbol_and_digits ? ' ' : '';
 
-    let formattedValue;
+  let formattedValue;
 
-    if (isNegative) {
-        const format = currencyRules.negative_format[0] || '-{symbol}{amount}';
-        formattedValue = format
-            .replace(/{symbol}/g, symbol)
-            .replace(/{space}/g, space)
-            .replace(/{amount}/g, amountStr);
+  if (isNegative) {
+    const format = currencyRules.negative_format[0] || '-{symbol}{amount}';
+    formattedValue = format
+      .replace(/{symbol}/g, symbol)
+      .replace(/{space}/g, space)
+      .replace(/{amount}/g, amountStr);
+  } else {
+    if (currencyRules.symbol_before_digits) {
+      formattedValue = symbol + space + amountStr;
     } else {
-        if (currencyRules.symbol_before_digits) {
-            formattedValue = symbol + space + amountStr;
-        } else {
-            formattedValue = amountStr + space + symbol;
-        }
+      formattedValue = amountStr + space + symbol;
     }
+  }
 
-    return formattedValue;
+  return formattedValue;
 }

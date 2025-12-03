@@ -17,38 +17,38 @@ import { validateNumeric } from '../validateNumeric/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateDivisibleBy(str, divisor, options = {}) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
-    }
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
 
-    const divisorNum = Number(divisor);
-    if (typeof divisor !== 'number' || !isFinite(divisorNum) || divisorNum === 0) {
-        return { valid: false, error: 'validateDivisibleByDivisor' };
-    }
+  const divisorNum = Number(divisor);
+  if (typeof divisor !== 'number' || !isFinite(divisorNum) || divisorNum === 0) {
+    return { valid: false, error: 'validateDivisibleByDivisor' };
+  }
 
-    const numericResult = validateNumeric(str, {
-        ...options,
-        allowDecimal: true,
-    });
+  const numericResult = validateNumeric(str, {
+    ...options,
+    allowDecimal: true,
+  });
 
-    if (!numericResult.valid) {
-        return numericResult;
-    }
+  if (!numericResult.valid) {
+    return numericResult;
+  }
 
-    const normalizedStr = getNormalizedNumberString(str, options.locale);
-    const valueNum = parseFloat(normalizedStr);
+  const normalizedStr = getNormalizedNumberString(str, options.locale);
+  const valueNum = parseFloat(normalizedStr);
 
-    if (isNaN(valueNum)) {
-        return { valid: false, error: 'validateNumericInvalid' };
-    }
+  if (isNaN(valueNum)) {
+    return { valid: false, error: 'validateNumericInvalid' };
+  }
 
-    if (valueNum % divisorNum === 0) {
-        return { valid: true };
-    } else {
-        return {
-            valid: false,
-            error: 'validateDivisibleBy',
-            context: { divisor: divisorNum },
-        };
-    }
+  if (valueNum % divisorNum === 0) {
+    return { valid: true };
+  } else {
+    return {
+      valid: false,
+      error: 'validateDivisibleBy',
+      context: { divisor: divisorNum },
+    };
+  }
 }

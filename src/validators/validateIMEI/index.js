@@ -15,30 +15,30 @@ const sanitizeRegex = /[\s-]/g;
  * @returns {ValidationResult} Validation result object
  */
 export function validateIMEI(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str).replace(sanitizeRegex, '');
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isIMEI');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isIMEI' } };
     }
 
-    const testStr = toString(str).replace(sanitizeRegex, '');
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isIMEI');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isIMEI' } };
-        }
-
-        if (!regex.test(testStr)) {
-            return { valid: false, error: 'validateIMEIFormat' };
-        }
-
-        if (!luhnCheck(testStr)) {
-            return { valid: false, error: 'validateIMEIChecksum' };
-        }
-
-        return { valid: true };
-    } catch (e) {
-        return { valid: false, error: 'genericError', context: { details: e.message } };
+    if (!regex.test(testStr)) {
+      return { valid: false, error: 'validateIMEIFormat' };
     }
+
+    if (!luhnCheck(testStr)) {
+      return { valid: false, error: 'validateIMEIChecksum' };
+    }
+
+    return { valid: true };
+  } catch (e) {
+    return { valid: false, error: 'genericError', context: { details: e.message } };
+  }
 }

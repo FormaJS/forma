@@ -13,26 +13,26 @@ import { getValidationRegex, isString, toString } from '../../utils/index.js';
  * @returns {ValidationResult} Validation result object
  */
 export function validateAscii(str) {
-    if (!isString(str)) {
-        return { valid: false, error: 'invalidType' };
+  if (!isString(str)) {
+    return { valid: false, error: 'invalidType' };
+  }
+
+  const testStr = toString(str);
+
+  const lang = '';
+
+  try {
+    const regex = getValidationRegex(lang, 'isAscii');
+    if (!regex) {
+      return { valid: false, error: 'invalidRule', context: { rule: 'isAscii' } };
     }
 
-    const testStr = toString(str);
-
-    const lang = '';
-
-    try {
-        const regex = getValidationRegex(lang, 'isAscii');
-        if (!regex) {
-            return { valid: false, error: 'invalidRule', context: { rule: 'isAscii' } };
-        }
-
-        if (regex.test(testStr)) {
-            return { valid: true };
-        } else {
-            return { valid: false, error: 'validateAscii' };
-        }
-    } catch {
-        return { valid: false, error: 'genericError' };
+    if (regex.test(testStr)) {
+      return { valid: true };
+    } else {
+      return { valid: false, error: 'validateAscii' };
     }
+  } catch {
+    return { valid: false, error: 'genericError' };
+  }
 }
