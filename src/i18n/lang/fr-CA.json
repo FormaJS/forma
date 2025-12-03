@@ -1,17 +1,6 @@
 {
   "accessible": {
-    "ones": [
-      "",
-      "un",
-      "deux",
-      "trois",
-      "quatre",
-      "cinq",
-      "six",
-      "sept",
-      "huit",
-      "neuf"
-    ],
+    "ones": ["", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"],
     "teens": [
       "dix",
       "onze",
@@ -48,14 +37,7 @@
       "huit cents",
       "neuf cents"
     ],
-    "scales": [
-      "",
-      "mille",
-      "million",
-      "milliard",
-      "billion",
-      "billiard"
-    ]
+    "scales": ["", "mille", "million", "milliard", "billion", "billiard"]
   },
   "separators": {
     "decimal": ".",
@@ -68,11 +50,7 @@
     "symbol_before_digits": true,
     "space_between_symbol_and_digits": false,
     "decimal_digits": 2,
-    "negative_format": [
-      "-{symbol}{amount}",
-      "({symbol}{amount})",
-      "{symbol}({amount})"
-    ]
+    "negative_format": ["-{symbol}{amount}", "({symbol}{amount})", "{symbol}({amount})"]
   },
   "date": {
     "format": "dd/mm/yyyy",
@@ -109,26 +87,10 @@
     },
     "taxid": "function:validateTaxId",
     "boolean": {
-      "strictTrue": [
-        "true",
-        "vrai",
-        "oui"
-      ],
-      "strictFalse": [
-        "false",
-        "faux",
-        "non"
-      ],
-      "looseTrue": [
-        "1",
-        "yes",
-        "y"
-      ],
-      "looseFalse": [
-        "0",
-        "no",
-        "n"
-      ]
+      "strictTrue": ["true", "vrai", "oui"],
+      "strictFalse": ["false", "faux", "non"],
+      "looseTrue": ["1", "yes", "y"],
+      "looseFalse": ["0", "no", "n"]
     }
   }
 }

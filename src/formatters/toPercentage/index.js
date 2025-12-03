@@ -7,15 +7,15 @@
  * @returns {string} The formatted percentage string.
  */
 export function toPercentage(number, locale = 'en-US', options = {}) {
-    const num = Number(number);
-    if (isNaN(num)) {
-        throw new Error('Invalid number input');
-    }
+  const num = Number(number);
+  if (isNaN(num)) {
+    throw new Error('Invalid number input');
+  }
 
-    const defaultOptions = {
-        style: 'percent',
-        ...options,
-    };
+  const defaultOptions = {
+    style: 'percent',
+    ...options,
+  };
 
-    return new Intl.NumberFormat(locale, defaultOptions).format(num);
+  return new Intl.NumberFormat(locale, defaultOptions).format(num);
 }

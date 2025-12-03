@@ -196,5 +196,6 @@
     "validateISSNChecksum": "ISSN sağlama toplamı geçersiz.",
     "validateUUID": "Alan geçerli bir UUID olmalıdır.",
     "validateUUIDVersion": "Alan geçerli bir sürüm {version} UUID olmalıdır."
-  }
-, "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }}
+  },
+  "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }
+}

@@ -192,5 +192,6 @@
     "validateISSNChecksum": "ISSNのチェックサムが無効です。",
     "validateUUID": "このフィールドは有効なUUIDである必要があります。",
     "validateUUIDVersion": "このフィールドはバージョン{version}の有効なUUIDである必要があります。"
-  }
-, "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }}
+  },
+  "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }
+}

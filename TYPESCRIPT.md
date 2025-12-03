@@ -51,7 +51,7 @@ if (result.valid) {
 
 Ao criar novas funções, adicione JSDoc com tipos:
 
-```javascript
+````javascript
 /**
  * @typedef {Object} ValidationResult
  * @property {boolean} valid - Se a validação passou
@@ -82,7 +82,7 @@ import '../types/index.js';
  * @returns {import('./types/index.js').ValidationResult}
  */
 export function validateDate(value, options = {}) { /* ... */ }
-```
+````
 
 Em formatters:
 
@@ -92,7 +92,9 @@ Em formatters:
  * @param {import('./types/index.js').FormatterOptions} [options]
  * @returns {string}
  */
-export function formatMobileNumber(str, options = {}) { /* ... */ }
+export function formatMobileNumber(str, options = {}) {
+  /* ... */
+}
 ```
 
 E para máscaras específicas de locale:
@@ -124,8 +126,11 @@ Em funções:
  * @param {T} value
  * @returns {import('./types/index.js').Result<T>}
  */
-export function wrap(value) { return { ok: true, value }; }
+export function wrap(value) {
+  return { ok: true, value };
+}
 ```
+
 ```
 
 ## Configuração
@@ -142,3 +147,4 @@ O arquivo `tsconfig.json` está configurado para:
 Os arquivos `.d.ts` são automaticamente incluídos no pacote npm através do campo `files` no `package.json`.
 
 Os usuários TypeScript automaticamente terão acesso aos tipos ao instalar o pacote.
+```

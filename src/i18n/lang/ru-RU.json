@@ -95,5 +95,6 @@
       "replace": "[^A-Z0-9А-ЯЁ]",
       "flags": "gi"
     }
-  }
-, "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }}
+  },
+  "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }
+}
