@@ -6,15 +6,19 @@
   "module": "dist/formajs.esm.js",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs"
     },
-    "./i18n/pt-BR": "./dist/esm/i18n/locales/pt-BR.js",
-    "./i18n/*": "./dist/esm/i18n/locales/*.js"
+    "./i18n/*": {
+      "types": "./dist/types/i18n/locales/*.d.ts",
+      "default": "./dist/esm/i18n/locales/*.js"
+    }
   },
   "sideEffects": [
     "./dist/esm/i18n/locales/*.js"
   ],
+  "types": "./dist/types/index.d.ts",
   "files": [
     "dist",
     "README.md",
@@ -27,7 +31,8 @@
     "test": "npx vitest run",
     "test:watch": "npx vitest --watch",
     "test:coverage": "npx vitest run --coverage",
-    "build": "rollup -c",
+    "build": "npm run build:types && rollup -c",
+    "build:types": "tsc",
     "build:watch": "rollup -c -w",
     "prepublishOnly": "npm run build",
     "lint": "eslint .",
@@ -62,12 +67,14 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^22.19.1",
     "@vitest/coverage-istanbul": "^4.0.5",
     "@vitest/coverage-v8": "^4.0.3",
     "eslint": "^9.38.0",
     "prettier": "^3.6.2",
     "rollup": "^4.52.5",
     "terser": "^5.44.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.3"
   }
 }
