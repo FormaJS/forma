@@ -35,6 +35,16 @@ This release focuses on significantly reducing the published package size and ma
   - `@formajs/formajs/i18n/tr-TR` (Turkish - Turkey)
   - `@formajs/formajs/i18n/zh-CN` (Chinese - China)
 
+- TypeScript support via JSDoc with declaration emit:
+  - `tsconfig.json` configured with `allowJs` and `emitDeclarationOnly`.
+  - Common typedefs in `src/types/index.js` (e.g., `ValidationResult`, `DateRangeOptions`, `FormatterOptions`).
+  - Package `types` field points to generated declarations under `dist/types`.
+
+- Locale-specific validations and formatters:
+  - `ru-RU` strict `validateTaxId` (INN 10/12, OGRN 13, OGRNIP 15) using checksum rules.
+  - `ja-JP` strict `validateTaxId` covering Corporate/My Number.
+  - Mobile/date masks refined for `ja-JP`, `tr-TR`, and `ru-RU`.
+
 ### Changed
 
 - Build outputs simplified for better tree-shaking:
@@ -43,6 +53,15 @@ This release focuses on significantly reducing the published package size and ma
 - `package.json` exports updated to point to preserved modules and to expose locale subpaths under `./i18n/...`.
 - `sideEffects` tuned to preserve the side-effectful locale wrapper modules during bundling.
 - Examples/docs updated to use the scoped package name `@formajs/formajs` and deep-imports like `@formajs/formajs/validators/validateEmail`.
+
+- Parsers/formatters behavior improvements:
+  - `toDate`: locale-first parsing with strict ISO fallback only when no locale is provided (safer min/max range comparisons).
+  - `formatMobileNumber`: improved trunk-zero handling and application of `local` vs `international` masks.
+  - `formatDate`: clarified locale pattern usage and zero-padding behavior.
+
+- Documentation:
+  - JSDoc expanded and translated to English across parsers/validators/formatters.
+  - Added `TYPESCRIPT.md` guide for JSDoc patterns and declaration generation.
 
 ### Removed
 
