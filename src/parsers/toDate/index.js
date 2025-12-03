@@ -9,35 +9,27 @@ import { iso8601RegexLenient } from '../../utils/index.js';
  * original string match the UTC year/month/day produced by the Date to avoid
  * accepting invalid offsets or truncated values.
  * @param {string} str - The input string to parse (expected ISO 8601).
- * @returns {Date|null} A Date object when the string is a valid ISO 8601
- * representation, otherwise null.
+ * @returns {Date|null} A Date object when the string is a valid ISO 8601 representation, otherwise null.
  */
 function _parseISO8601(str) {
-  if (!iso8601RegexLenient.test(str)) {
-    return null;
-  }
-
-  const date = new Date(str);
-  if (isNaN(date.getTime())) {
-    return null;
-  }
-
+  if (typeof str !== 'string') return null;
+  const s = str.trim();
+  if (!iso8601RegexLenient.test(s)) return null;
+  const date = new Date(s);
+  if (isNaN(date.getTime())) return null;
   try {
-    const yearStr = str.substring(0, 4);
-    const monthStr = str.substring(5, 7);
-    const dayStr = str.substring(8, 10);
-
-    const dateYear = date.getUTCFullYear();
+    const yearStr = s.substring(0, 4);
+    const monthStr = s.substring(5, 7);
+    const dayStr = s.substring(8, 10);
+    const dateYear = date.getUTCFullYear().toString();
     const dateMonth = (date.getUTCMonth() + 1).toString().padStart(2, '0');
     const dateDay = date.getUTCDate().toString().padStart(2, '0');
-
-    if (yearStr !== dateYear.toString() || monthStr !== dateMonth || dayStr !== dateDay) {
+    if (yearStr !== dateYear || monthStr !== dateMonth || dayStr !== dateDay) {
       return null;
     }
   } catch {
     return null;
   }
-
   return date;
 }
 

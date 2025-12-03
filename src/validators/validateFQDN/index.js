@@ -14,16 +14,16 @@ import {
  */
 
 /**
- * Verifica se uma string é um FQDN (Fully Qualified Domain Name)
+ * Checks whether a string is a FQDN (Fully Qualified Domain Name)
  * @param {string} str
  * @param {object} [options]
- * @param {boolean} [options.requireTld=true] - Exige um TLD (ex: .com, .org).
- * @param {boolean} [options.allowUnderscores=false] - Permite underscores (tecnicamente inválido para hostnames).
- * @param {boolean} [options.allowTrailingDot=false] - Permite um ponto ao final (ex: example.com.).
- * @param {boolean} [options.allowInternational=false] - Permite caracteres internacionais (IDN).
- * @param {boolean} [options.allowWildcard=false] - Permite domínios wildcard (ex: *.example.com).
- * @param {boolean} [options.allowLocalhost=false] - Permite a string "localhost" como válida.
- * @returns {ValidationResult} Objeto de resultado da validação.
+ * @param {boolean} [options.requireTld=true] - Require a TLD (e.g., .com, .org).
+ * @param {boolean} [options.allowUnderscores=false] - Allow underscores (technically invalid for hostnames).
+ * @param {boolean} [options.allowTrailingDot=false] - Allow a trailing dot (e.g., example.com.).
+ * @param {boolean} [options.allowInternational=false] - Allow international characters (IDN).
+ * @param {boolean} [options.allowWildcard=false] - Allow wildcard domains (e.g., *.example.com).
+ * @param {boolean} [options.allowLocalhost=false] - Allow the string "localhost" as valid.
+ * @returns {ValidationResult} Validation result object.
  */
 export function validateFQDN(str, options = {}) {
   if (!isString(str)) {

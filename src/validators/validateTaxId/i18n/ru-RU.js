@@ -1,5 +1,7 @@
 import { toString } from '../../../utils/index.js';
+import '../../types/index.js';
 
+// Usa ValidationResult do módulo de tipos comuns
 /**
  * Validates Russian Tax IDs (INN and OGRN/OGRNIP) with checksum validation.
  * INN: 10 digits (legal entities) or 12 digits (individuals)
@@ -74,7 +76,7 @@ function _validateOGRNIP15(ogrnip) {
 /**
  * Main validator for Russian Tax IDs.
  * @param {string} taxId - The tax ID to validate
- * @returns {object} Validation result { valid, error?, context? }
+ * @returns {import('../../types/index.js').ValidationResult} Resultado com flag valid, erro e contexto
  */
 export function validateTaxId(taxId) {
   if (typeof taxId !== 'string') {

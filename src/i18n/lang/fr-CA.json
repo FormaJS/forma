@@ -1,36 +1,134 @@
 {
-  "name": "Français (Canada)",
-  "separators": { "decimal": ".", "thousand": ",", "thousandDigits": 3 },
+  "accessible": {
+    "ones": [
+      "",
+      "un",
+      "deux",
+      "trois",
+      "quatre",
+      "cinq",
+      "six",
+      "sept",
+      "huit",
+      "neuf"
+    ],
+    "teens": [
+      "dix",
+      "onze",
+      "douze",
+      "treize",
+      "quatorze",
+      "quinze",
+      "seize",
+      "dix-sept",
+      "dix-huit",
+      "dix-neuf"
+    ],
+    "tens": [
+      "",
+      "",
+      "vingt",
+      "trente",
+      "quarante",
+      "cinquante",
+      "soixante",
+      "soixante-dix",
+      "quatre-vingts",
+      "quatre-vingt-dix"
+    ],
+    "hundreds": [
+      "",
+      "cent",
+      "deux cents",
+      "trois cents",
+      "quatre cents",
+      "cinq cents",
+      "six cents",
+      "sept cents",
+      "huit cents",
+      "neuf cents"
+    ],
+    "scales": [
+      "",
+      "mille",
+      "million",
+      "milliard",
+      "billion",
+      "billiard"
+    ]
+  },
+  "separators": {
+    "decimal": ".",
+    "thousand": ",",
+    "thousandDigits": 3
+  },
   "currency": {
     "symbol": "$",
     "code": "CAD",
     "symbol_before_digits": true,
     "space_between_symbol_and_digits": false,
     "decimal_digits": 2,
-    "negative_format": ["-{symbol}{amount}", "({symbol}{amount})", "{symbol}({amount})"]
+    "negative_format": [
+      "-{symbol}{amount}",
+      "({symbol}{amount})",
+      "{symbol}({amount})"
+    ]
   },
-  "date": { "format": "dd/mm/yyyy", "separator": "/" },
+  "date": {
+    "format": "dd/mm/yyyy",
+    "separator": "/"
+  },
   "masks": {
-    "postalcode": { "default": "A#A #A#" },
-    "mobileNumber": { "local": "(###) ###-####", "international": "+1 (###) ###-####" }
+    "postalcode": {
+      "default": "A#A #A#"
+    },
+    "mobileNumber": {
+      "local": "(###) ###-####",
+      "international": "+1 (###) ###-####"
+    }
   },
   "validate": {
-    "alpha": { "pattern": "^[A-ZÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ]+$", "flags": "i" },
-    "alphanumeric": { "pattern": "^[A-Z0-9ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ]+$", "flags": "i" },
+    "alpha": {
+      "pattern": "^[A-ZÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ]+$",
+      "flags": "i"
+    },
+    "alphanumeric": {
+      "pattern": "^[A-Z0-9ÀÂÆÇÉÈÊËÎÏÔŒÙÛÜŸ]+$",
+      "flags": "i"
+    },
     "mobilenumber": {
       "pattern": "^(?:\\+?1[ .-]?)?\\(?[2-9]\\d{2}\\)?[ .-]?[2-9]\\d{2}[ .-]?\\d{4}$"
     },
-    "postalcode": { "pattern": "^[A-Z]\\d[A-Z] ?\\d[A-Z]\\d$", "flags": "i" },
+    "postalcode": {
+      "pattern": "^[A-Z]\\d[A-Z] ?\\d[A-Z]\\d$",
+      "flags": "i"
+    },
     "licenseplate": {
       "pattern": "^[A-Z]{4}-?\\d{3}$",
       "flags": "i"
     },
     "taxid": "function:validateTaxId",
     "boolean": {
-      "strictTrue": ["true", "vrai", "oui"],
-      "strictFalse": ["false", "faux", "non"],
-      "looseTrue": ["1", "yes", "y"],
-      "looseFalse": ["0", "no", "n"]
+      "strictTrue": [
+        "true",
+        "vrai",
+        "oui"
+      ],
+      "strictFalse": [
+        "false",
+        "faux",
+        "non"
+      ],
+      "looseTrue": [
+        "1",
+        "yes",
+        "y"
+      ],
+      "looseFalse": [
+        "0",
+        "no",
+        "n"
+      ]
     }
   }
 }

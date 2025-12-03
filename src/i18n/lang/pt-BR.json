@@ -1,5 +1,71 @@
 {
-  "name": "Português do Brasil",
+  "name": "Português (Brasil)",
+  "accessible": {
+    "ones": [
+      "",
+      "um",
+      "dois",
+      "três",
+      "quatro",
+      "cinco",
+      "seis",
+      "sete",
+      "oito",
+      "nove"
+    ],
+    "teens": [
+      "dez",
+      "onze",
+      "doze",
+      "treze",
+      "quatorze",
+      "quinze",
+      "dezesseis",
+      "dezessete",
+      "dezoito",
+      "dezenove"
+    ],
+    "tens": [
+      "",
+      "",
+      "vinte",
+      "trinta",
+      "quarenta",
+      "cinquenta",
+      "sessenta",
+      "setenta",
+      "oitenta",
+      "noventa"
+    ],
+    "hundreds": [
+      "",
+      "cento",
+      "duzentos",
+      "trezentos",
+      "quatrocentos",
+      "quinhentos",
+      "seiscentos",
+      "setecentos",
+      "oitocentos",
+      "novecentos"
+    ],
+    "scales": [
+      "",
+      "mil",
+      "milhão",
+      "bilhão",
+      "trilhão",
+      "quatrilhão"
+    ],
+    "scalesPlural": [
+      "",
+      "mil",
+      "milhões",
+      "bilhões",
+      "trilhões",
+      "quatrilhões"
+    ]
+  },
   "separators": {
     "decimal": ",",
     "thousand": ".",
@@ -53,10 +119,25 @@
     },
     "taxid": "function:validateTaxId",
     "boolean": {
-      "strictTrue": ["true", "verdadeiro"],
-      "strictFalse": ["false", "falso"],
-      "looseTrue": ["1", "sim", "s"],
-      "looseFalse": ["0", "não", "nao", "n"]
+      "strictTrue": [
+        "true",
+        "verdadeiro"
+      ],
+      "strictFalse": [
+        "false",
+        "falso"
+      ],
+      "looseTrue": [
+        "1",
+        "sim",
+        "s"
+      ],
+      "looseFalse": [
+        "0",
+        "não",
+        "nao",
+        "n"
+      ]
     },
     "creditCardPatterns": {
       "elo": {

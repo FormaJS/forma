@@ -170,4 +170,4 @@
     "validateStrongPasswordMinSymbols": "密码必须至少包含 {minSymbols} 个符号。",
     "validateSlug": "字段必须是有效的 slug（URL 友好字符串）。"
   }
-}
+, "accessible": { "ones": [], "teens": [], "tens": [], "scales": [] }}

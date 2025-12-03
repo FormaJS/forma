@@ -6,16 +6,13 @@ import { getLocaleData } from '../../i18n/index.js';
  * @returns {string} (e.g., "05")
  */
 function _pad(num) {
-  return num < 10 ? '0' + num : String(num);
+  return String(num).padStart(2, '0');
 }
-
 /**
- * Formats a Date object into a locale-aware string,
- * using the format defined in the i18n file.
- * @param {Date} dateObj - The Date object to format.
- * @param {object} [options={}] - Options (must contain 'locale').
- * @returns {string | null} The formatted string (e.g., "31/10/2025")
- * or 'null' if the input is not a Date object or the locale is invalid.
+ * Formats a Date using the active locale's date pattern.
+ * @param {Date} dateObj - Date to format
+ * @param {{ locale?: string }} [options] - Formatting options
+ * @returns {string|null} Formatted string or null if invalid
  */
 export function formatDate(dateObj, options = {}) {
   if (!(dateObj instanceof Date) || isNaN(dateObj.getTime())) {

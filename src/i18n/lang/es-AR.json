@@ -1,5 +1,62 @@
 {
-  "name": "Español (Argentina)",
+  "accessible": {
+    "ones": [
+      "",
+      "uno",
+      "dos",
+      "tres",
+      "cuatro",
+      "cinco",
+      "seis",
+      "siete",
+      "ocho",
+      "nueve"
+    ],
+    "teens": [
+      "diez",
+      "once",
+      "doce",
+      "trece",
+      "catorce",
+      "quince",
+      "dieciséis",
+      "diecisiete",
+      "dieciocho",
+      "diecinueve"
+    ],
+    "tens": [
+      "",
+      "",
+      "veinte",
+      "treinta",
+      "cuarenta",
+      "cincuenta",
+      "sesenta",
+      "setenta",
+      "ochenta",
+      "noventa"
+    ],
+    "hundreds": [
+      "",
+      "ciento",
+      "doscientos",
+      "trescientos",
+      "cuatrocientos",
+      "quinientos",
+      "seiscientos",
+      "setecientos",
+      "ochocientos",
+      "novecientos"
+    ],
+    "scales": [
+      "",
+      "mil",
+      "millón",
+      "mil millones",
+      "billón",
+      "mil billones"
+    ]
+  },
   "separators": {
     "decimal": ",",
     "thousand": ".",
@@ -10,7 +67,11 @@
     "symbol_before_digits": true,
     "space_between_symbol_and_digits": true,
     "decimal_digits": 2,
-    "negative_format": ["-{symbol} {amount}", "({symbol} {amount})", "{symbol} {amount} -"]
+    "negative_format": [
+      "-{symbol} {amount}",
+      "({symbol} {amount})",
+      "{symbol} {amount} -"
+    ]
   },
   "date": {
     "format": "dd/mm/yyyy",
@@ -53,10 +114,25 @@
     },
     "taxid": "function:validateTaxId",
     "boolean": {
-      "strictTrue": ["verdadero", "true"],
-      "strictFalse": ["falso", "false"],
-      "looseTrue": ["1", "sí", "si", "s"],
-      "looseFalse": ["0", "no", "n"]
+      "strictTrue": [
+        "verdadero",
+        "true"
+      ],
+      "strictFalse": [
+        "falso",
+        "false"
+      ],
+      "looseTrue": [
+        "1",
+        "sí",
+        "si",
+        "s"
+      ],
+      "looseFalse": [
+        "0",
+        "no",
+        "n"
+      ]
     }
   },
   "messages": {

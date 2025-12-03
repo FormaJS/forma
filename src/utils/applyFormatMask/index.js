@@ -9,16 +9,15 @@ import { normalizeString } from '../normalizeString/index.js';
  * - '*' matches any alphanumeric character (letter or digit)
  * - Any other character is treated as a literal
  *
- * @param {string} input - The input string (e.g., "SW1A1AA", "09010140")
- * @param {string} mask - The format mask (e.g., "AA## #AA", "#####-###")
- * @param {object} [options={}] - Options
- * @param {boolean} [options.normalize=false] - If true, normalizes accented characters before matching
- * @returns {string} The formatted string (e.g., "SW1A 1AA", "09010-140")
- *
- * @example
+ * Examples:
  * applyFormatMask('09010140', '#####-###') // => '09010-140'
  * applyFormatMask('SW1A1AA', 'AA## #AA') // => 'SW1A 1AA'
  * applyFormatMask('12345678Z', '########A') // => '12345678Z'
+ *
+ * @param {string} input - Input string to be masked.
+ * @param {string} mask - Mask pattern using placeholders.
+ * @param {{ normalize?: boolean }} [options] - Optional normalization.
+ * @returns {string} The masked string.
  */
 export function applyFormatMask(input, mask, options = {}) {
   input = toString(input);

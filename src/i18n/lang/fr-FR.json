@@ -1,5 +1,62 @@
 {
-  "name": "Français (France)",
+  "accessible": {
+    "ones": [
+      "",
+      "un",
+      "deux",
+      "trois",
+      "quatre",
+      "cinq",
+      "six",
+      "sept",
+      "huit",
+      "neuf"
+    ],
+    "teens": [
+      "dix",
+      "onze",
+      "douze",
+      "treize",
+      "quatorze",
+      "quinze",
+      "seize",
+      "dix-sept",
+      "dix-huit",
+      "dix-neuf"
+    ],
+    "tens": [
+      "",
+      "",
+      "vingt",
+      "trente",
+      "quarante",
+      "cinquante",
+      "soixante",
+      "soixante-dix",
+      "quatre-vingts",
+      "quatre-vingt-dix"
+    ],
+    "hundreds": [
+      "",
+      "cent",
+      "deux cents",
+      "trois cents",
+      "quatre cents",
+      "cinq cents",
+      "six cents",
+      "sept cents",
+      "huit cents",
+      "neuf cents"
+    ],
+    "scales": [
+      "",
+      "mille",
+      "million",
+      "milliard",
+      "billion",
+      "billiard"
+    ]
+  },
   "separators": {
     "decimal": ",",
     "thousand": " ",
@@ -10,7 +67,11 @@
     "symbol_before_digits": false,
     "space_between_symbol_and_digits": true,
     "decimal_digits": 2,
-    "negative_format": ["-{amount} {symbol}", "({amount} {symbol})", "{amount} {symbol} -"]
+    "negative_format": [
+      "-{amount} {symbol}",
+      "({amount} {symbol})",
+      "{amount} {symbol} -"
+    ]
   },
   "date": {
     "format": "dd/mm/yyyy",
@@ -52,10 +113,26 @@
     },
     "taxid": "function:validateTaxId",
     "boolean": {
-      "strictTrue": ["true", "vrai", "oui"],
-      "strictFalse": ["false", "faux", "non"],
-      "looseTrue": ["1", "oui", "o"],
-      "looseFalse": ["0", "non", "n"]
+      "strictTrue": [
+        "true",
+        "vrai",
+        "oui"
+      ],
+      "strictFalse": [
+        "false",
+        "faux",
+        "non"
+      ],
+      "looseTrue": [
+        "1",
+        "oui",
+        "o"
+      ],
+      "looseFalse": [
+        "0",
+        "non",
+        "n"
+      ]
     }
   },
   "messages": {

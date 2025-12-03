@@ -1,5 +1,70 @@
 {
-  "name": "Português (Portugal)",
+  "accessible": {
+    "ones": [
+      "",
+      "um",
+      "dois",
+      "três",
+      "quatro",
+      "cinco",
+      "seis",
+      "sete",
+      "oito",
+      "nove"
+    ],
+    "teens": [
+      "dez",
+      "onze",
+      "doze",
+      "treze",
+      "quatorze",
+      "quinze",
+      "dezesseis",
+      "dezessete",
+      "dezoito",
+      "dezenove"
+    ],
+    "tens": [
+      "",
+      "",
+      "vinte",
+      "trinta",
+      "quarenta",
+      "cinquenta",
+      "sessenta",
+      "setenta",
+      "oitenta",
+      "noventa"
+    ],
+    "hundreds": [
+      "",
+      "cento",
+      "duzentos",
+      "trezentos",
+      "quatrocentos",
+      "quinhentos",
+      "seiscentos",
+      "setecentos",
+      "oitocentos",
+      "novecentos"
+    ],
+    "scales": [
+      "",
+      "mil",
+      "milhão",
+      "mil milhões",
+      "bilião",
+      "mil biliões"
+    ],
+    "scalesPlural": [
+      "",
+      "mil",
+      "milhões",
+      "mil milhões",
+      "biliões",
+      "mil biliões"
+    ]
+  },
   "separators": {
     "decimal": ",",
     "thousand": " ",
@@ -10,7 +75,11 @@
     "symbol_before_digits": false,
     "space_between_symbol_and_digits": true,
     "decimal_digits": 2,
-    "negative_format": ["-{amount} {symbol}", "({amount} {symbol})", "{amount} {symbol} -"]
+    "negative_format": [
+      "-{amount} {symbol}",
+      "({amount} {symbol})",
+      "{amount} {symbol} -"
+    ]
   },
   "date": {
     "format": "dd/mm/yyyy",
@@ -51,10 +120,25 @@
     },
     "taxid": "function:validateTaxId",
     "boolean": {
-      "strictTrue": ["verdadeiro", "true"],
-      "strictFalse": ["falso", "false"],
-      "looseTrue": ["1", "sim", "s"],
-      "looseFalse": ["0", "não", "nao", "n"]
+      "strictTrue": [
+        "verdadeiro",
+        "true"
+      ],
+      "strictFalse": [
+        "falso",
+        "false"
+      ],
+      "looseTrue": [
+        "1",
+        "sim",
+        "s"
+      ],
+      "looseFalse": [
+        "0",
+        "não",
+        "nao",
+        "n"
+      ]
     }
   },
   "messages": {

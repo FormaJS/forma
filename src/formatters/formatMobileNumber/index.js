@@ -2,11 +2,10 @@ import { toString, applyFormatMask } from '../../utils/index.js';
 import { getLocaleData } from '../../i18n/index.js';
 
 /**
- * Applies a locale-aware mobile number formatting mask.
- * @param {string} str - The string to format (e.g., "11987654321").
- * @param {object} [options={}] - Options.
- * @param {string} [options.format='local'] - The format ('local' or 'international').
- * @returns {string} The formatted string (e.g., "(11) 98765-4321") or the digits string.
+ * Aplica máscara de número móvel sensível ao locale.
+ * @param {string} str - Valor a formatar (ex.: "11987654321").
+ * @param {import('../../types/index.js').FormatterOptions} [options] - Opções de formatação.
+ * @returns {string} String formatada (ex.: "(11) 98765-4321") ou apenas dígitos se não aplicável.
  */
 export function formatMobileNumber(str, options = {}) {
   const rawDigits = toString(str).replace(/\D/g, '');
@@ -20,7 +19,8 @@ export function formatMobileNumber(str, options = {}) {
   }
 
   const localeData = getLocaleData(lang);
-  const maskObject = localeData?.masks?.mobileNumber;
+  /** @type {import('../../types/index.js').MaskObject} */
+  const maskObject = /** @type {any} */ (localeData?.masks?.mobileNumber);
 
   if (!maskObject || typeof maskObject !== 'object') {
     return rawDigits;
