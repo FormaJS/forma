@@ -2,36 +2,41 @@
   "compilerOptions": {
     // Permitir JavaScript com JSDoc
     "allowJs": true,
-    "checkJs": false,
-
+    "checkJs": true,
     // Gerar apenas declarações de tipo (.d.ts)
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": true,
-
     // Diretórios
     "outDir": "./dist/types",
     "rootDir": "./src",
-
     // Módulos
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES2020",
-
     // Configurações de strictness (gradual)
-    "strict": false,
+    "strict": true,
     "noImplicitAny": false,
-    "strictNullChecks": false,
-
+    "strictNullChecks": true,
     // Resolução de módulos
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-
     // Tipos
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "test", "coverage", "**/*.test.js", "**/*.spec.js"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test",
+    "coverage",
+    "**/*.test.js",
+    "**/*.spec.js"
+  ]
 }
