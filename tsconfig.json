@@ -24,19 +24,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     // Tipos
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "test",
-    "coverage",
-    "**/*.test.js",
-    "**/*.spec.js"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test", "coverage", "**/*.test.js", "**/*.spec.js"]
 }
