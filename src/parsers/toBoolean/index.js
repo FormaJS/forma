@@ -23,7 +23,13 @@ export function toBoolean(str, options = {}) {
     return false;
   }
 
-  const truthyValues = [...(booleanRules.strictTrue || []), ...(booleanRules.looseTrue || [])];
+  const { strict = false } = options;
+
+  let truthyValues = [...(booleanRules.strictTrue || [])];
+
+  if (!strict) {
+    truthyValues = truthyValues.concat(booleanRules.looseTrue || []);
+  }
 
   if (truthyValues.includes(testStr)) {
     return true;

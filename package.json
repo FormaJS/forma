@@ -2,13 +2,13 @@
   "name": "@formajs/formajs",
   "version": "2.0.0",
   "description": "A lightweight, modular JavaScript library for validating, parsing, and sanitizing form inputs",
-  "main": "dist/formajs.cjs.js",
-  "module": "dist/formajs.esm.js",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
     },
     "./i18n/*": {
       "types": "./dist/types/i18n/locales/*.d.ts",
